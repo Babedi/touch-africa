@@ -1,0 +1,56 @@
+{
+  "dashboards": [
+    {
+      "path": "frontend/private/internal/dashboard/index.html",
+      "exists": true,
+      "hasGlobalScript": true,
+      "hasNotifications": true,
+      "hasApiClient": true,
+      "scriptsOrder": [
+        "global-error-protection",
+        "notifications",
+        "api-client",
+        "index"
+      ]
+    },
+    {
+      "path": "frontend/private/external/tenant.admin/dashboard/index.html",
+      "exists": true,
+      "hasGlobalScript": true,
+      "hasNotifications": true,
+      "hasApiClient": true,
+      "scriptsOrder": [
+        "global-error-protection",
+        "notifications",
+        "api-client",
+        "index"
+      ]
+    },
+    {
+      "path": "frontend/private/external/tenant.user/dashboard/index.html",
+      "exists": true,
+      "hasGlobalScript": true,
+      "hasNotifications": true,
+      "hasApiClient": true,
+      "scriptsOrder": [
+        "global-error-protection",
+        "notifications",
+        "api-client",
+        "index"
+      ]
+    }
+  ],
+  "globalScript": {
+    "exists": true,
+    "hasUnhandledRejectionHandler": true,
+    "hasFetchOverride": true,
+    "hasErrorWrapper": true,
+    "hasSnackbarFallback": false,
+    "contentLength": 4537
+  },
+  "summary": {
+    "totalDashboards": 3,
+    "protectedDashboards": 3,
+    "success": true
+  }
+}

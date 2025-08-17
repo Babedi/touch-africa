@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Login Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .debug-log {
+            background-color: #000;
+            color: #00ff00;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 12px;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .test-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+
+        .test-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔬 Enhanced Login Debug Test</h1>
+
+    <div id="debugLog" class="debug-log">
+        === DEBUG LOG ===<br>
+    </div>
+
+    <button class="test-button" onclick="testDirectFetch()">🧪 Test Direct Fetch</button>
+    <button class="test-button" onclick="testAPIClient()">📡 Test API Client</button>
+    <button class="test-button" onclick="testWithoutClient()">🔧 Test Without Client</button>
+
+    <script>
+        function log(message) {
+            const debugLog = document.getElementById('debugLog');
+            const timestamp = new Date().toISOString().substring(11, 23);
+            debugLog.innerHTML += `[${timestamp}] ${message}<br>`;
+            debugLog.scrollTop = debugLog.scrollHeight;
+            console.log(message);
+        }
+
+        log('🚀 Enhanced test page loaded');
+
+        // Test 1: Direct fetch without any client
+        async function testDirectFetch() {
+            log('🧪 Testing direct fetch...');
+
+            try {
+                const response = await fetch('/internal/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'test.corrected@neighbourguard.co.za',
+                        password: 'TestCorrected123!'
+                    })
+                });
+
+                log(`📡 Direct fetch response: ${response.status} ${response.statusText}`);
+
+                const data = await response.text();
+                log(`📄 Direct fetch data: ${data.substring(0, 200)}...`);
+
+                if (response.ok) {
+                    log('✅ Direct fetch succeeded!');
+                } else {
+                    log('❌ Direct fetch failed');
+                }
+
+            } catch (error) {
+                log(`💥 Direct fetch error: ${error.message}`);
+            }
+        }
+
+        // Test 2: Try to load and use API client
+        async function testAPIClient() {
+            log('📡 Testing API client...');
+
+            try {
+                if (typeof APIClient === 'undefined') {
+                    log('❌ APIClient not defined, trying to load...');
+
+                    // Try to dynamically load the API client
+                    const script = document.createElement('script');
+                    script.src = '/shared/api-client.js';
+                    script.onload = () => {
+                        log('✅ API client loaded');
+                        setTimeout(() => testAPIClientActual(), 500);
+                    };
+                    script.onerror = () => {
+                        log('❌ Failed to load API client');
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    log('✅ APIClient already available');
+                    testAPIClientActual();
+                }
+            } catch (error) {
+                log(`💥 API client test error: ${error.message}`);
+            }
+        }
+
+        async function testAPIClientActual() {
+            try {
+                log('🔧 Creating API client instance...');
+                const apiClient = new APIClient();
+
+                log('📞 Calling loginInternalAdmin...');
+                const result = await apiClient.loginInternalAdmin({
+                    email: 'test.corrected@neighbourguard.co.za',
+                    password: 'TestCorrected123!'
+                });
+
+                log(`✅ API client success: Token length ${result.data?.token?.length || 'No token'}`);
+
+            } catch (error) {
+                log(`❌ API client failed: ${error.message}`);
+                log(`❌ Status: ${error.status || 'Unknown'}`);
+                log(`❌ Details: ${JSON.stringify(error.details || {})}`);
+            }
+        }
+
+        // Test 3: Manual XMLHttpRequest
+        function testWithoutClient() {
+            log('🔧 Testing XMLHttpRequest...');
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/internal/admin/login', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    log(`📡 XHR response: ${xhr.status} ${xhr.statusText}`);
+                    log(`📄 XHR data: ${xhr.responseText.substring(0, 200)}...`);
+
+                    if (xhr.status === 200) {
+                        log('✅ XHR succeeded!');
+                    } else {
+                        log('❌ XHR failed');
+                    }
+                }
+            };
+
+            xhr.onerror = function () {
+                log('💥 XHR error occurred');
+            };
+
+            const data = JSON.stringify({
+                email: 'test.corrected@neighbourguard.co.za',
+                password: 'TestCorrected123!'
+            });
+
+            log(`📤 Sending XHR: ${data}`);
+            xhr.send(data);
+        }
+
+        // Auto-trigger after 2 seconds
+        setTimeout(() => {
+            log('🤖 Auto-triggering direct fetch test...');
+            testDirectFetch();
+        }, 2000);
+    </script>
+</body>
+
+</html>

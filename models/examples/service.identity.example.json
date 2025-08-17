@@ -1,0 +1,39 @@
+{
+  "name": "NeighbourGuard™",
+  "features": [
+    {
+      "title": "Emergency Communication",
+      "text": "Emergency alerts via SMS, WhatsApp, and calls"
+    },
+    {
+      "title": "Flexible Response Network",
+      "text": "Customizable responder lists"
+    },
+    {
+      "title": "Tenant Integration",
+      "text": "Integration with tenant registry for efficient response"
+    },
+    {
+      "title": "User Experience",
+      "text": "User-friendly interface for quick access"
+    }
+  ],
+  "emphasizes": [
+    "tenant response and neighbour accountability.",
+    "Appeals to CPF groups, estates, and tenant-watch setups.",
+    "No existing use in SA panic button market (unlike Vigilant and Buzzer)",
+    "trigger.co.za"
+  ],
+  "publicDescriptions": [
+    "This turns every mobile into an emergency response device",
+    "This service turns every mobile into an emergency response device, allowing users to send emergency alerts to their contacts and local responders.",
+    "This service is designed to enhance personal safety by enabling quick emergency alerts.",
+    "It allows users to send alerts via SMS, WhatsApp, and calls to designated responders.",
+    "The service is integrated with a tenant registry for efficient emergency response management."
+  ],
+  "taglines": [
+    "When your circle become a life saver.",
+    "Your personal safety network at your fingertips.",
+    "Empowering tenants to respond to emergencies."
+  ]
+}

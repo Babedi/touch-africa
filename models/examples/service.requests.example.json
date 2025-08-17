@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Mr",
+    "names": "Simon Lesedi",
+    "surname": "Babedi",
+    "typeOfUser": "I am a Client",
+    "messageInRelationTo": "Sale",
+    "message": "jkjkjhkjjkkjhjkhkjj",
+    "contactInfo": {
+      "phoneNumber": "0635941451",
+      "email": "lesedi.simon@gmail.com"
+    },
+    "status": "pending",
+    "createdAt": "2025-07-30T14:07:23.264Z"
+  }
+]

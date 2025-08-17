@@ -1,0 +1,6 @@
+{
+  "category": "User Management",
+  "subCategory": "Roles",
+  "items": ["Admin", "Editor", "Viewer", "Moderator", "User"],
+  "description": "User roles for access control and permissions in the system"
+}

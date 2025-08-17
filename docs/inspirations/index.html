@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NeighbourGuard™</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/internal.admin.login.css" />
+</head>
+
+<body>
+    <!-- News Ticker -->
+    <div class="news-ticker">
+        <div class="ticker-label">NEWS</div>
+        <div class="ticker-content" id="newsTickerContent">
+            <span class="ticker-item">Loading news...</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="NeighbourGuard Security Logo" />
+                NeighbourGuard™
+            </div>
+            <nav>
+                <button id="loginBtn" class="nav-login-btn">Internal Admin Login</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Protect What Matters Most</h1>
+                <p>
+                    Instant emergency alerts for residential and commercial areas — stay safe, stay connected with the
+                    NeighbourGuard™ emergency response system.
+                </p>
+                <div class="cta-buttons">
+                    <button id="requestServiceBtn">Request for Service</button>
+                </div>
+                <div class="cta-buttons">
+                    <button id="userDashboardBtn">Access User Dashboard</button>
+                    <button id="tenantDashboardBtn">Access Tenant Dashboard</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="features-container">
+                <div class="features-header">
+                    <h2>Comprehensive Security Solutions</h2>
+                    <p>
+                        Advanced technology meets simplicity to deliver unmatched emergency response capabilities for
+                        modern
+                        tenants.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Real-Time Monitoring</h3>
+                        <p>24/7 surveillance with instant alerts for any suspicious activity detected in your area.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>tenant Network</h3>
+                        <p>Connect with neighbors and local authorities to create a strong safety network.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Smart Analytics</h3>
+                        <p>AI-powered insights help predict and prevent security incidents before they occur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 NeighbourGuard™. Protecting tenants through smart technology.</p>
+    </footer>
+
+    <!-- Container for dynamically loaded modals -->
+    <div id="modals-container"></div>
+
+    <!-- Main site JS -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Internal Admin Login Handler -->
+    <script src="assets/js/internal.admin.login.js"></script>
+</body>
+
+</html>

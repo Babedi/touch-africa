@@ -1,0 +1,33 @@
+{
+  "created": {
+    "by": "root",
+    "when": "2025-07-20T09:00:00Z"
+  },
+  "roles": ["internalSuperAdmin"],
+  "title": "Mr",
+  "names": "Simon Lesedi",
+  "surname": "Babedi",
+  "accessDetails": {
+    "email": "root@neighbourguard.co.za",
+    "password": "n207096946@Nn",
+    "lastLogin": [
+      {
+        "timestamp": "2025-07-30T14:07:39.482Z",
+        "ip": "system"
+      }
+    ]
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": [
+        {
+          "to": true,
+          "when": "2025-07-25T08:00:00Z",
+          "by": "root",
+          "reason": "Tenant registry system installation and initial setup completed successfully"
+        }
+      ]
+    }
+  }
+}

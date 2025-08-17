@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug PIN Toggle - Tenant User Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-button {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        .test-button:hover {
+            background: #005a8b;
+        }
+
+        .log-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="debug-container">
+        <h1>🔍 PIN Toggle Debug Test</h1>
+
+        <div>
+            <button class="test-button" onclick="openModal()">Open Tenant User Modal</button>
+            <button class="test-button" onclick="runDebug()">Debug PIN Toggle</button>
+            <button class="test-button" onclick="keepModalOpen()">Keep Modal Open & Debug</button>
+            <button class="test-button" onclick="clearLog()">Clear Log</button>
+        </div>
+
+        <div id="logOutput" class="log-output">
+            Ready for testing...
+        </div>
+    </div>
+
+    <!-- Load required stylesheets -->
+    <link rel="stylesheet" href="/shared/variables.css">
+    <link rel="stylesheet" href="/modals/tenant.user.login.modal/index.css">
+
+    <!-- Load required scripts -->
+    <script src="/shared/api-client.js"></script>
+    <script src="/shared/notifications.js"></script>
+    <script src="/shared/validation.js"></script>
+    <script src="/debug-pin-toggle.js"></script>
+
+    <!-- Load the modal HTML and JS -->
+    <div id="modalContainer"></div>
+
+    <script>
+        let logElement = document.getElementById('logOutput');
+        let modal = null;
+
+        // Override console.log to also display in our log
+        const originalLog = console.log;
+        console.log = function (...args) {
+            originalLog.apply(console, args);
+            logElement.textContent += args.join(' ') + '\n';
+            logElement.scrollTop = logElement.scrollHeight;
+        };
+
+        function clearLog() {
+            logElement.textContent = 'Log cleared...\n';
+        }
+
+        function runDebug() {
+            if (window.debugTenantUserPinToggle) {
+                window.debugTenantUserPinToggle();
+            } else {
+                console.log('❌ Debug function not available');
+            }
+        }
+
+        function keepModalOpen() {
+            console.log('🔒 Opening modal and preventing auto-close...');
+            openModal().then(() => {
+                setTimeout(() => {
+                    console.log('🧪 Running PIN toggle debug with modal open...');
+                    runDebug();
+                }, 1000);
+            });
+        }
+
+        async function openModal() {
+            console.log('🧪 Loading tenant user modal...');
+
+            try {
+                // Load modal HTML if not already loaded
+                if (!document.getElementById('tenantUserModalOverlay')) {
+                    const htmlResponse = await fetch('/modals/tenant.user.login.modal/index.html');
+                    if (!htmlResponse.ok) {
+                        throw new Error('Failed to load modal HTML: ' + htmlResponse.status);
+                    }
+                    const modalHTML = await htmlResponse.text();
+
+                    const parser = new DOMParser();
+                    const modalDoc = parser.parseFromString(modalHTML, 'text/html');
+                    const modalElement = modalDoc.body.firstElementChild;
+
+                    if (!modalElement) {
+                        throw new Error('Invalid modal HTML structure');
+                    }
+
+                    document.getElementById('modalContainer').appendChild(modalElement);
+                    console.log('✅ Modal HTML loaded');
+                }
+
+                // Load modal JavaScript if not already loaded
+                if (!window.TenantUserLoginModal) {
+                    return new Promise((resolve, reject) => {
+                        const script = document.createElement('script');
+                        script.src = '/modals/tenant.user.login.modal/index.js';
+
+                        script.onload = () => {
+                            console.log('✅ Modal JS loaded');
+
+                            if (window.TenantUserLoginModal) {
+                                modal = new window.TenantUserLoginModal();
+                                console.log('✅ Modal instance created');
+
+                                // Override the hide method to prevent auto-closing for debugging
+                                const originalHide = modal.hide.bind(modal);
+                                modal.hide = function () {
+                                    console.log('🚫 Modal hide() called - prevented for debugging');
+                                    // Don't actually hide during debugging
+                                };
+
+                                // Show the modal
+                                modal.show();
+                                console.log('✅ Modal shown and hide prevented');
+                                resolve();
+                            } else {
+                                console.log('❌ TenantUserLoginModal class not found');
+                                reject(new Error('TenantUserLoginModal class not found'));
+                            }
+                        };
+
+                        script.onerror = () => {
+                            console.log('❌ Failed to load modal JavaScript');
+                            reject(new Error('Failed to load modal JavaScript'));
+                        };
+
+                        document.head.appendChild(script);
+                    });
+                } else {
+                    // Modal class already exists, just create instance if needed
+                    if (!modal) {
+                        modal = new window.TenantUserLoginModal();
+                        console.log('✅ Modal instance created');
+
+                        // Override the hide method to prevent auto-closing for debugging
+                        const originalHide = modal.hide.bind(modal);
+                        modal.hide = function () {
+                            console.log('🚫 Modal hide() called - prevented for debugging');
+                            // Don't actually hide during debugging
+                        };
+                    }
+                    modal.show();
+                    console.log('✅ Modal shown and hide prevented');
+                    return Promise.resolve();
+                }
+
+            } catch (error) {
+                console.log('❌ Error loading modal: ' + error.message);
+                return Promise.reject(error);
+            }
+        }        // Initialize
+        console.log('🚀 PIN Toggle Debug page loaded');
+    </script>
+</body>
+
+</html>

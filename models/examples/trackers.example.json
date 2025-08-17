@@ -1,0 +1,6 @@
+{
+  "nextUSSDReferenceNumber": {
+    "value": 3,
+    "description": "This is used an a new tenant Id when a new tenant is added"
+  }
+}

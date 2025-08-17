@@ -1,0 +1,89 @@
+{
+  "activationResponseBlockName": "Sample Response Block",
+  "address": {
+    "locality": "Sample Area",
+    "province": "Gauteng",
+    "country": "South Africa",
+    "postalCode": "2010"
+  },
+  "activationContextMenu": {
+    "english": {
+      "menuItem1": "Life@Risk",
+      "menuItem2": "Property@Risk",
+      "menuItem3": "Both@Risk",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "afrikaans": {
+      "menuItem1": "Lewe in Gevaar",
+      "menuItem2": "Eiendom in Gevaar",
+      "menuItem3": "Albei in Gevaar",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "zulu": {
+      "menuItem1": "Impilo Esengozini",
+      "menuItem2": "Impahla Esengozini",
+      "menuItem3": "Zombili Esengozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "xhosa": {
+      "menuItem1": "Ubomi Busengozini",
+      "menuItem2": "Ipropathi Isengozini",
+      "menuItem3": "Zombini Zisengozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "sotho": {
+      "menuItem1": "Bophelo Bo Kotsing",
+      "menuItem2": "Thepa E Kotsing",
+      "menuItem3": "Ka Bobedi Kotsing",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "tswana": {
+      "menuItem1": "Botshelo mo Kotsing",
+      "menuItem2": "Thepa e mo Kotsing",
+      "menuItem3": "Tšotlhe di mo Kotsing",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "pedi": {
+      "menuItem1": "Bophelo Bo Kotsing",
+      "menuItem2": "Thepa E Kotsing",
+      "menuItem3": "Ka Bobedi Kotsing",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "venda": {
+      "menuItem1": "Vhutshilo Vhu Khomboni",
+      "menuItem2": "Pfuma Yo Khomboni",
+      "menuItem3": "Zwoṱhe Zwo Khomboni",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "tsonga": {
+      "menuItem1": "Vutomi Bya Eka Khombo",
+      "menuItem2": "Ndhawu Yi Eka Khombo",
+      "menuItem3": "Hinkwaswo Swi Eka Khombo",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "swazi": {
+      "menuItem1": "Kuphila Kuse Engozini",
+      "menuItem2": "Ifa Lise Engozini",
+      "menuItem3": "Konkhe Kuse Engozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "ndebele": {
+      "menuItem1": "Umpilo Use Engozini",
+      "menuItem2": "Ifa Lise Engozini",
+      "menuItem3": "Konke Kuse Engozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    }
+  },
+  "ussdRefId": 100
+}

@@ -1,0 +1,15 @@
+{
+  "serialNumber": "ALARM002",
+  "sgmModuleType": "RTU5024",
+  "modelDescription": "External Security Control Panel - Commercial Grade",
+  "accessDetails": {
+    "phoneNumber": "+27845678901",
+    "pin": "3579"
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

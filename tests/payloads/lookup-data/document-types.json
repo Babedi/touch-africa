@@ -1,0 +1,6 @@
+{
+  "category": "System",
+  "subCategory": "Document Types",
+  "items": ["Invoice", "Receipt", "Quote", "Report", "Contract"],
+  "description": "Standard document types used in business operations"
+}

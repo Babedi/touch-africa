@@ -1,0 +1,7 @@
+{
+  "name": "John Smith",
+  "phoneNumber": "+27123456789",
+  "email": "john.smith@example.com",
+  "role": "emergency_contact",
+  "verified": true
+}

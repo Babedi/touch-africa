@@ -1,0 +1,7 @@
+/* Tenant Admin Dashboard Component Styles */
+
+/* Import shared dashboard styles */
+@import url('/shared/css/dashboard-base.css');
+@import url('/shared/css/tenant-admin-dashboard.css');
+
+/* Component-specific overrides and additions can go here */

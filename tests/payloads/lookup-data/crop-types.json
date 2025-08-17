@@ -1,0 +1,6 @@
+{
+  "category": "Agriculture",
+  "subCategory": "Crop Types",
+  "items": ["Beetroot", "Eggplant", "Broccoli", "Cabbage", "Bunching Onion"],
+  "description": "Commonly cultivated crops in agricultural production"
+}

@@ -1,0 +1,1 @@
+- move all test scripts to tests/ and move all *.md to docs/generated/ and move all debug* to tests/debug/ and move all *.ps1 to utilities/

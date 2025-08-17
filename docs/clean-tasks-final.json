@@ -1,0 +1,185 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev-start",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": ["$tsc"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "label": "start-production",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "start:prod"],
+      "group": "build"
+    },
+    {
+      "label": "generate-jwt-token",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "make:token"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "generate-internal-token",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "make:internal-token"],
+      "group": "build"
+    },
+    {
+      "label": "health-check",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "try { $resp = Invoke-WebRequest -Uri http://localhost:5000/internal/health -UseBasicParsing; Write-Host '✅ Health Check:' $resp.StatusCode; Write-Host ($resp.Content) } catch { Write-Host '❌ Health Check Failed:' $_.Exception.Message }"
+      ],
+      "group": "test"
+    },
+    {
+      "label": "service-info-ping",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Invoke-WebRequest -Uri http://localhost:5000/general/serviceInfo/ping -UseBasicParsing | Select-Object -ExpandProperty Content"
+      ],
+      "group": "test"
+    },
+    {
+      "label": "test-admin-login",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$body = '{\\\"email\\\":\\\"test.corrected@neighbourguard.co.za\\\",\\\"password\\\":\\\"TestCorrected123!\\\"}'; try { $resp=Invoke-WebRequest -Uri http://localhost:5000/internal/admin/login -Method POST -Body $body -ContentType 'application/json' -UseBasicParsing; Write-Host 'SUCCESS:' $resp.StatusCode; $content = $resp.Content | ConvertFrom-Json; if($content.data.token) { Write-Host 'TOKEN RECEIVED (length):' $content.data.token.Length } } catch { Write-Host 'FAILED:' $_.Exception.Message }"
+      ],
+      "group": "test"
+    },
+    {
+      "label": "test-tenant-list",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$t=(Get-Content token.txt -Raw).Trim(); if(-not $t){ Write-Output 'No token in token.txt'; exit 1 }; $h=@{ Authorization='Bearer ' + $t }; try { $resp=Invoke-WebRequest -Uri http://localhost:5000/external/tenant/list -Headers $h -Method GET -UseBasicParsing; Write-Host 'SUCCESS:' $resp.StatusCode; Write-Host ($resp.Content) } catch { Write-Host 'FAILED:' $_.Exception.Message }"
+      ],
+      "group": "test",
+      "dependsOn": "generate-jwt-token"
+    },
+    {
+      "label": "run-all-tests",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:tenants"],
+      "group": "test",
+      "dependsOn": "generate-jwt-token"
+    },
+    {
+      "label": "test-service-info",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "test:serviceInfo"],
+      "group": "test"
+    },
+    {
+      "label": "test-three-card-system",
+      "type": "shell",
+      "command": "node",
+      "args": ["tests/test-three-card-system.mjs"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "verify-three-card-implementation",
+      "type": "shell",
+      "command": "node",
+      "args": ["tests/three-card-feature-verification.mjs"],
+      "group": "test"
+    },
+    {
+      "label": "open-test-html",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "Start-Process 'tests/test-three-card-cycling.html'"
+      ],
+      "group": "test"
+    },
+    {
+      "label": "setup-root-admin",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "setup:root-admin"],
+      "group": "build"
+    },
+    {
+      "label": "seed-all-endpoints",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "seed:post"],
+      "group": "build",
+      "dependsOn": "generate-jwt-token"
+    },
+    {
+      "label": "cleanup-legacy-files",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "cleanup:legacy"],
+      "group": "build"
+    },
+    {
+      "label": "quick-health-and-token",
+      "dependsOrder": "sequence",
+      "dependsOn": ["health-check", "generate-jwt-token"],
+      "group": "build"
+    },
+    {
+      "label": "full-system-test",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "health-check",
+        "generate-jwt-token",
+        "test-admin-login",
+        "test-tenant-list"
+      ],
+      "group": "test"
+    }
+  ]
+}

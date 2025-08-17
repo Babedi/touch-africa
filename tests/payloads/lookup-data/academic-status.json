@@ -1,0 +1,6 @@
+{
+  "category": "Education",
+  "subCategory": "Academic Status",
+  "items": ["Enrolled", "Completed", "Deferred", "Dropped"],
+  "description": "Academic progress status for learners and students"
+}

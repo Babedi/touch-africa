@@ -1,0 +1,6 @@
+{
+  "category": "User Profile",
+  "subCategory": "Marital Status",
+  "items": ["Single", "Married", "Divorced", "Widowed"],
+  "description": "Marital status options for demographic and survey data"
+}

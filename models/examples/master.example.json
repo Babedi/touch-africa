@@ -1,0 +1,336 @@
+{
+  "__collections__": {
+    "services": {
+      "anonymousDatingService": {
+        "__collections__": {}
+      },
+      "neighbourGuardService": {
+        "lookups": {
+          "southAfricanLanguages": [
+            "english",
+            "afrikaans",
+            "zulu",
+            "xhosa",
+            "sotho",
+            "tswana",
+            "venda",
+            "tsonga",
+            "swati",
+            "northern_sotho",
+            "ndebele"
+          ],
+          "provinces": [
+            "Eastern Cape",
+            "Free State",
+            "Gauteng",
+            "KwaZulu-Natal",
+            "Limpopo",
+            "Mpumalanga",
+            "Northern Cape",
+            "North West",
+            "Western Cape"
+          ],
+          "responderTypes": ["human", "entity"],
+          "relativeLocation": ["internal", "external"],
+          "internalRoles": [
+            {
+              "role": "super_admin",
+              "description": ""
+            },
+            {
+              "role": "alarm_manager",
+              "description": ""
+            },
+            {
+              "role": "tenant_manager",
+              "description": ""
+            }
+          ],
+          "externalRoles": [
+            {
+              "role": "super_admin",
+              "description": ""
+            },
+            {
+              "role": "user_manager",
+              "description": ""
+            },
+            {
+              "role": "user",
+              "description": ""
+            }
+          ],
+          "alarmDescriptions": [],
+          "communicationChannels": [
+            {
+              "channel": "sms"
+            },
+            {
+              "channel": "whatsapp"
+            },
+            {
+              "channel": "call"
+            }
+          ],
+          "titlePrefixes": [
+            {
+              "prefix": "Mr"
+            },
+            {
+              "prefix": "Mrs"
+            },
+            {
+              "prefix": "Ms"
+            },
+            {
+              "prefix": "Dr"
+            },
+            {
+              "prefix": "Miss"
+            },
+            {
+              "prefix": "Prof"
+            },
+            {
+              "prefix": "Rev"
+            },
+            {
+              "prefix": "Sir"
+            }
+          ],
+          "relationshipTypes": [
+            {
+              "relationship": "family"
+            },
+            {
+              "relationship": "friend"
+            },
+            {
+              "relationship": "neighbour"
+            },
+            {
+              "relationship": "colleague"
+            },
+            {
+              "relationship": "other"
+            }
+          ],
+          "typeOfUsersRequestingService": [
+            {
+              "typeOfUser": "I am a Client"
+            },
+            {
+              "typeOfUser": "I am a Tenant"
+            },
+            {
+              "typeOfUser": "I am a Potential Client"
+            }
+          ],
+          "serviceMessageRelations": [
+            {
+              "relation": "Sale"
+            },
+            {
+              "relation": "General"
+            },
+            {
+              "relation": "Other"
+            }
+          ]
+        },
+        "formats": {
+          "phoneNumbers": "^(0\\d{9}|\\+27\\d{9})$",
+          "ussdPins": "^\\d{4}$",
+          "serialNumbers": [{}],
+          "passwords": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$",
+          "internalAdminIds": "^IADMIN\\d{10}$",
+          "externalAdminIds": "^EADMIN\\d{10}$",
+          "internalAdminEmails": "^[a-zA-Z0-9._%+-]+@neighbourguard\\.(com|co\\.za)$"
+        },
+        "trackers": {
+          "visits": [],
+          "errors": []
+        },
+        "identity": {
+          "active": true,
+          "initialized": "",
+          "logo": "logo.png",
+          "name": "NeighbourGuard™",
+          "version": "1.0.0",
+          "features": [
+            {
+              "title": "Emergency Communication",
+              "text": "Emergency alerts via SMS, WhatsApp, and calls"
+            },
+            {
+              "title": "Flexible Response Network",
+              "text": "Customizable responder lists"
+            },
+            {
+              "title": "Tenant Integration",
+              "text": "Integration with tenant registry for efficient response"
+            },
+            {
+              "title": "User Experience",
+              "text": "User-friendly interface for quick access"
+            }
+          ],
+          "emphasizes": [
+            "tenant response and neighbour accountability.",
+            "Appeals to CPF groups, estates, and tenant-watch setups.",
+            "No existing use in SA panic button market (unlike Vigilant and Buzzer)",
+            "turn every cell phone whether smart or not, into a panic button"
+          ],
+          "publicDescriptions": [
+            "This turns every mobile into an emergency activation device",
+            "This service turns every mobile into an emergency response device, allowing users to send emergency alerts to their contacts and local responders.",
+            "This service is designed to enhance personal safety by enabling quick emergency alerts.",
+            "It allows users to send alerts via SMS, WhatsApp, and calls to designated responders.",
+            "The service is integrated with a tenant registry for efficient emergency response management."
+          ],
+          "taglines": [
+            "When your circle become a life saver.",
+            "Your personal safety network at your fingertips.",
+            "Empowering tenants to respond to emergencies."
+          ],
+          "communication": {
+            "support": {
+              "number": "+27635941451",
+              "email": "support@neighbourguard.com"
+            },
+            "finance": {
+              "number": "+27635941451",
+              "email": "finance@neighbourguard.com"
+            },
+            "general": {
+              "number": "+27635941451",
+              "email": "general@neighbourguard.com"
+            },
+            "serviceRequest": {
+              "number": "+27635941451",
+              "email": "sr@neighbourguard.com"
+            }
+          },
+          "social": [
+            {
+              "site": "facebook",
+              "url": "",
+              "icon": ""
+            }
+          ],
+          "themeInspirations": ["www.africatalking.com", "www.tricentis.com"]
+        },
+        "serviceRequests": [],
+        "notifications": [],
+        "admins": {
+          "root": {
+            "created": {
+              "by": "",
+              "when": "2025-07-20T09:00:00Z"
+            },
+            "id": "IADMIN0000000001",
+            "roles": ["internalSuperAdmin"],
+            "title": "Mr",
+            "names": "Simon Lesedi",
+            "surname": "Babedi",
+            "accessDetails": {
+              "email": "sl.babedi@neighbourguard.co.za",
+              "password": "$2b$12$iGZlz8I67lHQ2NlxozHNXeDT0frC.yDmw7UCkZNPFqyKQP4he7i1K",
+              "lastLogin": [
+                {
+                  "timestamp": "2025-07-30T14:07:39.482Z",
+                  "ip": "system"
+                }
+              ]
+            },
+            "account": {
+              "isActive": {
+                "value": true,
+                "changes": [
+                  {
+                    "to": true,
+                    "when": "2025-07-25T08:00:00Z",
+                    "by": "root",
+                    "reason": "Tenant registry system installation and initial setup completed successfully"
+                  }
+                ]
+              }
+            }
+          },
+          "additional": [
+            {
+              "created": {
+                "by": "root",
+                "when": "2025-07-20T09:00:00Z"
+              },
+              "id": "E/IADMIN0000000007",
+              "roles": ["internalSuperAdmin"],
+              "title": "Mr",
+              "names": "Simon Lesedi",
+              "surname": "Babedi",
+              "accessDetails": {
+                "email": "sl.babedi@neibourguard.com",
+                "password": "SecureAdminPass123",
+                "lastLogin": [
+                  {
+                    "timestamp": "2025-07-30T14:07:39.482Z",
+                    "ip": "system"
+                  }
+                ]
+              },
+              "account": {
+                "isActive": {
+                  "value": true,
+                  "changes": [
+                    {
+                      "to": true,
+                      "when": "2025-07-25T08:00:00Z",
+                      "by": "root",
+                      "reason": "Tenant registry system installation and initial setup completed successfully"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "created": {
+                "by": "root",
+                "when": "2025-07-20T09:00:00Z"
+              },
+              "id": "IADMIN0000000041",
+              "roles": ["internalSuperAdmin"],
+              "title": "Mr",
+              "names": "Simon Lesedi",
+              "surname": "Babedi",
+              "accessDetails": {
+                "email": "sl.babedi@neibourguard.com",
+                "password": "SecureAdminPass123",
+                "lastLogin": [
+                  {
+                    "timestamp": "2025-07-30T14:07:39.482Z",
+                    "ip": "system"
+                  }
+                ]
+              },
+              "account": {
+                "isActive": {
+                  "value": true,
+                  "changes": [
+                    {
+                      "to": true,
+                      "when": "2025-07-25T08:00:00Z",
+                      "by": "root",
+                      "reason": "Tenant registry system installation and initial setup completed successfully"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "tenants": [],
+        "__collections__": {}
+      }
+    }
+  }
+}

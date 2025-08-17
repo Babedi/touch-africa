@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Ticker Demo - NeighbourGuard™</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/shared/variables.css" />
+    <link rel="stylesheet" href="/shared/enhanced-contrast.css" />
+    <link rel="stylesheet" href="/shared/news-ticker.css" />
+
+    <style>
+        body {
+            font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+            margin: 0;
+            padding: 0;
+            background: #f9fafb;
+            color: #1f2937;
+        }
+
+        .demo-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-title {
+            color: var(--at-gray-dark, #1f2937);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .demo-description {
+            color: var(--at-gray, #374151);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .demo-button {
+            background: var(--at-orange, #FF6B35);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .demo-button:hover {
+            background: var(--at-orange-dark, #E55A2B);
+            transform: translateY(-1px);
+        }
+
+        .demo-button.secondary {
+            background: var(--at-blue, #1E3A8A);
+        }
+
+        .demo-button.secondary:hover {
+            background: var(--at-blue-dark, #1E40AF);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-success {
+            background: var(--at-green, #059669);
+        }
+
+        .status-error {
+            background: #DC2626;
+        }
+
+        .status-loading {
+            background: var(--at-orange, #FF6B35);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: var(--at-blue, #1E3A8A);
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .info-card h4 {
+            margin: 0 0 8px 0;
+            color: var(--at-orange, #FF6B35);
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- News ticker will be automatically inserted here -->
+
+    <div class="demo-container">
+        <div class="demo-section">
+            <h1 class="demo-title">🚀 NeighbourGuard™ News Ticker Demo</h1>
+            <p class="demo-description">
+                This demo showcases the AfricaTalking-inspired news ticker component that fetches
+                real-time news from the NeighbourGuard™ platform. The ticker automatically loads
+                news from the <code>/general/serviceInfo/news</code> endpoint and displays them
+                with smooth scrolling animations.
+            </p>
+
+            <div class="demo-controls">
+                <button class="demo-button" onclick="window.newsTicker?.refresh()">
+                    🔄 Refresh News
+                </button>
+                <button class="demo-button secondary" onclick="toggleTicker()">
+                    ⏯️ Toggle Ticker
+                </button>
+                <button class="demo-button secondary" onclick="changeSpeed()">
+                    ⚡ Change Speed
+                </button>
+                <button class="demo-button secondary" onclick="testWithSampleData()">
+                    📰 Load Sample Data
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">📊 Ticker Status</h2>
+            <div id="tickerStatus">
+                <span class="status-indicator status-loading"></span>
+                <span>Initializing news ticker...</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">🎨 AfricaTalking Theme Features</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🧡 Orange Primary</h4>
+                    <p>Dynamic orange gradient (#FF6B35) inspired by AfricaTalking's vibrant brand colors</p>
+                </div>
+                <div class="info-card">
+                    <h4>💙 Blue Secondary</h4>
+                    <p>Professional blue (#1E3A8A) for secondary elements and contrast</p>
+                </div>
+                <div class="info-card">
+                    <h4>🎭 Smooth Animations</h4>
+                    <p>Fluid scrolling with pause-on-hover and responsive controls</p>
+                </div>
+                <div class="info-card">
+                    <h4>📱 Responsive Design</h4>
+                    <p>Adapts seamlessly across mobile, tablet, and desktop devices</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">🔧 Technical Specifications</h2>
+            <ul class="demo-description">
+                <li><strong>Endpoint:</strong> <code>GET /general/serviceInfo/news</code></li>
+                <li><strong>Firebase Path:</strong> <code>/services/neighbourGuardService/news</code></li>
+                <li><strong>Auto Refresh:</strong> Every 5 minutes</li>
+                <li><strong>Scroll Speed:</strong> Configurable (default 50 seconds)</li>
+                <li><strong>Priority Support:</strong> High, normal, low with visual indicators</li>
+                <li><strong>Category Badges:</strong> Color-coded news categorization</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/shared/news-ticker.js"></script>
+    <script>
+        // Demo control functions
+        function toggleTicker() {
+            if (window.newsTicker) {
+                window.newsTicker.togglePlayPause();
+                updateStatus('🎬 Ticker playback toggled');
+            }
+        }
+
+        function changeSpeed() {
+            if (window.newsTicker) {
+                const speeds = [30, 45, 60, 90];
+                const currentSpeed = window.newsTicker.scrollSpeed || 60;
+                const nextSpeed = speeds[(speeds.indexOf(currentSpeed) + 1) % speeds.length];
+                window.newsTicker.updateSpeed(nextSpeed);
+                updateStatus(`⚡ Speed changed to ${nextSpeed} seconds`);
+            }
+        }
+
+        function testWithSampleData() {
+            // This would normally trigger sample data loading
+            updateStatus('📰 Sample data feature would load test news items');
+        }
+
+        function updateStatus(message) {
+            const statusEl = document.getElementById('tickerStatus');
+            if (statusEl) {
+                statusEl.innerHTML = `
+                    <span class="status-indicator status-success"></span>
+                    <span>${message}</span>
+                `;
+            }
+        }
+
+        // Monitor ticker initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (window.newsTicker) {
+                    updateStatus('✅ News ticker successfully initialized');
+                } else {
+                    document.getElementById('tickerStatus').innerHTML = `
+                        <span class="status-indicator status-error"></span>
+                        <span>❌ Failed to initialize news ticker</span>
+                    `;
+                }
+            }, 2000);
+        });
+
+        // Log ticker activity
+        if (window.newsTicker) {
+            console.log('📰 News ticker demo loaded');
+        }
+    </script>
+</body>
+
+</html>

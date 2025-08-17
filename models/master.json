@@ -1,0 +1,467 @@
+{
+  "services": {
+    "anonymousDatingService": { "__collections__": {} },
+
+    "neighbourGuardService": {
+      "logo": "logo.png",
+      "name": "NeighbourGuard™",
+      "version": "1.0.0",
+      "initialized": "",
+
+      "active": true,
+
+      "descriptions": [
+        "This turns every mobile into an emergency activation device",
+        "This service turns every mobile into an emergency response device, allowing users to send emergency alerts to their contacts and local responders.",
+        "This service is designed to enhance personal safety by enabling quick emergency alerts.",
+        "It allows users to send alerts via SMS, WhatsApp, and calls to designated responders.",
+        "The service is integrated with a tenant registry for efficient emergency response management."
+      ],
+
+      "features": [
+        {
+          "title": "Alarm Activation Strategy",
+          "text": "The first of its kind in SA to allow each tenant to implement an alarm activation strategy sensitive to each activation context. Note that this is custom to each tenant and can be improved on over time"
+        },
+        {
+          "title": "Responder Activation Strategy",
+          "text": "The first of its kind in SA to allow each tenant to implement a responder activation strategy sensitive to each activation context. Note that this is custom to each tenant and can be improved on over time"
+        },
+        {
+          "title": "Emergency Communication",
+          "text": "Emergency alerts via SMS, WhatsApp, and calls"
+        },
+        {
+          "title": "Flexible Response Network",
+          "text": "Customizable responder lists"
+        },
+        {
+          "title": "Tenant Integration",
+          "text": "Integration with tenant registry for efficient response"
+        },
+        {
+          "title": "User Experience",
+          "text": "User-friendly interface for quick access"
+        }
+      ],
+
+      "emphasizes": [
+        "tenant response and neighbour accountability.",
+        "Appeals to CPF groups, estates, and tenant-watch setups.",
+        "No existing use in SA panic button market (unlike Vigilant and Buzzer)",
+        "turn every cell phone whether smart or not, into a panic button"
+      ],
+
+      "taglines": [
+        "When your circle become a life saver.",
+        "Your personal safety network at your fingertips.",
+        "Empowering tenants to respond to emergencies."
+      ],
+
+      "communicationChannels": {
+        "support": {
+          "number": "+27635941451",
+          "email": "support@neighbourguard.com"
+        },
+        "finance": {
+          "number": "+27635941451",
+          "email": "finance@neighbourguard.com"
+        },
+        "general": {
+          "number": "+27635941451",
+          "email": "general@neighbourguard.com"
+        },
+        "service_request": {
+          "number": "+27635941451",
+          "email": "service.requests@neighbourguard.com"
+        },
+        "careers": {
+          "number": "+27635941451",
+          "email": "careers@neighbourguard.com"
+        },
+        "complaints": {
+          "number": "+27635941451",
+          "email": "complains@neighbourguard.com"
+        },
+        "complements": {
+          "number": "+27635941451",
+          "email": "complements@neighbourguard.com"
+        },
+        "sales": {
+          "number": "+27635941451",
+          "email": "sales@neighbourguard.com"
+        }
+      },
+
+      "social": {
+        "facebook": {
+          "url": "",
+          "icon": ""
+        },
+        "linkedin": {
+          "url": "",
+          "icon": ""
+        },
+        "twitter": {
+          "url": "",
+          "icon": ""
+        },
+        "instagram": {
+          "url": "",
+          "icon": ""
+        }
+      },
+
+      "counters": {
+        "tenantsUssdRefId": 3
+      },
+
+      "__collections__": {
+        "admins": {
+          "root": {},
+          "EXXP4g4IrTXknDxvemJ8": {}
+        },
+
+        "serviceRequests": {
+          "Vh9Lc69wXo0qGvSyIgrv": {}
+        },
+
+        "notifications": {
+          "j4xueeLJEAqrlDcjisYx": {}
+        },
+
+        "tenants": {
+          "1": {
+            "created": {
+              "by": "root",
+              "when": "2025-07-20T09:00:00Z"
+            },
+            "ussdRefId": 1,
+            "activationResponseBlockName": "Sandton Office Park Security Response Block",
+            "address": {
+              "locality": "Sandton",
+              "province": "Gauteng",
+              "country": "South Africa",
+              "postalCode": "2010"
+            },
+            "activationContextMenu": {
+              "english": {
+                "menuItem1": "Life@Risk",
+                "menuItem2": "Property@Risk",
+                "menuItem3": "Both@Risk",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "afrikaans": {
+                "menuItem1": "Lewe in Gevaar",
+                "menuItem2": "Eiendom in Gevaar",
+                "menuItem3": "Albei in Gevaar",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "zulu": {
+                "menuItem1": "Impilo Esengozini",
+                "menuItem2": "Impahla Esengozini",
+                "menuItem3": "Zombili Esengozini",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "xhosa": {
+                "menuItem1": "Ubomi Lusengozini",
+                "menuItem2": "Ipropathi Isengozini",
+                "menuItem3": "Zombini Zisengozini",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "sotho": {
+                "menuItem1": "Bophelo Bo Kotsing",
+                "menuItem2": "Thepa E Kotsing",
+                "menuItem3": "Ka Bobedi Kotsing",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "tswana": {
+                "menuItem1": "Botshelo mo Kotsing",
+                "menuItem2": "Thepa e mo Kotsing",
+                "menuItem3": "Tšotlhe di mo Kotsing",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "venda": {
+                "menuItem1": "Vhutshilo Vhu Khomboni",
+                "menuItem2": "Pfuma Yo Khomboni",
+                "menuItem3": "Zwoṱhe Zwo Khomboni",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "tsonga": {
+                "menuItem1": "Vutomi Bya Eka Khombo",
+                "menuItem2": "Ndhawu Yi Eka Khombo",
+                "menuItem3": "Hinkwaswo Swi Eka Khombo",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "swati": {
+                "menuItem1": "Kuphila Kuse Engozini",
+                "menuItem2": "Ifa Lise Engozini",
+                "menuItem3": "Konkhe Kuse Engozini",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "northernSotho": {
+                "menuItem1": "Bophelo Bo Kotsing",
+                "menuItem2": "Thepa E Kotsing",
+                "menuItem3": "Ka Bobedi Kotsing",
+                "menuItem4": "",
+                "menuItem5": ""
+              },
+              "ndebele": {
+                "menuItem1": "Umpilo Use Engozini",
+                "menuItem2": "Ifa Lise Engozini",
+                "menuItem3": "Konke Kuse Engozini",
+                "menuItem4": "",
+                "menuItem5": ""
+              }
+            },
+            "account": {
+              "isActive": {
+                "value": true,
+                "changes": [
+                  {
+                    "to": true,
+                    "when": "2025-07-25T08:00:00Z",
+                    "by": "system_installer",
+                    "reason": "Tenant registry system installation and initial setup completed successfully"
+                  }
+                ]
+              }
+            },
+            "__collections__": {
+              "admins": {
+                "root": {
+                  "created": {
+                    "by": "",
+                    "when": "2025-07-20T09:00:00Z"
+                  },
+                  "roles": ["internalSuperAdmin"],
+                  "title": "Mr",
+                  "names": "Simon Lesedi",
+                  "surname": "Babedi",
+                  "accessDetails": {
+                    "email": "sl.babedi@neighbourguard.co.za",
+                    "password": "$2b$12$iGZlz8I67lHQ2NlxozHNXeDT0frC.yDmw7UCkZNPFqyKQP4he7i1K",
+                    "lastLogin": [
+                      {
+                        "timestamp": "2025-07-30T14:07:39.482Z",
+                        "ip": "system"
+                      }
+                    ]
+                  },
+                  "account": {
+                    "isActive": {
+                      "value": true,
+                      "changes": [
+                        {
+                          "to": true,
+                          "when": "2025-07-25T08:00:00Z",
+                          "by": "root",
+                          "reason": "Tenant registry system installation and initial setup completed successfully"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "TNNTADMIN2527585455": {},
+                "TNNTADMIN2527585755": {}
+              },
+              "internalAlarmsTesting": {
+                "enabled": true,
+                "day": 2,
+                "timeRange": {
+                  "start": {
+                    "hour": 11,
+                    "minutes": 30
+                  },
+                  "end": {
+                    "hour": 12,
+                    "minutes": 30
+                  }
+                }
+              },
+              "externalAlarmsTesting": {
+                "enabled": false,
+                "day": 2,
+                "timeRange": {
+                  "start": {
+                    "hour": 11,
+                    "minutes": 30
+                  },
+                  "end": {
+                    "hour": 12,
+                    "minutes": 30
+                  }
+                }
+              },
+              "internalAlarmsList": {},
+              "internalAlarms": {
+                "menuItem1": [],
+                "menuItem2": [],
+                "menuItem3": [],
+                "menuItem4": [],
+                "menuItem5": []
+              },
+              "externalAlarmsList": {},
+              "externalAlarms": {
+                "menuItem1": [],
+                "menuItem2": [],
+                "menuItem3": [],
+                "menuItem4": [],
+                "menuItem5": []
+              },
+              "internalRespondersList": {},
+              "internalResponders": {
+                "menuItem1": [],
+                "menuItem2": [],
+                "menuItem3": [],
+                "menuItem4": [],
+                "menuItem5": []
+              },
+              "externalRespondersList": {},
+              "externalResponders": {
+                "menuItem1": [],
+                "menuItem2": [],
+                "menuItem3": [],
+                "menuItem4": [],
+                "menuItem5": []
+              },
+              "users": {
+                "+27252548545": {},
+                "+27652548585": {}
+              }
+            }
+          }
+        },
+
+        "lookups": {
+          "southAfricanLanguages": [
+            "english",
+            "afrikaans",
+            "zulu",
+            "xhosa",
+            "sotho",
+            "tswana",
+            "venda",
+            "tsonga",
+            "swati",
+            "northern_sotho",
+            "ndebele"
+          ],
+          "provinces": [
+            "Eastern Cape",
+            "Free State",
+            "Gauteng",
+            "KwaZulu-Natal",
+            "Limpopo",
+            "Mpumalanga",
+            "Northern Cape",
+            "North West",
+            "Western Cape"
+          ],
+          "responderTypes": ["human", "entity"],
+          "relativeLocation": ["internal", "external"],
+          "internalRoles": [
+            {
+              "role": "super_admin",
+              "description": ""
+            },
+            {
+              "role": "alarm_manager",
+              "description": ""
+            },
+            {
+              "role": "tenant_manager",
+              "description": ""
+            }
+          ],
+          "externalRoles": [
+            {
+              "role": "super_admin",
+              "description": ""
+            },
+            {
+              "role": "user_manager",
+              "description": ""
+            },
+            {
+              "role": "user",
+              "description": ""
+            }
+          ],
+          "alarmDescriptions": [],
+          "communicationChannels": [
+            { "channel": "sms" },
+            { "channel": "whatsapp" },
+            { "channel": "call" }
+          ],
+          "titlePrefixes": [
+            { "prefix": "Mr" },
+            { "prefix": "Mrs" },
+            { "prefix": "Ms" },
+            { "prefix": "Dr" },
+            { "prefix": "Miss" },
+            { "prefix": "Prof" },
+            { "prefix": "Rev" },
+            { "prefix": "Sir" }
+          ],
+          "relationshipTypes": [
+            { "relationship": "family" },
+            { "relationship": "friend" },
+            { "relationship": "neighbour" },
+            { "relationship": "colleague" },
+            { "relationship": "other" }
+          ],
+          "typeOfServiceRequestUser": [
+            { "typeOfUser": "I am a Client" },
+            { "typeOfUser": "I am a Tenant" },
+            { "typeOfUser": "I am a Potential Client" }
+          ],
+          "serviceRequestMessageRelatedTo": [
+            { "relation": "Sale" },
+            { "relation": "General" },
+            { "relation": "Other" }
+          ],
+          "serviceRequestStatus": [
+            { "status": "Open" },
+            { "status": "processing" },
+            { "status": "Closed" }
+          ],
+          "serviceRequestPriority": [
+            { "priority": "High" },
+            { "priority": "Medium" },
+            { "priority": "Low" }
+          ],
+          "gsmModuleTypes": ["RTU5024", "RTU5035"]
+        },
+
+        "formats": {
+          "phoneNumbers": { "regex": "^(0\\d{9}|\\+27\\d{9})$" },
+          "ussdPins": { "regex": "^\\d{4}$" },
+          "serialNumbers": { "regex": [{}] },
+          "passwords": {
+            "regex": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$"
+          },
+          "internalAdminIds": { "regex": "^IADMIN\\d{10}$" },
+          "externalAdminIds": { "regex": "^EADMIN\\d{10}$" },
+          "internalAdminEmails": {
+            "regex": "^[a-zA-Z0-9._%+-]+@neighbourguard\\.(com|co\\.za)$"
+          }
+        },
+
+        "trackers": {
+          "visits": [],
+          "errors": []
+        }
+      }
+    }
+  }
+}

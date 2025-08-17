@@ -1,0 +1,16 @@
+{
+  "roles": ["internalSuperAdmin"],
+  "title": "Ms",
+  "names": "Sarah Louise",
+  "surname": "Mitchell",
+  "accessDetails": {
+    "email": "s.mitchell@neighbourguard.co.za",
+    "password": "SecureAdmin789!"
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

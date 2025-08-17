@@ -1,0 +1,9 @@
+{
+  "permission": "read_alarms",
+  "granted": true,
+  "grantedBy": "admin_001",
+  "grantedAt": {
+    "Seconds": 1703088000,
+    "Nanoseconds": 0
+  }
+}

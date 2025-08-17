@@ -1,0 +1,18 @@
+{
+  "category": "Culture",
+  "subCategory": "Languages",
+  "items": [
+    "English",
+    "Afrikaans",
+    "Zulu",
+    "Xhosa",
+    "Sotho",
+    "Tswana",
+    "Venda",
+    "Tsonga",
+    "Swati",
+    "Northern Sotho",
+    "Ndebele"
+  ],
+  "description": "Languages supported for communication, localization, and user interaction"
+}

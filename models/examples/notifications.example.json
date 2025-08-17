@@ -1,0 +1,31 @@
+[
+  {
+    "from": {
+      "type": "system",
+      "systemName": "NeighbourGuard System",
+      "adminUserName": ""
+    },
+    "to": {
+      "type": "tenantAdmin",
+      "someTenantAdmins": [],
+      "someTenantUser": [],
+      "ussdRefId": "tenant_001",
+      "tenantAdminId": "admin_sandton_001",
+      "tenantUserId": ""
+    },
+    "notification": {
+      "type": "info",
+      "title": "Monthly System Update Notification",
+      "message": "The NeighbourGuard™ system will undergo scheduled maintenance on Sunday, July 30th, 2025 from 02:00 to 04:00 AM. During this time, emergency services will remain operational, but dashboard access may be temporarily limited.",
+      "priority": "normal",
+      "timestamp": {
+        "__datatype__": "timestamp",
+        "value": {
+          "Seconds": 1722038400,
+          "Nanoseconds": 0
+        }
+      }
+    },
+    "isRead": false
+  }
+]

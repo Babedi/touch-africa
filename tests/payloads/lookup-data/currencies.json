@@ -1,0 +1,6 @@
+{
+  "category": "Finance",
+  "subCategory": "Currencies",
+  "items": ["ZAR", "USD", "EUR", "GBP", "INR"],
+  "description": "Supported currencies for payments and financial reporting"
+}

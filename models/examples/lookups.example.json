@@ -1,0 +1,118 @@
+{
+  "employeeRoles": [
+    {
+      "role": "internalSuperAdmin",
+      "description": ""
+    },
+    {
+      "role": "admin",
+      "description": ""
+    }
+  ],
+  "tenantRoles": [
+    {
+      "role": "internalSuperAdmin",
+      "description": ""
+    },
+    {
+      "role": "admin",
+      "description": ""
+    },
+    {
+      "role": "user",
+      "description": ""
+    }
+  ],
+  "alarmDescriptions": [],
+  "communicationChannels": [
+    {
+      "channel": "sms"
+    },
+    {
+      "channel": "whatsapp"
+    },
+    {
+      "channel": "call"
+    }
+  ],
+  "alarmTypes": [
+    {
+      "type": "external"
+    },
+    {
+      "type": "internal"
+    }
+  ],
+  "titlePrefixes": [
+    {
+      "prefix": "Mr"
+    },
+    {
+      "prefix": "Mrs"
+    },
+    {
+      "prefix": "Ms"
+    },
+    {
+      "prefix": "Dr"
+    },
+    {
+      "prefix": "Miss"
+    },
+    {
+      "prefix": "Prof"
+    },
+    {
+      "prefix": "Rev"
+    },
+    {
+      "prefix": "Sir"
+    }
+  ],
+  "relationshipTypes": [
+    {
+      "relationship": "family"
+    },
+    {
+      "relationship": "friend"
+    },
+    {
+      "relationship": "neighbour"
+    },
+    {
+      "relationship": "colleague"
+    },
+    {
+      "relationship": "other"
+    }
+  ],
+  "typeOfUsersRequestingService": [
+    {
+      "typeOfUser": "I am a Client"
+    },
+    {
+      "typeOfUser": "I am a Tenant"
+    },
+    {
+      "typeOfUser": "I am a Potential Client"
+    }
+  ],
+  "serviceMessageRelations": [
+    {
+      "relation": "Sale"
+    },
+    {
+      "relation": "General"
+    },
+    {
+      "relation": "Other"
+    }
+  ],
+  "format": {
+    "phoneNumbers": [{}],
+    "USSDPins": [{}],
+    "serialNumbers": [{}],
+    "passwords": [{}],
+    "adminIds": [{}]
+  }
+}

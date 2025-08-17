@@ -1,0 +1,6 @@
+{
+  "category": "Education",
+  "subCategory": "Grade Levels",
+  "items": ["Grade 1", "Grade 2", "Grade 3", "Undergraduate", "Postgraduate"],
+  "description": "Education levels for school and higher education systems"
+}

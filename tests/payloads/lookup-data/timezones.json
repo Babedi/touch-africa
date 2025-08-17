@@ -1,0 +1,6 @@
+{
+  "category": "System",
+  "subCategory": "Time Zones",
+  "items": ["UTC", "GMT+2", "EST", "PST", "CET"],
+  "description": "Time zones for scheduling, logging, and international coordination"
+}

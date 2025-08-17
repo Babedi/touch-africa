@@ -1,0 +1,67 @@
+{
+  "name": "NeighbourGuard Panic Button API",
+  "version": "1.0.0",
+  "description": "Emergency response platform with multi-tenant management and integrated alarm systems",
+  "author": "TouchAfrica Development Team",
+  "devtools": {
+    "enabled": true,
+    "features": [
+      "console",
+      "network",
+      "sources",
+      "application",
+      "security",
+      "lighthouse"
+    ],
+    "sourceMap": {
+      "enabled": true,
+      "baseUrl": "/"
+    },
+    "debugging": {
+      "breakpoints": true,
+      "stepDebugging": true,
+      "variableInspection": true,
+      "callStackInspection": true
+    },
+    "performance": {
+      "profiling": true,
+      "memoryLeakDetection": true,
+      "performanceMetrics": true
+    },
+    "security": {
+      "httpsRedirect": true,
+      "contentSecurityPolicy": true,
+      "crossOriginIsolation": false
+    }
+  },
+  "application": {
+    "type": "web-app",
+    "framework": "express",
+    "frontend": "vanilla-js",
+    "backend": "node.js",
+    "database": "firestore"
+  },
+  "endpoints": {
+    "health": "/internal/health",
+    "api": "/",
+    "static": "/frontend/public",
+    "private": "/private",
+    "admin": "/internal/admin",
+    "tenant": "/external/tenant"
+  },
+  "development": {
+    "port": 5000,
+    "environment": "development",
+    "hotReload": false,
+    "apiDocumentation": "/docs",
+    "testingSuite": "/tests"
+  },
+  "chrome_devtools": {
+    "manifest_version": 2,
+    "permissions": ["debugger", "tabs", "activeTab", "storage"],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "background": {
+      "persistent": false
+    }
+  }
+}

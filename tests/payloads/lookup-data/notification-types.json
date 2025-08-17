@@ -1,0 +1,6 @@
+{
+  "category": "System",
+  "subCategory": "Notification Types",
+  "items": ["Email", "SMS", "Push Notification", "In-App"],
+  "description": "Channels for system and user notifications"
+}

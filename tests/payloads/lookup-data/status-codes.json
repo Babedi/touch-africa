@@ -1,0 +1,6 @@
+{
+  "category": "System",
+  "subCategory": "Status Codes",
+  "items": ["Active", "Inactive", "Pending", "Suspended"],
+  "description": "General status codes for records, accounts, and processes"
+}

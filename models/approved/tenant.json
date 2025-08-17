@@ -1,0 +1,210 @@
+{
+  "created": {
+    "by": "root",
+    "when": "2025-07-20T09:00:00Z"
+  },
+  "ussdRefId": 1,
+  "activationResponseBlockName": "Sandton Office Park Security Response Block",
+  "address": {
+    "locality": "Sandton",
+    "province": "Gauteng",
+    "country": "South Africa",
+    "postalCode": "2010"
+  },
+  "activationContextMenu": {
+    "english": {
+      "menuItem1": "Life@Risk",
+      "menuItem2": "Property@Risk",
+      "menuItem3": "Both@Risk",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "afrikaans": {
+      "menuItem1": "Lewe in Gevaar",
+      "menuItem2": "Eiendom in Gevaar",
+      "menuItem3": "Albei in Gevaar",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "zulu": {
+      "menuItem1": "Impilo Esengozini",
+      "menuItem2": "Impahla Esengozini",
+      "menuItem3": "Zombili Esengozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "xhosa": {
+      "menuItem1": "Ubomi Lusengozini",
+      "menuItem2": "Ipropathi Isengozini",
+      "menuItem3": "Zombini Zisengozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "sotho": {
+      "menuItem1": "Bophelo Bo Kotsing",
+      "menuItem2": "Thepa E Kotsing",
+      "menuItem3": "Ka Bobedi Kotsing",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "tswana": {
+      "menuItem1": "Botshelo mo Kotsing",
+      "menuItem2": "Thepa e mo Kotsing",
+      "menuItem3": "Tšotlhe di mo Kotsing",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "venda": {
+      "menuItem1": "Vhutshilo Vhu Khomboni",
+      "menuItem2": "Pfuma Yo Khomboni",
+      "menuItem3": "Zwoṱhe Zwo Khomboni",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "tsonga": {
+      "menuItem1": "Vutomi Bya Eka Khombo",
+      "menuItem2": "Ndhawu Yi Eka Khombo",
+      "menuItem3": "Hinkwaswo Swi Eka Khombo",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "swati": {
+      "menuItem1": "Kuphila Kuse Engozini",
+      "menuItem2": "Ifa Lise Engozini",
+      "menuItem3": "Konkhe Kuse Engozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "northernSotho": {
+      "menuItem1": "Bophelo Bo Kotsing",
+      "menuItem2": "Thepa E Kotsing",
+      "menuItem3": "Ka Bobedi Kotsing",
+      "menuItem4": "",
+      "menuItem5": ""
+    },
+    "ndebele": {
+      "menuItem1": "Umpilo Use Engozini",
+      "menuItem2": "Ifa Lise Engozini",
+      "menuItem3": "Konke Kuse Engozini",
+      "menuItem4": "",
+      "menuItem5": ""
+    }
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": [
+        {
+          "to": true,
+          "when": "2025-07-25T08:00:00Z",
+          "by": "system_installer",
+          "reason": "Tenant registry system installation and initial setup completed successfully"
+        }
+      ]
+    }
+  },
+  "__collections__": {
+    "admins": {
+      "root": {
+        "created": {
+          "by": "",
+          "when": "2025-07-20T09:00:00Z"
+        },
+        "roles": ["internalSuperAdmin"],
+        "title": "Mr",
+        "names": "Simon Lesedi",
+        "surname": "Babedi",
+        "accessDetails": {
+          "email": "sl.babedi@neighbourguard.co.za",
+          "password": "$2b$12$iGZlz8I67lHQ2NlxozHNXeDT0frC.yDmw7UCkZNPFqyKQP4he7i1K",
+          "lastLogin": [
+            {
+              "timestamp": "2025-07-30T14:07:39.482Z",
+              "ip": "system"
+            }
+          ]
+        },
+        "account": {
+          "isActive": {
+            "value": true,
+            "changes": [
+              {
+                "to": true,
+                "when": "2025-07-25T08:00:00Z",
+                "by": "root",
+                "reason": "Tenant registry system installation and initial setup completed successfully"
+              }
+            ]
+          }
+        }
+      },
+      "TNNTADMIN2527585455": {},
+      "TNNTADMIN2527585755": {}
+    },
+    "internalAlarmsTesting": {
+      "enabled": true,
+      "day": 2,
+      "timeRange": {
+        "start": {
+          "hour": 11,
+          "minutes": 30
+        },
+        "end": {
+          "hour": 12,
+          "minutes": 30
+        }
+      }
+    },
+    "externalAlarmsTesting": {
+      "enabled": false,
+      "day": 2,
+      "timeRange": {
+        "start": {
+          "hour": 11,
+          "minutes": 30
+        },
+        "end": {
+          "hour": 12,
+          "minutes": 30
+        }
+      }
+    },
+
+    "internalAlarmsList": {},
+
+    "internalAlarmsMenuItem1": [],
+    "internalAlarmsMenuItem2": [],
+    "internalAlarmsMenuItem3": [],
+    "internalAlarmsMenuItem4": [],
+    "internalAlarmsMenuItem5": [],
+
+    "externalAlarmsList": {},
+
+    "externalAlarmsMenuItem1": [],
+    "externalAlarmsMenuItem2": [],
+    "externalAlarmsMenuItem3": [],
+    "externalAlarmsMenuItem4": [],
+    "externalAlarmsMenuItem5": [],
+
+    "internalRespondersList": {},
+
+    "internalRespondersMenuItem1": [],
+    "internalRespondersMenuItem2": [],
+    "internalRespondersMenuItem3": [],
+    "internalRespondersMenuItem4": [],
+    "internalRespondersMenuItem5": [],
+
+    "externalRespondersList": {},
+
+    "externalRespondersMenuItem1": [],
+    "externalRespondersMenuItem2": [],
+    "externalRespondersMenuItem3": [],
+    "externalRespondersMenuItem4": [],
+    "externalRespondersMenuItem5": [],
+
+    "users": {
+      "+27252548545": {},
+      "+27652548585": {}
+    }
+  }
+}

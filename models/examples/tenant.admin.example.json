@@ -1,0 +1,20 @@
+{
+  "created": {
+    "by": "root",
+    "when": "2025-07-20T09:00:00Z"
+  },
+  "id": "admin0001",
+  "isActive": true,
+  "role": "internalSuperAdmin",
+  "title": "Mr",
+  "names": "Simon Lesedi",
+  "surname": "Babedi",
+  "accessDetails": {
+    "username": "lesedi.simon@gmail.com",
+    "password": "SecureAdminPass123"
+  },
+  "lastLogin": {
+    "timestamp": "2025-07-30T14:07:39.482Z",
+    "ip": "system"
+  }
+}

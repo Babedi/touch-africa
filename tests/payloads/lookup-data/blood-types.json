@@ -1,0 +1,6 @@
+{
+  "category": "Healthcare",
+  "subCategory": "Blood Types",
+  "items": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+  "description": "Standard human blood groups for healthcare applications"
+}

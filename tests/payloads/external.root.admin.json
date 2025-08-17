@@ -1,0 +1,16 @@
+{
+  "title": "Ms",
+  "names": "External Root",
+  "surname": "Administrator",
+  "accessDetails": {
+    "email": "external.root@neighbourguard.co.za",
+    "password": "ExternalSecure123!",
+    "lastLogin": []
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

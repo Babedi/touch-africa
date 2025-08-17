@@ -1,0 +1,16 @@
+{
+  "category": "Geography",
+  "subCategory": "Provinces",
+  "items": [
+    "Eastern Cape",
+    "Free State",
+    "Gauteng",
+    "KwaZulu-Natal",
+    "Limpopo",
+    "Mpumalanga",
+    "Northern Cape",
+    "North West",
+    "Western Cape"
+  ],
+  "description": "Administrative divisions of South Africa, used for address and service mapping"
+}

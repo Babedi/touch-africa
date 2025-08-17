@@ -1,0 +1,6 @@
+{
+  "category": "Business",
+  "subCategory": "Payment Methods",
+  "items": ["Credit Card", "Cash", "EFT", "Mobile Money", "PayPal"],
+  "description": "Supported payment methods for transactions"
+}

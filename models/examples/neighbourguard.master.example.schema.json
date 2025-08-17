@@ -1,0 +1,1243 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://neighbourguard.tech/schema/v1.0.0",
+  "title": "NeighbourGuard Database Schema",
+  "description": "Comprehensive schema for the NeighbourGuard panic button service database structure",
+  "type": "object",
+  "properties": {
+    "__collections__": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "object",
+          "properties": {
+            "anonymousDatingService": {
+              "type": "object",
+              "properties": {
+                "__collections__": {
+                  "type": "object"
+                }
+              }
+            },
+            "neighbourGuardService": {
+              "$ref": "#/definitions/neighbourGuardService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "neighbourGuardService": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ServiceIdentity"
+        },
+        "communication": {
+          "$ref": "#/definitions/Communication"
+        },
+        "alarms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alarm"
+          }
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          }
+        },
+        "tenants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tenant"
+          }
+        },
+        "serviceRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRequest"
+          }
+        },
+        "admins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Admin"
+          }
+        },
+        "trackers": {
+          "$ref": "#/definitions/Trackers"
+        },
+        "lookups": {
+          "$ref": "#/definitions/Lookups"
+        },
+        "__collections__": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "identity",
+        "communication",
+        "alarms",
+        "tenants",
+        "admins",
+        "trackers",
+        "lookups"
+      ],
+      "additionalProperties": false
+    },
+    "ServiceIdentity": {
+      "type": "object",
+      "properties": {
+        "siteName": {
+          "type": "string",
+          "pattern": "^NeighbourGuard™$"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              }
+            },
+            "required": ["title", "text"],
+            "additionalProperties": false
+          }
+        },
+        "emphasizes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "publicDescriptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        },
+        "taglines": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        }
+      },
+      "required": [
+        "siteName",
+        "features",
+        "emphasizes",
+        "publicDescriptions",
+        "taglines"
+      ],
+      "additionalProperties": false
+    },
+    "Communication": {
+      "type": "object",
+      "properties": {
+        "support": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "string",
+              "pattern": "^\\+27[0-9]{9}$"
+            },
+            "website": {
+              "type": "string",
+              "format": "uri"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "required": ["number", "website", "email"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["support"],
+      "additionalProperties": false
+    },
+    "Alarm": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-zA-Z]{10}$"
+        },
+        "sgmModuleType": {
+          "type": "string",
+          "enum": ["RTU5024", "RTU5035", "RTU5024/RTU5035"]
+        },
+        "modelDescription": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 200
+        },
+        "serial": {
+          "type": "string",
+          "pattern": "^SN[0-9a-zA-Z]{10,}$"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "pattern": "^\\+27[0-9]{9}$"
+        },
+        "pin": {
+          "type": "string",
+          "pattern": "^[0-9]{4}$"
+        },
+        "used": {
+          "type": "object",
+          "properties": {
+            "By": {
+              "type": "string",
+              "pattern": "^tenant_[0-9]{3}$"
+            },
+            "as": {
+              "type": "string",
+              "enum": ["external", "internal"]
+            },
+            "where": {
+              "type": "object",
+              "properties": {
+                "locationDescription": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 500
+                },
+                "geoLocation": {
+                  "type": "object",
+                  "properties": {
+                    "latitude": {
+                      "type": "number",
+                      "minimum": -90,
+                      "maximum": 90
+                    },
+                    "longitude": {
+                      "type": "number",
+                      "minimum": -180,
+                      "maximum": 180
+                    }
+                  },
+                  "required": ["latitude", "longitude"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["locationDescription", "geoLocation"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["By", "as", "where"],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "sgmModuleType",
+        "modelDescription",
+        "serial",
+        "phoneNumber",
+        "pin"
+      ],
+      "additionalProperties": false
+    },
+    "Notification": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["system", "admin", "user"]
+            },
+            "systemName": {
+              "type": "string"
+            },
+            "adminUserName": {
+              "type": "string"
+            }
+          },
+          "required": ["type"],
+          "additionalProperties": false
+        },
+        "to": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["tenantAdmin", "tenantUser", "systemAdmin", "all"]
+            },
+            "someTenantAdmins": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "someTenantUser": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ussdRefID": {
+              "type": "string",
+              "pattern": "^tenant_[0-9]{3}$"
+            },
+            "tenantAdminId": {
+              "type": "string"
+            },
+            "tenantUserId": {
+              "type": "string"
+            }
+          },
+          "required": ["type"],
+          "additionalProperties": false
+        },
+        "notification": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["info", "warning", "error", "success"]
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "priority": {
+              "type": "string",
+              "enum": ["low", "normal", "high", "urgent"]
+            },
+            "timestamp": {
+              "type": "object",
+              "properties": {
+                "__datatype__": {
+                  "type": "string",
+                  "const": "timestamp"
+                },
+                "value": {
+                  "type": "object",
+                  "properties": {
+                    "Seconds": {
+                      "type": "integer"
+                    },
+                    "Nanoseconds": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 999999999
+                    }
+                  },
+                  "required": ["_seconds", "_nanoseconds"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["__datatype__", "value"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["type", "title", "message", "priority", "timestamp"],
+          "additionalProperties": false
+        },
+        "isRead": {
+          "type": "boolean"
+        }
+      },
+      "required": ["from", "to", "notification", "isRead"],
+      "additionalProperties": false
+    },
+    "Tenant": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "ussdRefID": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "activationResponseBlockName": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 200
+        },
+        "activationContextMenu": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["Life@Risk", "Property@Risk", "Both@Risk"]
+          },
+          "minItems": 1,
+          "maxItems": 3,
+          "uniqueItems": true
+        },
+        "admins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantAdmin"
+          }
+        },
+        "alarms": {
+          "type": "object",
+          "properties": {
+            "alarmTesting": {
+              "type": "object",
+              "properties": {
+                "timeRange": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "$ref": "#/definitions/TimeSlot"
+                    },
+                    "end": {
+                      "$ref": "#/definitions/TimeSlot"
+                    }
+                  },
+                  "required": ["start", "end"],
+                  "additionalProperties": false
+                },
+                "day": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 6
+                }
+              },
+              "required": ["timeRange", "day"],
+              "additionalProperties": false
+            },
+            "external": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TenantAlarmReference"
+              }
+            },
+            "internal": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TenantAlarmReference"
+              }
+            }
+          },
+          "required": ["alarmTesting", "external", "internal"],
+          "additionalProperties": false
+        },
+        "Address": {
+          "$ref": "#/definitions/Address"
+        },
+        "responders": {
+          "type": "object",
+          "properties": {
+            "external": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Responder"
+              }
+            },
+            "internal": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Responder"
+              }
+            }
+          },
+          "required": ["external", "internal"],
+          "additionalProperties": false
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantUser"
+          }
+        },
+        "account": {
+          "$ref": "#/definitions/AccountStatus"
+        }
+      },
+      "required": [
+        "created",
+        "ussdRefID",
+        "activationResponseBlockName",
+        "activationContextMenu",
+        "admins",
+        "alarms",
+        "Address",
+        "responders",
+        "users",
+        "account"
+      ],
+      "additionalProperties": false
+    },
+    "ServiceRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "enum": ["Mr", "Mrs", "Ms", "Dr", "Miss", "Prof", "Rev", "Sir"]
+        },
+        "names": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "typeOfUser": {
+          "type": "string",
+          "enum": ["I am a Client", "I am a Tenant", "I am a Potential Client"]
+        },
+        "messageRelatedTo": {
+          "type": "string",
+          "enum": ["Sale", "General", "Other"]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 2000
+        },
+        "contactInfo": {
+          "type": "object",
+          "properties": {
+            "phoneNumber": {
+              "type": "string",
+              "pattern": "^(\\+27|0)[0-9]{9}$"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "required": ["phoneNumber"],
+          "additionalProperties": false
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "read", "processed", "done"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "title",
+        "names",
+        "surname",
+        "typeOfUser",
+        "messageRelatedTo",
+        "message",
+        "contactInfo",
+        "status",
+        "createdAt"
+      ],
+      "additionalProperties": false
+    },
+    "Admin": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^admin[0-9]{4}$"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["internalSuperAdmin", "admin"]
+        },
+        "title": {
+          "type": "string",
+          "enum": ["Mr", "Mrs", "Ms", "Dr", "Miss", "Prof", "Rev", "Sir"]
+        },
+        "names": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "accessDetails": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "format": "email"
+            },
+            "password": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          },
+          "required": ["username", "password"],
+          "additionalProperties": false
+        },
+        "lastLogin": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "ip": {
+              "type": "string"
+            }
+          },
+          "required": ["timestamp", "ip"],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "created",
+        "id",
+        "isActive",
+        "role",
+        "title",
+        "names",
+        "surname",
+        "accessDetails"
+      ],
+      "additionalProperties": false
+    },
+    "Trackers": {
+      "type": "object",
+      "properties": {
+        "nextUSSDReferenceNumber": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": {
+              "type": "string",
+              "const": "This is used an a new tenant Id when a new tenant is added"
+            }
+          },
+          "required": ["value", "description"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["nextUSSDReferenceNumber"],
+      "additionalProperties": false
+    },
+    "Lookups": {
+      "type": "object",
+      "properties": {
+        "employeeRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": ["internalSuperAdmin", "admin"]
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": ["role", "description"],
+            "additionalProperties": false
+          }
+        },
+        "tenantRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "enum": ["internalSuperAdmin", "admin", "user"]
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": ["role", "description"],
+            "additionalProperties": false
+          }
+        },
+        "alarmDescriptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "minLength": 50,
+                "maxLength": 250
+              },
+              "created": {
+                "$ref": "#/definitions/CreatedInfo"
+              }
+            },
+            "required": ["id", "description", "created"],
+            "additionalProperties": false
+          }
+        },
+        "communicationChannels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "channel": {
+                "type": "string",
+                "enum": ["sms", "whatsapp", "call"]
+              }
+            },
+            "required": ["channel"],
+            "additionalProperties": false
+          }
+        },
+        "alarmTypes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["external", "internal"]
+              }
+            },
+            "required": ["type"],
+            "additionalProperties": false
+          }
+        },
+        "titlePrefixes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prefix": {
+                "type": "string",
+                "enum": ["Mr", "Mrs", "Ms", "Dr", "Miss", "Prof", "Rev", "Sir"]
+              }
+            },
+            "required": ["prefix"],
+            "additionalProperties": false
+          }
+        },
+        "relationshipTypes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "relationship": {
+                "type": "string",
+                "enum": ["family", "friend", "neighbour", "colleague", "other"]
+              }
+            },
+            "required": ["relationship"],
+            "additionalProperties": false
+          }
+        },
+        "typeOfUsersRequestingService": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "typeOfUser": {
+                "type": "string",
+                "enum": [
+                  "I am a Client",
+                  "I am a Tenant",
+                  "I am a Potential Client"
+                ]
+              }
+            },
+            "required": ["typeOfUser"],
+            "additionalProperties": false
+          }
+        },
+        "serviceMessageRelations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "relation": {
+                "type": "string",
+                "enum": ["Sale", "General", "Other"]
+              }
+            },
+            "required": ["relation"],
+            "additionalProperties": false
+          }
+        },
+        "format": {
+          "type": "object",
+          "properties": {
+            "phoneNumbers": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "USSDPins": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "serialNumbers": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "passwords": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "adminIds": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          },
+          "required": [
+            "phoneNumbers",
+            "USSDPins",
+            "serialNumbers",
+            "passwords",
+            "adminIds"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "employeeRoles",
+        "tenantRoles",
+        "alarmDescriptions",
+        "communicationChannels",
+        "alarmTypes",
+        "titlePrefixes",
+        "relationshipTypes",
+        "typeOfUsersRequestingService",
+        "serviceMessageRelations",
+        "format"
+      ],
+      "additionalProperties": false
+    },
+    "CreatedInfo": {
+      "type": "object",
+      "properties": {
+        "by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "when": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["by", "when"],
+      "additionalProperties": false
+    },
+    "TenantAdmin": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^admin[0-9]{4}$"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["internalSuperAdmin", "admin", "user"]
+        },
+        "title": {
+          "type": "string",
+          "enum": ["Mr", "Mrs", "Ms", "Dr", "Miss", "Prof", "Rev", "Sir"]
+        },
+        "names": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "accessDetails": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "format": "email"
+            },
+            "password": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          },
+          "required": ["username", "password"],
+          "additionalProperties": false
+        },
+        "lastLogin": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "ip": {
+              "type": "string"
+            }
+          },
+          "required": ["timestamp", "ip"],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "created",
+        "id",
+        "isActive",
+        "role",
+        "title",
+        "names",
+        "surname",
+        "accessDetails"
+      ],
+      "additionalProperties": false
+    },
+    "TimeSlot": {
+      "type": "object",
+      "properties": {
+        "hour": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59
+        }
+      },
+      "required": ["hour", "minutes"],
+      "additionalProperties": false
+    },
+    "TenantAlarmReference": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["created", "id"],
+      "additionalProperties": false
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "locality": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "country": {
+          "type": "string",
+          "const": "South Africa"
+        },
+        "province": {
+          "type": "string",
+          "enum": [
+            "Gauteng",
+            "Western Cape",
+            "KwaZulu-Natal",
+            "Eastern Cape",
+            "Free State",
+            "Limpopo",
+            "Mpumalanga",
+            "North West",
+            "Northern Cape"
+          ]
+        },
+        "postalCode": {
+          "type": "string",
+          "pattern": "^[0-9]{4}$"
+        }
+      },
+      "required": ["locality", "country", "province", "postalCode"],
+      "additionalProperties": false
+    },
+    "Responder": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 200
+        },
+        "phoneNumber": {
+          "type": "string",
+          "pattern": "^\\+27[0-9]{9}$"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "channel": {
+          "type": "string",
+          "enum": ["call", "sms", "whatsapp"]
+        },
+        "customMessage": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "created",
+        "id",
+        "name",
+        "phoneNumber",
+        "description",
+        "channel",
+        "customMessage"
+      ],
+      "additionalProperties": false
+    },
+    "TenantUser": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9]{10}$"
+        },
+        "title": {
+          "type": "string",
+          "enum": ["Mr", "Mrs", "Ms", "Dr", "Miss", "Prof", "Rev", "Sir"]
+        },
+        "names": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "pattern": "^\\+27[0-9]{9}$"
+        },
+        "pin": {
+          "type": "string",
+          "pattern": "^[0-9]{4}$"
+        },
+        "permissions": {
+          "type": "object",
+          "properties": {
+            "isAdministrator": {
+              "type": "boolean"
+            },
+            "isAnActivator": {
+              "type": "boolean"
+            },
+            "isATester": {
+              "type": "boolean"
+            }
+          },
+          "required": ["isAdministrator", "isAnActivator", "isATester"],
+          "additionalProperties": false
+        },
+        "subAddress": {
+          "type": "object",
+          "properties": {
+            "floor": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "street": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "unit": {
+              "type": "string",
+              "maxLength": 20
+            }
+          },
+          "required": ["floor", "street", "unit"],
+          "additionalProperties": false
+        },
+        "privateResponders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateResponder"
+          }
+        },
+        "account": {
+          "$ref": "#/definitions/AccountStatus"
+        }
+      },
+      "required": [
+        "created",
+        "id",
+        "title",
+        "names",
+        "surname",
+        "phoneNumber",
+        "pin",
+        "permissions",
+        "subAddress",
+        "privateResponders",
+        "account"
+      ],
+      "additionalProperties": false
+    },
+    "PrivateResponder": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "$ref": "#/definitions/CreatedInfo"
+        },
+        "title": {
+          "type": "string",
+          "enum": ["Mr", "Mrs", "Ms", "Dr", "Miss", "Prof", "Rev", "Sir"]
+        },
+        "names": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z\\s]+$"
+        },
+        "relationship": {
+          "type": "string",
+          "enum": ["family", "friend", "neighbour", "colleague", "other"]
+        },
+        "phoneNumber": {
+          "type": "string",
+          "pattern": "^\\+27[0-9]{9}$"
+        },
+        "channel": {
+          "type": "string",
+          "enum": ["call", "sms", "whatsapp"]
+        }
+      },
+      "required": [
+        "created",
+        "title",
+        "names",
+        "surname",
+        "relationship",
+        "phoneNumber",
+        "channel"
+      ],
+      "additionalProperties": false
+    },
+    "AccountStatus": {
+      "type": "object",
+      "properties": {
+        "isActive": {
+          "type": "boolean"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "to": {
+                "type": "boolean"
+              },
+              "when": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "by": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              }
+            },
+            "required": ["to", "when", "by", "reason"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["isActive", "changes"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["__collections__"]
+}

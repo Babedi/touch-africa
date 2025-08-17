@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeighbourGuard - Well-Known Resources</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .header {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .resource {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource h3 {
+            margin: 0 0 0.5rem 0;
+            color: #495057;
+        }
+
+        .resource code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+        }
+
+        .description {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>NeighbourGuard - Well-Known Resources</h1>
+        <p>This directory contains well-known resources for the NeighbourGuard emergency response platform.</p>
+    </div>
+
+    <div class="resource">
+        <h3>Chrome DevTools Configuration</h3>
+        <p><code>/appspecific/com.chrome.devtools.json</code></p>
+        <p class="description">
+            Configuration file for Chrome DevTools integration, enabling enhanced debugging
+            features for the NeighbourGuard web application including source maps,
+            performance profiling, and security analysis.
+        </p>
+    </div>
+
+    <div class="resource">
+        <h3>Application Information</h3>
+        <p class="description">
+            <strong>Type:</strong> Multi-tenant emergency response platform<br>
+            <strong>Framework:</strong> Express.js with Firestore backend<br>
+            <strong>Environment:</strong> Development (Port 5000)
+        </p>
+    </div>
+
+    <div class="resource">
+        <h3>Available Endpoints</h3>
+        <p class="description">
+            <code>/internal/health</code> - System health check<br>
+            <code>/internal/admin</code> - Internal admin interface<br>
+            <code>/external/tenant</code> - Tenant management<br>
+            <code>/general/serviceInfo</code> - Service information
+        </p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+  "roles": ["internalRootAdmin", "internalSuperAdmin"],
+  "title": "Mr",
+  "names": "Root Admin",
+  "surname": "Administrator",
+  "accessDetails": {
+    "email": "root.admin@neighbourguard.co.za",
+    "password": "SecurePassword123!",
+    "lastLogin": []
+  },
+  "account": {
+    "isActive": {
+      "value": true
+    }
+  }
+}

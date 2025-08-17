@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant User Modal Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-button {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        .test-button:hover {
+            background: #005a8b;
+        }
+
+        .log-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="debug-container">
+        <h1>🔍 Tenant User Modal Debug Test</h1>
+
+        <div>
+            <button class="test-button" onclick="testEndpoint()">Test Backend Endpoint</button>
+            <button class="test-button" onclick="testModalLoad()">Test Modal Load</button>
+            <button class="test-button" onclick="testModalShow()">Test Modal Show</button>
+            <button class="test-button" onclick="clearLog()">Clear Log</button>
+        </div>
+
+        <div id="logOutput" class="log-output">
+            Ready for testing...
+        </div>
+    </div>
+
+    <!-- Load required stylesheets -->
+    <link rel="stylesheet" href="/shared/variables.css">
+    <link rel="stylesheet" href="/modals/tenant.user.login.modal/index.css">
+
+    <!-- Load required scripts -->
+    <script src="/shared/api-client.js"></script>
+    <script src="/shared/notifications.js"></script>
+    <script src="/shared/validation.js"></script>
+
+    <!-- Load the modal HTML and JS -->
+    <div id="modalContainer"></div>
+
+    <script>
+        let logElement = document.getElementById('logOutput');
+        let modal = null;
+
+        function log(message) {
+            console.log(message);
+            logElement.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        function clearLog() {
+            logElement.textContent = 'Log cleared...\n';
+        }
+
+        async function testEndpoint() {
+            log('🧪 Testing /general/tenants endpoint...');
+
+            try {
+                const response = await fetch('/general/tenants');
+                log('📊 Response status: ' + response.status);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    log('✅ Endpoint success: ' + JSON.stringify(data, null, 2));
+                } else {
+                    log('❌ Endpoint failed with status: ' + response.status);
+                }
+            } catch (error) {
+                log('❌ Endpoint error: ' + error.message);
+            }
+        }
+
+        async function testModalLoad() {
+            log('🧪 Testing modal loading...');
+
+            try {
+                // Load modal HTML
+                log('📥 Loading modal HTML...');
+                const htmlResponse = await fetch('/modals/tenant.user.login.modal/index.html');
+                if (!htmlResponse.ok) {
+                    throw new Error('Failed to load modal HTML: ' + htmlResponse.status);
+                }
+                const modalHTML = await htmlResponse.text();
+                log('✅ Modal HTML loaded successfully');
+
+                // Parse and insert HTML
+                const parser = new DOMParser();
+                const modalDoc = parser.parseFromString(modalHTML, 'text/html');
+                const modalElement = modalDoc.body.firstElementChild;
+
+                if (!modalElement) {
+                    throw new Error('Invalid modal HTML structure');
+                }
+
+                document.getElementById('modalContainer').appendChild(modalElement);
+                log('✅ Modal HTML inserted into DOM');
+
+                // Load modal JavaScript
+                log('📥 Loading modal JavaScript...');
+                const script = document.createElement('script');
+                script.src = '/modals/tenant.user.login.modal/index.js';
+
+                script.onload = () => {
+                    log('✅ Modal JS loaded successfully');
+
+                    // Check if class is available
+                    if (window.TenantUserLoginModal) {
+                        log('✅ TenantUserLoginModal class is available');
+
+                        // Create modal instance
+                        try {
+                            modal = new window.TenantUserLoginModal();
+                            log('✅ Modal instance created successfully');
+                        } catch (error) {
+                            log('❌ Failed to create modal instance: ' + error.message);
+                        }
+                    } else {
+                        log('❌ TenantUserLoginModal class not found in window object');
+                    }
+                };
+
+                script.onerror = () => {
+                    log('❌ Failed to load modal JavaScript');
+                };
+
+                document.head.appendChild(script);
+
+            } catch (error) {
+                log('❌ Modal loading failed: ' + error.message);
+            }
+        }
+
+        function testModalShow() {
+            log('🧪 Testing modal show...');
+
+            if (!modal) {
+                log('❌ Modal not loaded. Run "Test Modal Load" first.');
+                return;
+            }
+
+            try {
+                log('📱 Calling modal.show()...');
+                modal.show();
+                log('✅ Modal.show() called successfully');
+
+                // Check if loadTenants was called
+                setTimeout(() => {
+                    const tenantSelect = document.getElementById('tenantUserTenantName');
+                    if (tenantSelect) {
+                        log('✅ Tenant select element found: ' + tenantSelect.options.length + ' options');
+                        for (let i = 0; i < tenantSelect.options.length; i++) {
+                            log('   Option ' + i + ': ' + tenantSelect.options[i].text);
+                        }
+                    } else {
+                        log('❌ Tenant select element not found');
+                    }
+                }, 2000);
+
+            } catch (error) {
+                log('❌ Modal show failed: ' + error.message);
+            }
+        }
+
+        // Initialize
+        log('🚀 Debug page loaded. Backend server should be running on localhost:5000');
+    </script>
+</body>
+
+</html>

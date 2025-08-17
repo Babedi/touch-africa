@@ -1,0 +1,36 @@
+{
+  "created": {
+    "by": "EADMIN0000000001",
+    "when": "2025-07-20T09:00:00Z"
+  },
+  "id": "USR0000000001",
+  "title": "Mr",
+  "names": "Michael James",
+  "surname": "Thompson",
+  "subAddress": {
+    "streetOrFloor": "123 Sandton Central Drive",
+    "unit": "101"
+  },
+  "activationDetails": {
+    "phoneNumber": "+27845678901",
+    "pin": "1357",
+    "preferredMenuLanguage": "english",
+    "isATester": true
+  },
+  "privateResponders": [],
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": [
+        {
+          "to": true,
+          "when": "2025-07-25T10:30:00Z",
+          "by": "system_admin",
+          "reason": "Initial account activation during system setup"
+        }
+      ]
+    },
+    "activationHistory": [],
+    "testingHistory": []
+  }
+}

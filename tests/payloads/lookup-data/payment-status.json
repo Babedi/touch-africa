@@ -1,0 +1,6 @@
+{
+  "category": "Business",
+  "subCategory": "Payment Status",
+  "items": ["Paid", "Unpaid", "Refunded", "Overdue"],
+  "description": "Statuses to track invoice and order payments"
+}

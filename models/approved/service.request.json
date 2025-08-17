@@ -1,0 +1,20 @@
+{
+  "created": {
+    "when": "2025-07-30T14:07:23.264Z"
+  },
+  "title": "Mr",
+  "names": "Simon Lesedi",
+  "surname": "Babedi",
+  "company": "",
+  "role": "",
+  "typeOfUser": "I am a Client",
+  "messageRelationTo": "Sale",
+  "message": "I need to know how can I get a hold of you and arrange to purchase",
+  "contactInfo": {
+    "phoneNumber": "+27635941451",
+    "email": "lesedi.simon@gmail.com"
+  },
+  "processing": {
+    "status": "not read"
+  }
+}

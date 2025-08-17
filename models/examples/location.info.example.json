@@ -1,0 +1,14 @@
+{
+  "location": {
+    "province": "Gauteng",
+    "locality": "Johannesburg",
+    "country": "South Africa",
+    "postalCode": "2000"
+  },
+  "geoLocation": {
+    "latitude": -26.2041,
+    "longitude": 28.0473
+  },
+  "details": "Office building 3rd floor",
+  "type": "fixed"
+}

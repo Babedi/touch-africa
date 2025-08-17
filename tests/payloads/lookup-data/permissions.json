@@ -1,0 +1,6 @@
+{
+  "category": "User Management",
+  "subCategory": "Permissions",
+  "items": ["Read", "Write", "Update", "Delete", "Approve"],
+  "description": "Granular access rights assigned to user roles"
+}

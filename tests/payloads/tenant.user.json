@@ -1,0 +1,22 @@
+{
+  "title": "Ms",
+  "names": "Sarah Jane",
+  "surname": "Williams",
+  "subAddress": {
+    "streetOrFloor": "456 Cape Town Drive",
+    "unit": "202"
+  },
+  "activationDetails": {
+    "phoneNumber": "+27823456789",
+    "pin": "2468",
+    "preferredMenuLanguage": "english",
+    "isATester": false
+  },
+  "privateResponders": [],
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

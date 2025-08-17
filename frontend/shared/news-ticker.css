@@ -1,0 +1,326 @@
+/* 
+ * News Ticker Component - AfricaTalking Inspired Theme
+ * Modern, clean design with African-inspired colors
+ */
+
+/* AfricaTalking inspired color palette */
+:root {
+    --at-orange: #FF6B35;
+    --at-orange-light: #FF8A5C;
+    --at-orange-dark: #E55A2B;
+    --at-blue: #1E3A8A;
+    --at-blue-light: #3B82F6;
+    --at-blue-dark: #1E40AF;
+    --at-green: #059669;
+    --at-green-light: #10B981;
+    --at-purple: #7C3AED;
+    --at-gray: #374151;
+    --at-gray-light: #9CA3AF;
+    --at-gray-dark: #1F2937;
+}
+
+/* News Ticker Container */
+.news-ticker {
+    background: linear-gradient(135deg, var(--at-orange) 0%, var(--at-orange-dark) 100%);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid var(--at-blue);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.news-ticker-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+}
+
+/* News Ticker Label */
+.news-ticker-label {
+    background: var(--at-blue);
+    color: white;
+    padding: 0 16px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 80px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.news-ticker-label::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 8px solid var(--at-blue);
+    border-top: 24px solid transparent;
+    border-bottom: 24px solid transparent;
+}
+
+.news-ticker-label .icon {
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+/* Scrolling News Container */
+.news-ticker-scroll {
+    flex: 1;
+    overflow: hidden;
+    height: 48px;
+    position: relative;
+    padding-left: 16px;
+}
+
+.news-ticker-items {
+    display: flex;
+    animation: scroll-news 60s linear infinite;
+    white-space: nowrap;
+    height: 48px;
+    align-items: center;
+}
+
+.news-ticker-items:hover {
+    animation-play-state: paused;
+}
+
+/* Individual News Item */
+.news-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    height: 48px;
+    padding: 0 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.news-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+    color: white;
+    text-decoration: none;
+}
+
+.news-item-priority-high {
+    color: #FEF3C7;
+    font-weight: 600;
+}
+
+.news-item-priority-high::before {
+    content: '🔥';
+    margin-right: 6px;
+}
+
+.news-item-category {
+    background: var(--at-blue);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.news-item-time {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+/* Controls */
+.news-ticker-controls {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+    flex-shrink: 0;
+    height: 48px;
+}
+
+.news-ticker-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-ticker-control:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.news-ticker-control.active {
+    background: var(--at-blue);
+    border-color: var(--at-blue);
+}
+
+/* Animations */
+@keyframes scroll-news {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .news-ticker-label {
+        min-width: 60px;
+        padding: 0 12px;
+        font-size: 12px;
+    }
+
+    .news-ticker-label .icon {
+        display: none;
+    }
+
+    .news-item {
+        font-size: 13px;
+        margin-right: 32px;
+    }
+
+    .news-item-category {
+        display: none;
+    }
+
+    .news-ticker-controls {
+        padding: 0 8px;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-ticker {
+        min-height: 44px;
+    }
+
+    .news-ticker-content,
+    .news-ticker-label,
+    .news-ticker-scroll,
+    .news-ticker-items,
+    .news-item,
+    .news-ticker-controls {
+        height: 44px;
+    }
+
+    .news-ticker-label::after {
+        border-top-width: 22px;
+        border-bottom-width: 22px;
+    }
+}
+
+/* Loading State */
+.news-ticker.loading {
+    background: linear-gradient(135deg, var(--at-gray) 0%, var(--at-gray-dark) 100%);
+}
+
+.news-ticker-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 48px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.news-ticker-loading .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error State */
+.news-ticker.error {
+    background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+}
+
+.news-ticker-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 48px;
+    color: white;
+    font-size: 14px;
+}
+
+/* No News State */
+.news-ticker.no-news {
+    display: none;
+}
+
+/* AfricaTalking inspired enhancements */
+.news-ticker::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--at-blue), var(--at-green), var(--at-purple), var(--at-orange));
+    animation: rainbow 3s ease-in-out infinite;
+}
+
+@keyframes rainbow {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}

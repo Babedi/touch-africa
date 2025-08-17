@@ -1,0 +1,11 @@
+{
+  "By": "tenant_001",
+  "as": "external",
+  "where": {
+    "locationDescription": "Main entrance security panel, Sandton Office Park Building A",
+    "geoLocation": {
+      "latitude": -26.1076,
+      "longitude": 28.0567
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "category": "Business",
+  "subCategory": "Product Categories",
+  "items": ["Electronics", "Clothing", "Food", "Furniture", "Books"],
+  "description": "High-level product categories for e-commerce and inventory classification"
+}

@@ -1,0 +1,16 @@
+{
+  "roles": ["internalSuperAdmin"],
+  "title": "Mr",
+  "names": "Test Admin",
+  "surname": "User",
+  "accessDetails": {
+    "email": "test.admin@neighbourguard.co.za",
+    "password": "SecureAdminPass123"
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

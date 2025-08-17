@@ -1,0 +1,6 @@
+{
+  "category": "Emergency Response",
+  "subCategory": "Alarm Types",
+  "items": ["Fire", "Medical", "Crime", "Accident", "Panic"],
+  "description": "Emergency alarm categories used in incident reporting"
+}

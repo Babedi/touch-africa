@@ -1,0 +1,18 @@
+{
+  "action": "created",
+  "entity": "tenant",
+  "entityId": "tenant_001",
+  "timestamp": {
+    "Seconds": 1703088000,
+    "Nanoseconds": 0
+  },
+  "details": {
+    "field": "account.isActive",
+    "oldValue": null,
+    "newValue": true
+  },
+  "performedBy": {
+    "adminId": "admin_001",
+    "adminName": "System Administrator"
+  }
+}

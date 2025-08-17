@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeighbourGuard™ - Login Success Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-admin {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-tenant {
+            background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+        }
+
+        .btn-user {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin-top: 0;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .sequence {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .notification-preview {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1><span class="emoji">🎉</span>Multi-Snackbar Login Success Demo</h1>
+        <h2>Experience the Enhanced Login Flow</h2>
+
+        <div class="demo-card">
+            <h3><span class="emoji">✨</span>New Feature: Multiple Success Notifications</h3>
+            <p><strong>Enhanced user experience with sequential success messages!</strong></p>
+            <p>Each login type now shows a sequence of 4 success snackbars with progressive information:</p>
+
+            <div class="sequence">
+                <div class="notification-preview">🎉 "Login Successful!" - Welcome message</div>
+                <div class="notification-preview">🔐 "Authentication Complete" - Security confirmation</div>
+                <div class="notification-preview">👤 "Access Granted" - Role confirmation</div>
+                <div class="notification-preview">⚡ "System Ready" - Ready to redirect</div>
+            </div>
+        </div>
+
+        <!-- Valid Credentials Section -->
+        <div class="demo-card">
+            <h3><span class="emoji">🔐</span>Valid Test Credentials</h3>
+            <p><strong>Ready-to-use credentials for testing:</strong></p>
+            <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin: 10px 0;">
+                <h4 style="margin-top: 0; color: #E1BEE7;">👑 Tenant Admin Login</h4>
+                <p><strong>Email:</strong> sarah.admin@neighbourguard.co.za</p>
+                <p><strong>Password:</strong> TenantAdminPass123!</p>
+                <p><strong>Tenant Name:</strong> Sample Area</p>
+            </div>
+            <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin: 10px 0;">
+                <h4 style="margin-top: 0; color: #FFE0B2;">👤 Tenant User Login</h4>
+                <p><strong>Username:</strong> john.smith (or any username)</p>
+                <p><strong>Password:</strong> password123 (or any password)</p>
+                <p><strong>Tenant Name:</strong> Sample Area</p>
+            </div>
+            <p style="font-size: 14px; opacity: 0.8;">📋 These credentials are now in the database and ready for
+                testing!</p>
+        </div>
+
+        <div class="demo-card">
+            <h3><span class="emoji">🎯</span>Test Different Login Types</h3>
+            <p>Click the buttons below to experience the new multi-snackbar login flow:</p>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="btn btn-admin" onclick="simulateInternalAdminLogin()">
+                    🔧 Internal Admin Login
+                </button>
+                <button class="btn btn-tenant" onclick="simulateTenantAdminLogin()">
+                    🏘️ Tenant Admin Login
+                </button>
+                <button class="btn btn-user" onclick="simulateTenantUserLogin()">
+                    👤 Tenant User Login
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <h3><span class="emoji">📋</span>Timing Details</h3>
+            <ul>
+                <li><strong>Notification 1:</strong> Immediate (0ms)</li>
+                <li><strong>Notification 2:</strong> After 800ms</li>
+                <li><strong>Notification 3:</strong> After 1600ms</li>
+                <li><strong>Notification 4:</strong> After 2400ms</li>
+                <li><strong>Redirection:</strong> After 3200ms</li>
+            </ul>
+            <p><em>Total sequence duration: 3.2 seconds for optimal user experience</em></p>
+        </div>
+
+        <div class="demo-card">
+            <h3><span class="emoji">🔗</span>Quick Actions</h3>
+            <a href="/" class="btn">🏠 Test Real Login</a>
+            <a href="/auth-debug.html" class="btn btn-admin">🔍 Debug Console</a>
+            <a href="/system-status.html" class="btn btn-tenant">📊 System Status</a>
+        </div>
+    </div>
+
+    <script>
+        // Mock notifications system for demo
+        if (!window.notifications) {
+            window.notifications = {
+                success: function (title, message) {
+                    console.log(`✅ ${title}: ${message}`);
+                    // Create a simple toast-like notification
+                    this.showToast(title, message, 'success');
+                },
+                error: function (title, message) {
+                    console.log(`❌ ${title}: ${message}`);
+                    this.showToast(title, message, 'error');
+                },
+                showToast: function (title, message, type) {
+                    const toast = document.createElement('div');
+                    toast.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+                        color: white;
+                        padding: 15px 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                        z-index: 10000;
+                        max-width: 300px;
+                        transform: translateX(100%);
+                        transition: transform 0.3s ease;
+                    `;
+                    toast.innerHTML = `<strong>${title}</strong><br>${message}`;
+                    document.body.appendChild(toast);
+
+                    // Animate in
+                    setTimeout(() => {
+                        toast.style.transform = 'translateX(0)';
+                    }, 10);
+
+                    // Remove after 3 seconds
+                    setTimeout(() => {
+                        toast.style.transform = 'translateX(100%)';
+                        setTimeout(() => document.body.removeChild(toast), 300);
+                    }, 3000);
+                }
+            };
+        }
+
+        function simulateInternalAdminLogin() {
+            // Simulate Internal Admin success sequence
+            window.notifications.success(
+                "🎉 Login Successful!",
+                "Welcome back, Admin!"
+            );
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "🔐 Authentication Complete",
+                    "Your session has been securely established"
+                );
+            }, 800);
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "👤 Access Granted",
+                    "Logged in as Super Administrator"
+                );
+            }, 1600);
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "⚡ System Ready",
+                    "Redirecting to dashboard..."
+                );
+            }, 2400);
+
+            console.log("🎯 Internal Admin login sequence completed!");
+        }
+
+        function simulateTenantAdminLogin() {
+            // Simulate Tenant Admin success sequence
+            window.notifications.success(
+                "🎉 Login Successful!",
+                "Welcome back, Admin!"
+            );
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "🏘️ Tenant Access Granted",
+                    "Connected to Sample tenant"
+                );
+            }, 800);
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "👤 Admin Access",
+                    "Tenant Administrator privileges activated"
+                );
+            }, 1600);
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "⚡ Management Portal Ready",
+                    "Loading tenant dashboard..."
+                );
+            }, 2400);
+
+            console.log("🎯 Tenant Admin login sequence completed!");
+        }
+
+        function simulateTenantUserLogin() {
+            // Simulate Tenant User success sequence
+            window.notifications.success(
+                "🎉 Welcome Back!",
+                "Hello, User!"
+            );
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "🛡️ Safety Portal Active",
+                    "You are now connected to your safety network"
+                );
+            }, 800);
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "🏘️ tenant Access",
+                    "Connected to your tenant"
+                );
+            }, 1600);
+
+            setTimeout(() => {
+                window.notifications.success(
+                    "🚨 Emergency System Ready",
+                    "Panic button and emergency services activated"
+                );
+            }, 2400);
+
+            console.log("🎯 Tenant User login sequence completed!");
+        }
+    </script>
+</body>
+
+</html>

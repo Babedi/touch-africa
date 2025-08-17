@@ -1,0 +1,6 @@
+{
+  "category": "Business",
+  "subCategory": "Shipping Methods",
+  "items": ["Courier", "Pickup", "Freight", "Postal"],
+  "description": "Available methods of delivering goods and services"
+}

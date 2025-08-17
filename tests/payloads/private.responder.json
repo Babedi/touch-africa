@@ -1,0 +1,21 @@
+{
+  "title": "Dr",
+  "names": "Michael Robert",
+  "surname": "Anderson",
+  "subAddress": {
+    "streetOrFloor": "789 Johannesburg Avenue",
+    "unit": "305"
+  },
+  "activationDetails": {
+    "phoneNumber": "+27856789012",
+    "pin": "4680",
+    "preferredMenuLanguage": "english",
+    "isATester": false
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

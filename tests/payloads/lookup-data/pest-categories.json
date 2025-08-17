@@ -1,0 +1,6 @@
+{
+  "category": "Agriculture",
+  "subCategory": "Pest Categories",
+  "items": ["Insects", "Fungal", "Bacterial", "Weeds"],
+  "description": "Categories of pests affecting agricultural crops"
+}

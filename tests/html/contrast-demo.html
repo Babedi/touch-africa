@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Contrast Demo - NeighbourGuard™</title>
+
+    <!-- Original styles -->
+    <link rel="stylesheet" href="/shared/variables.css">
+    <link rel="stylesheet" href="/index.css">
+
+    <!-- Enhanced contrast overlay -->
+    <link rel="stylesheet" href="/shared/enhanced-contrast.css">
+
+    <style>
+        .demo-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        .demo-section h3 {
+            margin: 0 0 15px 0;
+            color: #1f2937;
+        }
+
+        .demo-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .demo-input-container {
+            position: relative;
+            flex: 1;
+        }
+
+        .toggle-demo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .contrast-toggle {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contrast-toggle:hover {
+            background: #2563eb;
+        }
+
+        /* Demo password toggle that mimics modal styles */
+        .demo-password-input {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+        }
+
+        .demo-password-input input {
+            width: 100%;
+            padding: 10px 45px 10px 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .demo-password-toggle {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 1px solid #9ca3af;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 4px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Status indicators */
+        .status-good {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .status-warning {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .status-bad {
+            color: #ef4444;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-container">
+        <h1>🎨 Enhanced Contrast Demo</h1>
+        <p>This page demonstrates improved color contrast for better visibility across all NeighbourGuard™ interface
+            elements.</p>
+
+        <button class="contrast-toggle" onclick="toggleContrast()">
+            <span id="contrast-status">Enable Enhanced Contrast</span>
+        </button>
+
+        <div class="demo-section">
+            <h3>🔐 Password Toggle Visibility</h3>
+            <p>The most common visibility issue - password toggle buttons that are hard to see:</p>
+
+            <div class="demo-row">
+                <label>Before (Original):</label>
+                <div class="demo-password-input">
+                    <input type="password" value="password123" class="original-style">
+                    <button class="demo-password-toggle original-style" onclick="togglePassword(this)">
+                        👁️
+                    </button>
+                </div>
+                <span class="status-warning">❌ Low Contrast</span>
+            </div>
+
+            <div class="demo-row">
+                <label>After (Enhanced):</label>
+                <div class="demo-password-input">
+                    <input type="password" value="password123" class="password-toggle-input">
+                    <button class="password-toggle" onclick="togglePassword(this)">
+                        👁️
+                    </button>
+                </div>
+                <span class="status-good">✅ High Contrast</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>🎯 Button Visibility</h3>
+            <div class="demo-row">
+                <button class="cta-button cta-button--primary">Primary Button</button>
+                <button class="cta-button cta-button--secondary">Secondary Button</button>
+                <button class="cta-button cta-button--tertiary">Tertiary Button</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>📝 Form Elements</h3>
+            <div class="demo-row">
+                <div style="flex: 1;">
+                    <label class="form-label">Enhanced Input Field:</label>
+                    <input type="text" class="form-input" placeholder="Better contrast input" value="Sample text">
+                </div>
+                <div style="flex: 1;">
+                    <label class="form-label">Enhanced Select:</label>
+                    <select class="form-select">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>🔔 Notification Visibility</h3>
+            <div style="display: grid; gap: 10px;">
+                <div class="notification notification--success">✅ Success notification with enhanced contrast</div>
+                <div class="notification notification--error">❌ Error notification with enhanced contrast</div>
+                <div class="notification notification--warning">⚠️ Warning notification with enhanced contrast</div>
+                <div class="notification notification--info">ℹ️ Info notification with enhanced contrast</div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>🧪 Accessibility Features</h3>
+            <ul>
+                <li class="status-good">✅ High contrast mode support (@media prefers-contrast: high)</li>
+                <li class="status-good">✅ Reduced motion support (@media prefers-reduced-motion: reduce)</li>
+                <li class="status-good">✅ Dark mode compatibility (@media prefers-color-scheme: dark)</li>
+                <li class="status-good">✅ Enhanced focus indicators</li>
+                <li class="status-good">✅ Larger touch targets (44px minimum)</li>
+                <li class="status-good">✅ Improved color contrast ratios</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h3>🎛️ How to Apply</h3>
+            <p><strong>Option 1 - Add to main page:</strong> Include the enhanced contrast CSS file in your main HTML:
+            </p>
+            <code>&lt;link rel="stylesheet" href="/shared/enhanced-contrast.css"&gt;</code>
+
+            <p><strong>Option 2 - Toggle on demand:</strong> Load it dynamically when users need better contrast:</p>
+            <code>document.head.appendChild(contrastStylesheet);</code>
+
+            <p><strong>Option 3 - User preference:</strong> Save user preference and auto-apply on future visits.</p>
+        </div>
+    </div>
+
+    <script>
+        let contrastEnabled = false;
+        let contrastStylesheet = null;
+
+        function toggleContrast() {
+            const statusSpan = document.getElementById('contrast-status');
+
+            if (!contrastEnabled) {
+                // Enable enhanced contrast
+                if (!contrastStylesheet) {
+                    contrastStylesheet = document.createElement('link');
+                    contrastStylesheet.rel = 'stylesheet';
+                    contrastStylesheet.href = '/shared/enhanced-contrast.css';
+                }
+                document.head.appendChild(contrastStylesheet);
+                statusSpan.textContent = 'Disable Enhanced Contrast';
+                contrastEnabled = true;
+            } else {
+                // Disable enhanced contrast
+                if (contrastStylesheet && contrastStylesheet.parentNode) {
+                    contrastStylesheet.parentNode.removeChild(contrastStylesheet);
+                }
+                statusSpan.textContent = 'Enable Enhanced Contrast';
+                contrastEnabled = false;
+            }
+        }
+
+        function togglePassword(button) {
+            const input = button.parentElement.querySelector('input');
+            if (input.type === 'password') {
+                input.type = 'text';
+                button.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                button.textContent = '👁️';
+            }
+        }
+
+        // Auto-enable contrast for demo
+        setTimeout(() => {
+            toggleContrast();
+        }, 500);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+{
+  "serialNumber": "ALARM004",
+  "sgmModuleType": "RTU5024",
+  "modelDescription": "Internal Security Control Panel - Residential Grade (Menu Item)",
+  "accessDetails": {
+    "phoneNumber": "+27834567891",
+    "pin": "2468"
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

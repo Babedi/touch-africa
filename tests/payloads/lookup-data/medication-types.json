@@ -1,0 +1,6 @@
+{
+  "category": "Healthcare",
+  "subCategory": "Medication Types",
+  "items": ["Tablet", "Capsule", "Injection", "Syrup"],
+  "description": "Common formats for pharmaceutical medications"
+}

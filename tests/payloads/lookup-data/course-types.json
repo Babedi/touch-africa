@@ -1,0 +1,6 @@
+{
+  "category": "Education",
+  "subCategory": "Course Types",
+  "items": ["Full-time", "Part-time", "Online", "Hybrid"],
+  "description": "Types of educational courses offered by institutions"
+}

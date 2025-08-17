@@ -1,0 +1,93 @@
+{
+  "logo": "https://cdn.neighbourguard.com/logo.png",
+  "name": "NeighbourGuard",
+  "version": "01.000.0001",
+  "initialized": "2025-08-11T22:35:00.000Z",
+  "active": true,
+  "descriptions": [
+    "This turns every mobile into an emergency activation device for personal safety.",
+    "This service is designed to enhance personal safety by enabling quick emergency alerts via SMS, WhatsApp, and calls.",
+    "The service is integrated with a tenant registry for efficient emergency response management and neighbor coordination.",
+    "Our platform allows users to send alerts to designated responders within their tenant network."
+  ],
+  "features": [
+    {
+      "title": "Emergency Communication",
+      "text": "Emergency alerts via SMS, WhatsApp, and calls. Fast and reliable communication for your safety in critical situations."
+    },
+    {
+      "title": "Flexible Response Network",
+      "text": "Customizable responder lists that allow you to define who gets notified during an emergency, ensuring the right people respond quickly."
+    },
+    {
+      "title": "Multi-Language Support",
+      "text": "Support for all 11 official South African languages, ensuring everyone can use the service in their preferred language for clear communication."
+    },
+    {
+      "title": "Tenant Management",
+      "text": "Comprehensive tenant registry system that manages security groups, alarm systems, and responder networks for organized tenants."
+    }
+  ],
+  "emphasizes": [
+    "tenant response and neighbor accountability for enhanced safety.",
+    "Quick activation during emergencies through simple mobile interactions.",
+    "Comprehensive security management for residential and commercial properties."
+  ],
+  "taglines": [
+    "Your personal safety network at your fingertips.",
+    "When your circle becomes a life saver.",
+    "tenant safety redefined."
+  ],
+  "communicationChannels": {
+    "support": {
+      "number": "+27635941451",
+      "email": "support@neighbourguard.com"
+    },
+    "finance": {
+      "number": "+27635941452",
+      "email": "finance@neighbourguard.com"
+    },
+    "general": {
+      "number": "+27635941453",
+      "email": "general@neighbourguard.com"
+    },
+    "service_request": {
+      "number": "+27635941454",
+      "email": "service.requests@neighbourguard.com"
+    },
+    "careers": {
+      "number": "+27635941455",
+      "email": "careers@neighbourguard.com"
+    },
+    "complaints": {
+      "number": "+27635941456",
+      "email": "complaints@neighbourguard.com"
+    },
+    "complements": {
+      "number": "+27635941457",
+      "email": "complements@neighbourguard.com"
+    },
+    "sales": {
+      "number": "+27635941458",
+      "email": "sales@neighbourguard.com"
+    }
+  },
+  "social": {
+    "facebook": {
+      "url": "https://facebook.com/neighbourguard",
+      "icon": "facebook"
+    },
+    "linkedin": {
+      "url": "https://linkedin.com/company/neighbourguard",
+      "icon": "linkedin"
+    },
+    "twitter": {
+      "url": "https://twitter.com/neighbourguard",
+      "icon": "twitter"
+    },
+    "instagram": {
+      "url": "https://instagram.com/neighbourguard",
+      "icon": "instagram"
+    }
+  }
+}

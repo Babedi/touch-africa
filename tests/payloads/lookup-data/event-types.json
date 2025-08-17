@@ -1,0 +1,6 @@
+{
+  "category": "System",
+  "subCategory": "Event Types",
+  "items": ["Login", "Logout", "Password Reset", "Purchase", "Alert"],
+  "description": "System events tracked for audit logs and monitoring"
+}

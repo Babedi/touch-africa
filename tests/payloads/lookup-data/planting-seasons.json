@@ -1,0 +1,6 @@
+{
+  "category": "Agriculture",
+  "subCategory": "Planting Seasons",
+  "items": ["Spring", "Summer", "Autumn", "Winter"],
+  "description": "Seasonal windows for crop planting and cultivation"
+}

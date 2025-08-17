@@ -1,0 +1,6 @@
+{
+  "category": "Business",
+  "subCategory": "Order Status",
+  "items": ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
+  "description": "Lifecycle states for customer orders"
+}

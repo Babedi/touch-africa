@@ -1,0 +1,6 @@
+{
+  "category": "Emergency Response",
+  "subCategory": "Response Status",
+  "items": ["Acknowledged", "Dispatched", "In Progress", "Resolved", "Closed"],
+  "description": "Status lifecycle for emergency incidents"
+}

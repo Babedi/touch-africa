@@ -1,0 +1,16 @@
+{
+  "roles": ["internalSuperAdmin"],
+  "title": "Mr",
+  "names": "Simon Lesedi",
+  "surname": "Babedi",
+  "accessDetails": {
+    "email": "sl.babedi@neighbourguard.co.za",
+    "password": "SecureAdminPass123"
+  },
+  "account": {
+    "isActive": {
+      "value": true,
+      "changes": []
+    }
+  }
+}

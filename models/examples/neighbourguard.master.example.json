@@ -1,0 +1,475 @@
+{
+  "__collections__": {
+    "services": {
+      "anonymousDatingService": {
+        "__collections__": {}
+      },
+      "neighbourGuardService": {
+        "identity": {
+          "siteName": "NeighbourGuard™",
+          "features": [
+            {
+              "title": "Emergency Communication",
+              "text": "Emergency alerts via SMS, WhatsApp, and calls"
+            },
+            {
+              "title": "Flexible Response Network",
+              "text": "Customizable responder lists"
+            },
+            {
+              "title": "Tenant Integration",
+              "text": "Integration with tenant registry for efficient response"
+            },
+            {
+              "title": "User Experience",
+              "text": "User-friendly interface for quick access"
+            }
+          ],
+          "emphasizes": [
+            "tenant response and neighbour accountability.",
+            "Appeals to CPF groups, estates, and tenant-watch setups.",
+            "No existing use in SA panic button market (unlike Vigilant and Buzzer)",
+            "trigger.co.za"
+          ],
+          "publicDescriptions": [
+            "This turns every mobile into an emergency response device",
+            "This service turns every mobile into an emergency response device, allowing users to send emergency alerts to their contacts and local responders.",
+            "This service is designed to enhance personal safety by enabling quick emergency alerts.",
+            "It allows users to send alerts via SMS, WhatsApp, and calls to designated responders.",
+            "The service is integrated with a tenant registry for efficient emergency response management."
+          ],
+          "taglines": [
+            "When your circle become a life saver.",
+            "Your personal safety network at your fingertips.",
+            "Empowering tenants to respond to emergencies."
+          ]
+        },
+        "communication": {
+          "support": {
+            "number": "+27635941451",
+            "website": "www.neighbourguard.tech",
+            "email": "support@neighbourguard.com"
+          }
+        },
+        "alarms": [
+          {
+            "created": {
+              "when": "2025-07-20T09:00:00Z",
+              "by": "admin0001"
+            },
+            "id": "1234567890",
+            "sgmModuleType": "RTU5024",
+            "modelDescription": "External Security Control Panel - Commercial Grade",
+            "serial": "SN987654321ABC",
+            "phoneNumber": "+27118765432",
+            "pin": "5678",
+            "used": {
+              "By": "tenant_001",
+              "as": "external",
+              "where": {
+                "locationDescription": "Main entrance security panel, Sandton Office Park Building A",
+                "geoLocation": {
+                  "latitude": -26.1076,
+                  "longitude": 28.0567
+                }
+              }
+            }
+          },
+          {
+            "created": {
+              "when": "2025-07-20T09:00:00Z",
+              "by": "admin0002"
+            },
+            "id": "9876543210",
+            "sgmModuleType": "RTU5035",
+            "modelDescription": "Internal Security Control Unit - Residential Grade",
+            "serial": "SN123456789XYZ",
+            "phoneNumber": "+27119876543",
+            "pin": "1234"
+          },
+          {
+            "id": "5555555555",
+            "sgmModuleType": "RTU5024/RTU5035",
+            "modelDescription": "Hybrid Security System - Multi-Zone Coverage",
+            "serial": "SN555777999AAA",
+            "phoneNumber": "+27117778889",
+            "pin": "9999",
+            "used": {
+              "By": "tenant_002",
+              "as": "internal",
+              "where": {
+                "locationDescription": "Central security room, Rosebank Residential Complex",
+                "geoLocation": {
+                  "latitude": -26.1448,
+                  "longitude": 28.0436
+                }
+              }
+            }
+          }
+        ],
+        "notifications": [
+          {
+            "from": {
+              "type": "system",
+              "systemName": "NeighbourGuard System",
+              "adminUserName": ""
+            },
+            "to": {
+              "type": "tenantAdmin",
+              "someTenantAdmins": [],
+              "someTenantUser": [],
+              "ussdRefID": "tenant_001",
+              "tenantAdminId": "admin_sandton_001",
+              "tenantUserId": ""
+            },
+            "notification": {
+              "type": "info",
+              "title": "Monthly System Update Notification",
+              "message": "The NeighbourGuard™ system will undergo scheduled maintenance on Sunday, July 30th, 2025 from 02:00 to 04:00 AM. During this time, emergency services will remain operational, but dashboard access may be temporarily limited.",
+              "priority": "normal",
+              "timestamp": {
+                "__datatype__": "timestamp",
+                "value": {
+                  "Seconds": 1722038400,
+                  "Nanoseconds": 0
+                }
+              }
+            },
+            "isRead": false
+          }
+        ],
+        "tenants": [
+          {
+            "created": {
+              "by": "root",
+              "when": "2025-07-20T09:00:00Z"
+            },
+            "ussdRefID": 1,
+            "activationResponseBlockName": "Sandton Office Park Security Response Block",
+            "activationContextMenu": [
+              "Life@Risk",
+              "Property@Risk",
+              "Both@Risk"
+            ],
+            "admins": [
+              {
+                "created": {
+                  "by": "root",
+                  "when": "2025-07-20T09:00:00Z"
+                },
+                "id": "admin0001",
+                "isActive": true,
+                "role": "internalSuperAdmin",
+                "title": "Mr",
+                "names": "Simon Lesedi",
+                "surname": "Babedi",
+                "accessDetails": {
+                  "username": "lesedi.simon@gmail.com",
+                  "password": "SecureAdminPass123"
+                },
+                "lastLogin": {
+                  "timestamp": "2025-07-30T14:07:39.482Z",
+                  "ip": "system"
+                }
+              }
+            ],
+            "alarms": {
+              "alarmTesting": {
+                "timeRange": {
+                  "start": {
+                    "hour": 11,
+                    "minutes": 30
+                  },
+                  "end": {
+                    "hour": 12,
+                    "minutes": 30
+                  }
+                },
+                "day": 2
+              },
+              "external": [
+                {
+                  "created": {
+                    "by": "root",
+                    "when": "2025-07-20T09:00:00Z"
+                  },
+                  "id": "ada2342JHjk"
+                }
+              ],
+              "internal": [
+                {
+                  "created": {
+                    "by": "root",
+                    "when": "2025-07-20T09:00:00Z"
+                  },
+                  "id": "ada2342JHjk"
+                }
+              ]
+            },
+            "Address": {
+              "locality": "Sandton",
+              "country": "South Africa",
+              "province": "Gauteng",
+              "postalCode": "2196"
+            },
+            "responders": {
+              "external": [
+                {
+                  "created": {
+                    "by": "root",
+                    "when": "2025-07-20T09:00:00Z"
+                  },
+                  "id": "",
+                  "name": "Sandton Metro Police Emergency Unit",
+                  "phoneNumber": "+27112345678",
+                  "description": "",
+                  "channel": "call",
+                  "customMessage": "",
+                  "respondsTo": []
+                }
+              ],
+              "internal": [
+                {
+                  "created": {
+                    "by": "root",
+                    "when": "2025-07-20T09:00:00Z"
+                  },
+                  "id": "",
+                  "name": "John Smith - Building Manager",
+                  "phoneNumber": "+27823456789",
+                  "description": "",
+                  "channel": "whatsapp",
+                  "customMessage": "",
+                  "respondsTo": []
+                }
+              ]
+            },
+            "users": [
+              {
+                "created": {
+                  "by": "tenantAdminId",
+                  "when": "2025-07-20T09:00:00Z"
+                },
+                "id": "3333333333",
+                "title": "Mr",
+                "names": "Michael James",
+                "surname": "Thompson",
+                "phoneNumber": "+27845678901",
+                "pin": "1357",
+                "permissions": {
+                  "isAdministrator": true,
+                  "isAnActivator": true,
+                  "isATester": true
+                },
+                "subAddress": {
+                  "floor": "Ground Floor",
+                  "street": "123 Sandton Central Drive",
+                  "unit": "101"
+                },
+                "privateResponders": [
+                  {
+                    "created": {
+                      "by": "tenantAdminId",
+                      "when": "2025-07-20T09:00:00Z"
+                    },
+                    "title": "Mrs",
+                    "names": "Linda Marie",
+                    "surname": "Thompson",
+                    "relationship": "family",
+                    "phoneNumber": "+27856789012",
+                    "channel": "whatsapp"
+                  }
+                ],
+                "account": {
+                  "changes": [
+                    {
+                      "to": true,
+                      "when": "2025-07-25T10:30:00Z",
+                      "by": "system_admin",
+                      "reason": "Initial account activation during system setup"
+                    }
+                  ],
+                  "isActive": true
+                }
+              }
+            ],
+            "account": {
+              "isActive": true,
+              "changes": [
+                {
+                  "to": true,
+                  "when": "2025-07-25T08:00:00Z",
+                  "by": "system_installer",
+                  "reason": "Tenant registry system installation and initial setup completed successfully"
+                }
+              ]
+            }
+          }
+        ],
+        "serviceRequests": [
+          {
+            "title": "Mr",
+            "names": "Simon Lesedi",
+            "surname": "Babedi",
+            "typeOfUser": "I am a Client",
+            "messageRelatedTo": "Sale",
+            "message": "jkjkjhkjjkkjhjkhkjj",
+            "contactInfo": {
+              "phoneNumber": "0635941451",
+              "email": "lesedi.simon@gmail.com"
+            },
+            "status": "pending/read/processed/done",
+            "createdAt": "2025-07-30T14:07:23.264Z"
+          }
+        ],
+        "admins": [
+          {
+            "created": {
+              "by": "root",
+              "when": "2025-07-20T09:00:00Z"
+            },
+            "id": "admin0001",
+            "isActive": true,
+            "role": "internalSuperAdmin",
+            "title": "Mr",
+            "names": "Simon Lesedi",
+            "surname": "Babedi",
+            "accessDetails": {
+              "username": "lesedi.simon@gmail.com",
+              "password": "SecureAdminPass123"
+            },
+            "lastLogin": {
+              "timestamp": "2025-07-30T14:07:39.482Z",
+              "ip": "system"
+            }
+          }
+        ],
+        "trackers": {
+          "nextUSSDReferenceNumber": {
+            "value": 3,
+            "description": "This is used an a new tenant Id when a new tenant is added"
+          }
+        },
+        "lookups": {
+          "employeeRoles": [
+            {
+              "role": "internalSuperAdmin",
+              "description": ""
+            },
+            {
+              "role": "admin",
+              "description": ""
+            }
+          ],
+          "tenantRoles": [
+            {
+              "role": "internalSuperAdmin",
+              "description": ""
+            },
+            {
+              "role": "admin",
+              "description": ""
+            },
+            {
+              "role": "user",
+              "description": ""
+            }
+          ],
+          "alarmDescriptions": [],
+          "communicationChannels": [
+            {
+              "channel": "sms"
+            },
+            {
+              "channel": "whatsapp"
+            },
+            {
+              "channel": "call"
+            }
+          ],
+          "alarmTypes": [
+            {
+              "type": "external"
+            },
+            {
+              "type": "internal"
+            }
+          ],
+          "titlePrefixes": [
+            {
+              "prefix": "Mr"
+            },
+            {
+              "prefix": "Mrs"
+            },
+            {
+              "prefix": "Ms"
+            },
+            {
+              "prefix": "Dr"
+            },
+            {
+              "prefix": "Miss"
+            },
+            {
+              "prefix": "Prof"
+            },
+            {
+              "prefix": "Rev"
+            },
+            {
+              "prefix": "Sir"
+            }
+          ],
+          "relationshipTypes": [
+            {
+              "relationship": "family"
+            },
+            {
+              "relationship": "friend"
+            },
+            {
+              "relationship": "neighbour"
+            },
+            {
+              "relationship": "colleague"
+            },
+            {
+              "relationship": "other"
+            }
+          ],
+          "typeOfUsersRequestingService": [
+            {
+              "typeOfUser": "I am a Client"
+            },
+            {
+              "typeOfUser": "I am a Tenant"
+            },
+            {
+              "typeOfUser": "I am a Potential Client"
+            }
+          ],
+          "serviceMessageRelations": [
+            {
+              "relation": "Sale"
+            },
+            {
+              "relation": "General"
+            },
+            {
+              "relation": "Other"
+            }
+          ],
+          "format": {
+            "phoneNumbers": [{}],
+            "USSDPins": [{}],
+            "serialNumbers": [{}],
+            "passwords": [{}],
+            "adminIds": [{}]
+          }
+        },
+        "__collections__": {}
+      }
+    }
+  }
+}

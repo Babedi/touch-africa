@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeighbourGuard™ - Auth Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+
+        .success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>🔍 NeighbourGuard™ Authentication Debug</h1>
+        <p>Real-time authentication debugging and testing</p>
+
+        <div>
+            <button class="btn" onclick="fullDebugReport()">📊 Full Debug Report</button>
+            <button class="btn" onclick="testSimpleLogin()">🔑 Test Login</button>
+            <button class="btn" onclick="testTokenValidation()">✅ Test Token Validation</button>
+            <button class="btn" onclick="clearAllAuth()">🧹 Clear All Auth</button>
+            <button class="btn" onclick="simulateAuthCheck()">🔄 Simulate Auth Check</button>
+        </div>
+
+        <div id="output"></div>
+    </div>
+
+    <script src="/shared/api-client.js"></script>
+    <script>
+        let output = document.getElementById('output');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}\n`;
+
+            let statusDiv = document.querySelector('.status:last-child');
+            if (!statusDiv || !statusDiv.classList.contains(type)) {
+                statusDiv = document.createElement('div');
+                statusDiv.className = `status ${type}`;
+                output.appendChild(statusDiv);
+            }
+
+            statusDiv.textContent += logEntry;
+            statusDiv.scrollTop = statusDiv.scrollHeight;
+        }
+
+        function fullDebugReport() {
+            output.innerHTML = '';
+            log('🔍 FULL DEBUG REPORT STARTING', 'info');
+
+            // 1. Check if API client exists
+            log(`1. API Client Available: ${!!window.APIClient}`, window.APIClient ? 'success' : 'error');
+
+            // 2. Initialize API client
+            if (!window.apiClient) {
+                window.apiClient = new APIClient();
+                log('2. API Client initialized', 'success');
+            } else {
+                log('2. API Client already exists', 'success');
+            }
+
+            // 3. Check localStorage
+            const authKeys = ['authToken', 'internalAdminToken', 'tenantAdminToken', 'tenantUserToken', 'userType', 'user', 'tenantId'];
+            log('3. LocalStorage Check:', 'info');
+            authKeys.forEach(key => {
+                const value = localStorage.getItem(key);
+                log(`   ${key}: ${value ? (value.length > 100 ? value.substring(0, 100) + '...' : value) : 'null'}`, value ? 'success' : 'warning');
+            });
+
+            // 4. Check API client methods
+            log('4. API Client Methods:', 'info');
+            log(`   getUserType(): ${window.apiClient.getUserType()}`, 'info');
+            log(`   isAuthenticated(): ${window.apiClient.isAuthenticated()}`, 'info');
+            log(`   getAuthToken(): ${window.apiClient.getAuthToken() ? 'EXISTS (length: ' + window.apiClient.getAuthToken().length + ')' : 'null'}`, 'info');
+
+            // 5. Check current user
+            const currentUser = window.apiClient.getCurrentUser();
+            log(`5. Current User: ${currentUser ? JSON.stringify(currentUser, null, 2) : 'null'}`, currentUser ? 'success' : 'warning');
+
+            log('🔍 DEBUG REPORT COMPLETE', 'success');
+        }
+
+        async function testSimpleLogin() {
+            log('🔑 TESTING LOGIN...', 'info');
+
+            try {
+                const result = await window.apiClient.loginInternalAdmin({
+                    email: 'test.corrected@neighbourguard.co.za',
+                    password: 'TestCorrected123!'
+                });
+
+                if (result.success) {
+                    log(`✅ Login SUCCESS: Token length ${result.data.token.length}`, 'success');
+                    log(`   Admin: ${result.data.admin.names} ${result.data.admin.surname}`, 'success');
+
+                    // Check storage after login
+                    log('📦 Post-login storage check:', 'info');
+                    log(`   authToken: ${localStorage.getItem('authToken') ? 'SET' : 'null'}`, 'info');
+                    log(`   internalAdminToken: ${localStorage.getItem('internalAdminToken') ? 'SET' : 'null'}`, 'info');
+                    log(`   userType: ${localStorage.getItem('userType')}`, 'info');
+                } else {
+                    log(`❌ Login FAILED: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Login ERROR: ${error.message}`, 'error');
+            }
+        }
+
+        async function testTokenValidation() {
+            log('✅ TESTING TOKEN VALIDATION...', 'info');
+
+            try {
+                const userType = window.apiClient.getUserType();
+                if (!userType) {
+                    log('❌ No user type found', 'error');
+                    return;
+                }
+
+                log(`Testing validation for user type: ${userType}`, 'info');
+
+                const response = await window.apiClient.get('/internal/admin/list');
+
+                log(`📡 API Response:`, 'info');
+                log(`   Status: ${response.success ? 'SUCCESS' : 'FAILED'}`, response.success ? 'success' : 'error');
+                log(`   Message: ${response.message || 'No message'}`, 'info');
+
+                if (response.data) {
+                    log(`   Data: ${JSON.stringify(response.data, null, 2)}`, 'success');
+                }
+
+            } catch (error) {
+                log(`❌ Validation ERROR: ${error.message}`, 'error');
+                log(`   Error details: ${JSON.stringify(error, null, 2)}`, 'error');
+            }
+        }
+
+        function clearAllAuth() {
+            log('🧹 CLEARING ALL AUTHENTICATION...', 'warning');
+
+            if (window.apiClient) {
+                window.apiClient.logout();
+                log('✅ API client logout called', 'success');
+            }
+
+            // Clear all cookies
+            document.cookie.split(";").forEach(function (c) {
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+
+            log('✅ All cookies cleared', 'success');
+            log('🔄 Re-run debug report to verify', 'info');
+        }
+
+        async function simulateAuthCheck() {
+            log('🔄 SIMULATING AUTH CHECK...', 'info');
+
+            // Simulate the same logic as the main page
+            const userType = window.apiClient?.getUserType();
+            const hasToken = window.apiClient?.isAuthenticated();
+
+            log(`Step 1 - Initial checks:`, 'info');
+            log(`   userType: ${userType}`, 'info');
+            log(`   hasToken: ${hasToken}`, 'info');
+
+            if (userType && hasToken) {
+                log(`Step 2 - Authentication data found, checking quality:`, 'info');
+
+                const user = window.apiClient.getCurrentUser();
+                const authToken = window.apiClient.getAuthToken();
+
+                log(`   user exists: ${!!user}`, user ? 'success' : 'error');
+                log(`   authToken exists: ${!!authToken}`, authToken ? 'success' : 'error');
+                log(`   authToken length: ${authToken ? authToken.length : 0}`, 'info');
+
+                if (user && authToken && authToken.length > 50) {
+                    log(`✅ WOULD REDIRECT to dashboard for ${userType}`, 'success');
+
+                    // Show what dashboard URL would be used
+                    let dashboardUrl;
+                    switch (userType) {
+                        case "internal.admin":
+                            dashboardUrl = "/private/internal/dashboard/admin.dashboard.html";
+                            break;
+                        case "tenant.admin":
+                            dashboardUrl = "/private/external/tenant.admin/dashboard/";
+                            break;
+                        case "tenant.user":
+                            dashboardUrl = "/private/external/tenant.user/dashboard/";
+                            break;
+                        default:
+                            dashboardUrl = "UNKNOWN";
+                    }
+
+                    log(`   Dashboard URL: ${dashboardUrl}`, 'success');
+                } else {
+                    log(`❌ WOULD CLEAR AUTH - incomplete data`, 'warning');
+                }
+            } else {
+                log(`Step 2 - No authentication found`, 'warning');
+            }
+        }
+
+        // Auto-run on load
+        setTimeout(() => {
+            if (!window.apiClient) {
+                window.apiClient = new APIClient();
+            }
+            fullDebugReport();
+        }, 100);
+    </script>
+</body>
+
+</html>

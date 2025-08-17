@@ -1,0 +1,6 @@
+{
+  "category": "Emergency Response",
+  "subCategory": "Responder Roles",
+  "items": ["Police", "Firefighter", "Paramedic", "Security", "Volunteer"],
+  "description": "Types of responders available for emergencies"
+}

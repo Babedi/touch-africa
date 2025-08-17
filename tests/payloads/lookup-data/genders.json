@@ -1,0 +1,6 @@
+{
+  "category": "User Profile",
+  "subCategory": "Genders",
+  "items": ["Male", "Female", "Prefer not to say"],
+  "description": "Gender options for user profiles and demographic data"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Mr",
+  "names": "John Smith",
+  "surname": "Johnson",
+  "company": "Test Company",
+  "role": "Manager",
+  "typeOfUser": "I am a Client",
+  "messageRelationTo": "Sale",
+  "message": "I need assistance with setting up a new security system for our office building.",
+  "contactInfo": {
+    "phoneNumber": "+27841234567",
+    "email": "john.johnson@testcompany.com"
+  }
+}
