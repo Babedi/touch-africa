@@ -64,6 +64,8 @@ import { authenticateJWT } from "./middleware/auth.middleware.js";
 // 2.3. Modular route handlers
 import internalAdminRouter from "./modules/internal/admin/admin.route.js";
 import internalLookupRouter from "./modules/internal/lookup/lookup.route.js";
+import internalLookupCategoryRouter from "./modules/internal/lookup.category/lookup.category.route.js";
+import internalLookupSubCategoryRouter from "./modules/internal/lookup.sub.category/lookup.sub.category.route.js";
 import serviceRequestRouter from "./modules/internal/service.request/service.request.route.js";
 import serviceInfoRouter from "./modules/general/service.info/service.info.route.js";
 import externalTenantRouter from "./modules/external/tenant/tenant.route.js";
@@ -167,6 +169,8 @@ app.use(nocache());
 // 6. API ROUTES -----------------------------------------------------------------
 app.use(internalAdminRouter);
 app.use(internalLookupRouter);
+app.use(internalLookupCategoryRouter);
+app.use(internalLookupSubCategoryRouter);
 app.use(serviceRequestRouter);
 app.use(serviceInfoRouter);
 app.use(externalTenantRouter);

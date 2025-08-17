@@ -782,6 +782,7 @@ class AdminDashboard {
 
   async loadLookups() {
     try {
+      console.log("🔄 Loading lookups data from API...");
       const token =
         localStorage.getItem("authToken") || this.getCookieValue("authToken");
       const response = await fetch("/internal/lookup/list", {
@@ -793,9 +794,11 @@ class AdminDashboard {
 
       const data = await response.json();
       if (data.success) {
+        console.log(`✅ Loaded ${data.data?.length || 0} lookup records`);
         this.lookupsData = data.data || [];
         this.filteredLookups = [...this.lookupsData];
         this.renderLookupsTable();
+        this.updateLookupStats();
       } else {
         throw new Error(data.error || "Failed to load lookups");
       }
@@ -808,7 +811,77 @@ class AdminDashboard {
     }
   }
 
+  // Refresh lookups data (called by modals after successful creation)
+  async refreshLookupsData() {
+    console.log("🔄 Refreshing lookups data...");
+
+    // Get the refresh button and show loading state
+    const refreshBtn = document.getElementById("refreshLookupsBtn");
+    if (refreshBtn) {
+      // Store original content
+      const originalContent = refreshBtn.innerHTML;
+
+      // Show loading state
+      refreshBtn.disabled = true;
+      refreshBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-spin">
+          <path d="M21 12a9 9 0 11-6.219-8.56"/>
+        </svg>
+        Refreshing...
+      `;
+
+      try {
+        await this.loadLookups();
+
+        // Show success feedback
+        if (window.notifications) {
+          window.notifications.success(
+            "Success",
+            "Lookups data refreshed successfully!"
+          );
+        } else if (typeof showSuccessSnackbar === "function") {
+          showSuccessSnackbar("Lookups data refreshed successfully!");
+        }
+      } catch (error) {
+        console.error("❌ Failed to refresh lookups:", error);
+
+        // Show error feedback
+        if (window.notifications) {
+          window.notifications.error(
+            "Error",
+            "Failed to refresh lookups data. Please try again."
+          );
+        } else if (typeof showErrorSnackbar === "function") {
+          showErrorSnackbar(
+            "Failed to refresh lookups data. Please try again."
+          );
+        }
+      } finally {
+        // Restore button state
+        if (refreshBtn) {
+          refreshBtn.disabled = false;
+          refreshBtn.innerHTML = originalContent;
+        }
+      }
+    } else {
+      // Fallback if button not found
+      await this.loadLookups();
+    }
+  }
+
   setupLookupControls() {
+    // Add New Category button
+    const addCategoryBtn = document.getElementById("addCategoryBtn");
+    if (addCategoryBtn) {
+      addCategoryBtn.onclick = () => this.showAddCategoryModal();
+    }
+
+    // Add New Sub Category button
+    const addSubCategoryBtn = document.getElementById("addSubCategoryBtn");
+    if (addSubCategoryBtn) {
+      addSubCategoryBtn.onclick = () => this.showAddSubCategoryModal();
+    }
+
     // Add New Lookup button
     const addLookupBtn = document.getElementById("addLookupBtn");
     if (addLookupBtn) {
@@ -818,7 +891,7 @@ class AdminDashboard {
     // Refresh button
     const refreshBtn = document.getElementById("refreshLookupsBtn");
     if (refreshBtn) {
-      refreshBtn.onclick = () => this.loadLookups();
+      refreshBtn.onclick = () => this.refreshLookupsData();
     }
 
     // Search input
@@ -1126,8 +1199,205 @@ class AdminDashboard {
   }
 
   // Action methods for lookup management
-  showAddLookupModal() {
-    alert("Add Lookup functionality - Coming soon!");
+  async showAddLookupModal() {
+    try {
+      console.log("🔧 AdminDashboard: Opening add lookup modal...");
+
+      // Load modal if not already loaded
+      await this.loadAddLookupModal();
+
+      // Open the modal
+      if (typeof window.openAddLookupModal === "function") {
+        await window.openAddLookupModal();
+      } else {
+        throw new Error("Add lookup modal function not available");
+      }
+    } catch (error) {
+      console.error(
+        "❌ AdminDashboard: Failed to show add lookup modal:",
+        error
+      );
+
+      if (window.notifications) {
+        window.notifications.error(
+          "Error",
+          "Failed to open add lookup modal. Please try again."
+        );
+      } else if (typeof showErrorSnackbar === "function") {
+        showErrorSnackbar("Failed to open add lookup modal. Please try again.");
+      } else {
+        alert("Failed to open add lookup modal. Please try again.");
+      }
+    }
+  }
+
+  async loadAddLookupModal() {
+    try {
+      console.log("🔧 Loading Add Lookup modal script...");
+
+      // Check if script is already loaded
+      if (document.getElementById("addLookupModalScript")) {
+        console.log("✅ Add Lookup modal script already loaded");
+        return;
+      }
+
+      // Load the modal script
+      const script = document.createElement("script");
+      script.id = "addLookupModalScript";
+      script.src = "/modals/add.lookup.modal/index.js";
+      script.async = true;
+
+      return new Promise((resolve, reject) => {
+        script.onload = () => {
+          console.log("✅ Add Lookup modal script loaded successfully");
+          resolve();
+        };
+        script.onerror = () => {
+          console.error("❌ Failed to load Add Lookup modal script");
+          reject(new Error("Failed to load modal script"));
+        };
+        document.head.appendChild(script);
+      });
+    } catch (error) {
+      console.error("❌ Error loading Add Lookup modal:", error);
+      throw error;
+    }
+  }
+
+  // Action methods for category management
+  async showAddCategoryModal() {
+    try {
+      console.log("🔧 AdminDashboard: Opening add category modal...");
+
+      // Load modal if not already loaded
+      await this.loadAddCategoryModal();
+
+      // Open the modal
+      if (typeof window.openAddCategoryModal === "function") {
+        await window.openAddCategoryModal();
+      } else {
+        throw new Error("Add category modal function not available");
+      }
+    } catch (error) {
+      console.error(
+        "❌ AdminDashboard: Failed to show add category modal:",
+        error
+      );
+
+      if (window.notifications) {
+        window.notifications.error(
+          "Error",
+          "Failed to open add category modal. Please try again."
+        );
+      } else if (typeof showErrorSnackbar === "function") {
+        showErrorSnackbar(
+          "Failed to open add category modal. Please try again."
+        );
+      } else {
+        alert("Failed to open add category modal. Please try again.");
+      }
+    }
+  }
+
+  async loadAddCategoryModal() {
+    try {
+      console.log("🔧 Loading Add Category modal script...");
+
+      // Check if script is already loaded
+      if (document.getElementById("addCategoryModalScript")) {
+        console.log("✅ Add Category modal script already loaded");
+        return;
+      }
+
+      // Load the modal script
+      const script = document.createElement("script");
+      script.id = "addCategoryModalScript";
+      script.src = "/modals/add.category.modal/index.js";
+      script.async = true;
+
+      return new Promise((resolve, reject) => {
+        script.onload = () => {
+          console.log("✅ Add Category modal script loaded successfully");
+          resolve();
+        };
+        script.onerror = () => {
+          console.error("❌ Failed to load Add Category modal script");
+          reject(new Error("Failed to load modal script"));
+        };
+        document.head.appendChild(script);
+      });
+    } catch (error) {
+      console.error("❌ Error loading Add Category modal:", error);
+      throw error;
+    }
+  }
+
+  // Action methods for subcategory management
+  async showAddSubCategoryModal() {
+    try {
+      console.log("🔧 AdminDashboard: Opening add subcategory modal...");
+
+      // Load modal if not already loaded
+      await this.loadAddSubCategoryModal();
+
+      // Open the modal
+      if (typeof window.openAddSubCategoryModal === "function") {
+        await window.openAddSubCategoryModal();
+      } else {
+        throw new Error("Add subcategory modal function not available");
+      }
+    } catch (error) {
+      console.error(
+        "❌ AdminDashboard: Failed to show add subcategory modal:",
+        error
+      );
+
+      if (window.notifications) {
+        window.notifications.error(
+          "Error",
+          "Failed to open add subcategory modal. Please try again."
+        );
+      } else if (typeof showErrorSnackbar === "function") {
+        showErrorSnackbar(
+          "Failed to open add subcategory modal. Please try again."
+        );
+      } else {
+        alert("Failed to open add subcategory modal. Please try again.");
+      }
+    }
+  }
+
+  async loadAddSubCategoryModal() {
+    try {
+      console.log("🔧 Loading Add Sub Category modal script...");
+
+      // Check if script is already loaded
+      if (document.getElementById("addSubCategoryModalScript")) {
+        console.log("✅ Add Sub Category modal script already loaded");
+        return;
+      }
+
+      // Load the modal script
+      const script = document.createElement("script");
+      script.id = "addSubCategoryModalScript";
+      script.src = "/modals/add.subcategory.modal/index.js";
+      script.async = true;
+
+      return new Promise((resolve, reject) => {
+        script.onload = () => {
+          console.log("✅ Add Sub Category modal script loaded successfully");
+          resolve();
+        };
+        script.onerror = () => {
+          console.error("❌ Failed to load Add Sub Category modal script");
+          reject(new Error("Failed to load modal script"));
+        };
+        document.head.appendChild(script);
+      });
+    } catch (error) {
+      console.error("❌ Error loading Add Sub Category modal:", error);
+      throw error;
+    }
   }
 
   viewLookupItems(lookupId) {
@@ -1164,7 +1434,14 @@ class AdminDashboard {
 
         const data = await response.json();
         if (data.success) {
-          this.showSuccess("Lookup deleted successfully");
+          if (window.notifications) {
+            window.notifications.success(
+              "Success",
+              "Lookup deleted successfully"
+            );
+          } else {
+            this.showSuccess("Lookup deleted successfully");
+          }
           await this.loadLookups();
         } else {
           throw new Error(data.error || "Failed to delete lookup");
@@ -1754,6 +2031,18 @@ window.refreshAdminList = function () {
     return window.adminDashboard.refreshAdminList();
   } else {
     console.warn("Admin dashboard not available for refresh");
+  }
+};
+
+// Global function to refresh lookup list (for modal use)
+window.refreshLookupList = function () {
+  if (
+    window.adminDashboard &&
+    typeof window.adminDashboard.loadLookups === "function"
+  ) {
+    return window.adminDashboard.loadLookups();
+  } else {
+    console.warn("Admin dashboard not available for lookup refresh");
   }
 };
 

@@ -514,6 +514,23 @@ class NotificationSystem {
 // Create global notification system
 window.notifications = new NotificationSystem();
 
+// Legacy aliases for backward compatibility
+window.showSuccessSnackbar = function (message, title = "Success") {
+  return window.notifications.success(title, message);
+};
+
+window.showErrorSnackbar = function (message, title = "Error") {
+  return window.notifications.error(title, message);
+};
+
+window.showWarningSnackbar = function (message, title = "Warning") {
+  return window.notifications.warning(title, message);
+};
+
+window.showInfoSnackbar = function (message, title = "Info") {
+  return window.notifications.info(title, message);
+};
+
 // Export for module usage
 if (typeof module !== "undefined" && module.exports) {
   module.exports = NotificationSystem;

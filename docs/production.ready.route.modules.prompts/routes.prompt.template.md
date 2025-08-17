@@ -1,6 +1,6 @@
 # Variables
 
-1. Build the `lookup` module with a placement of `internal` so you can reproduce the pattern for any `{moduleName}` with any placement of `{modulePlacement}`. Make sure filed and folder names use the dot notation version(with only small letters) of {moduleName} if {moduleName} is more than one word.
+1. Build the `lookupSubCategory` module with a placement of `internal` so you can reproduce the pattern for any `{moduleName}` with any placement of `{modulePlacement}`. Make sure filed and folder names use the dot notation version(with only small letters) of {moduleName} if {moduleName} is more than one word.
 
 - the module should be placed under `./modules/{modulePlacement}/{moduleName}/`
 
@@ -37,43 +37,18 @@
 
 3. JSON structure `{json}` used is(resource availed and accessed via routes):
 
-- The `id` is generated server-side using a pattern like `LOOKUP${Date.now()}`.
+- The `id` is generated server-side using a pattern like `LOOKUP_SUB_CATEGORY${Date.now()}`.
 
 ```json
 {
-  "category": "Geography",
-  "subCategory": "Countries",
-  "items": [
-    "South Africa",
-    "United States",
-    "United Kingdom",
-    "India",
-    "China",
-    "Australia",
-    "Canada",
-    "Germany",
-    "France",
-    "Japan",
-    "Brazil",
-    "Russia",
-    "Mexico",
-    "Italy",
-    "Spain",
-    "Netherlands",
-    "Sweden",
-    "Norway",
-    "Denmark",
-    "Finland"
-  ],
+  "Subcategory": "Geography",
   "description": "Major countries for international operations and user registration"
 }
 ```
 
 4. Zod validation schema for `{json}`:
 
-- `category`: strings (3–50), required
-  `subCategory`: strings (3–50), required
-- `items`: strings[] (1–25), required
+- `Subcategory`: strings (3–50), required
 - `description`: strings (3-200), required
 
 5. Firestore storage model
@@ -96,7 +71,7 @@ This project does not support an in-memory store. Always use Firestore.
 
 6. Firestore path conventions:
 
-- path: `/services/{neighbourGuardService}/lookups`
+- path: `/services/{neighbourGuardService}/lookupSubCategory/`
 
 7. Special Notes:
 
