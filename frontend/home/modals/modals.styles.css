@@ -1,0 +1,592 @@
+/* Unified Modal Styles (Login + Service Request) */
+
+/* Overlays */
+#loginModal,
+#serviceRequestModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+#loginModal.show,
+#serviceRequestModal.show {
+    display: flex;
+}
+
+/* Shared modal shell */
+.modal-content {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 32px;
+    width: 90%;
+    max-width: 440px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    position: relative;
+    animation: slideUp 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.modal-icon {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.icon-circle {
+    display: inline-flex;
+    width: 56px;
+    height: 56px;
+    background: #4A69BD;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.modal-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #4A69BD;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-header .subtitle {
+    font-size: 15px;
+    color: #777;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.modal-body {
+    width: 100%;
+}
+
+/* Service Request form styles */
+#serviceRequestForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.error-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 0;
+    /* spacing is handled on error messages only when present */
+}
+
+#serviceRequestForm input,
+#serviceRequestForm textarea,
+#serviceRequestForm select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+#serviceRequestForm input:focus,
+#serviceRequestForm textarea:focus,
+#serviceRequestForm select:focus {
+    outline: none;
+    border-color: #4A69BD;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.1);
+}
+
+#serviceRequestForm input::placeholder,
+#serviceRequestForm textarea::placeholder {
+    color: #999;
+}
+
+#serviceRequestForm textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#serviceRequestForm input.error,
+#serviceRequestForm textarea.error,
+#serviceRequestForm select.error {
+    border-color: #e74c3c;
+    background: #fff5f5;
+}
+
+/* Title select specifics */
+.sr-title-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #777 50%),
+        linear-gradient(135deg, #777 50%, transparent 50%),
+        linear-gradient(to right, #e0e0e0, #e0e0e0);
+    background-position: calc(100% - 20px) calc(50% - 3px),
+        calc(100% - 14px) calc(50% - 3px),
+        calc(100% - 40px) 50%;
+    background-size: 6px 6px, 6px 6px, 1px 60%;
+    background-repeat: no-repeat;
+}
+
+.sr-title-select:hover {
+    border-color: #c9c9c9;
+}
+
+.sr-title-select:focus {
+    background-image: linear-gradient(45deg, transparent 50%, #4A69BD 50%),
+        linear-gradient(135deg, #4A69BD 50%, transparent 50%),
+        linear-gradient(to right, #4A69BD33, #4A69BD33);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 13px;
+    line-height: 1.3;
+    display: none;
+    margin-top: 0;
+}
+
+.error-message:not(:empty) {
+    display: block;
+    margin-top: 4px;
+}
+
+/* Login modal uses the same conditional spacing for error messages */
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: #4A69BD;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0;
+}
+
+.btn-submit:hover:not(:disabled) {
+    background: #3a5aad;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 105, 189, 0.3);
+}
+
+.btn-submit:disabled {
+    background: #b0b0b0;
+    cursor: not-allowed;
+}
+
+.modal-footer-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+.modal-footer-text a {
+    color: #4A69BD;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.modal-footer-text a:hover {
+    color: #3a5aad;
+    text-decoration: underline;
+}
+
+/* Loading state */
+.btn-submit.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-submit.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Login form (generic) */
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#loginForm input,
+#loginForm textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+#loginForm input:focus,
+#loginForm textarea:focus {
+    outline: none;
+    border-color: #4A69BD;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.1);
+}
+
+#loginForm input::placeholder,
+#loginForm textarea::placeholder {
+    color: #999;
+}
+
+#loginForm textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#loginForm input.error,
+#loginForm textarea.error {
+    border-color: #e74c3c;
+    background: #fff5f5;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Login selection grid and forms */
+.login-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.login-option {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px;
+    background: #fafafa;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.login-option:hover {
+    background: #f5f5f5;
+}
+
+.login-option i {
+    font-size: 20px;
+    color: #4A69BD;
+}
+
+/* Center the text inside selection buttons */
+.login-option>div {
+    text-align: center;
+}
+
+.login-option h3 {
+    margin: 0;
+    text-align: center;
+}
+
+.login-option p {
+    margin: 4px 0 0;
+    text-align: center;
+}
+
+.login-form h3 {
+    margin: 0 0 12px 0;
+}
+
+/* Generic form grouping used in login modal */
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.btn-primary {
+    background: #4A69BD;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    color: #111;
+    border: 1px solid #e5e7eb;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.error-message {
+    font-size: 12px;
+}
+
+/* Ensure service request error messages never get clipped */
+#serviceRequestForm .error-message:not(:empty) {
+    margin-top: 4px;
+}
+
+/* Wider layout for Service Request modal only (applies to both light and dark modes) */
+#serviceRequestModal .modal-content {
+    max-width: 720px;
+}
+
+/* Make login form inputs match service request inputs */
+.login-form input,
+.login-form select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+.login-form input:focus,
+.login-form select:focus {
+    outline: none;
+    border-color: #4A69BD;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.1);
+}
+
+.login-form input::placeholder {
+    color: #999;
+}
+
+.login-form input.error,
+.login-form select.error {
+    border-color: #e74c3c;
+    background: #fff5f5;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        padding: 32px 24px;
+        border-radius: 16px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .error-row {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-header h2 {
+        font-size: 24px;
+    }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    .modal-content {
+        background: #3e1500a6;
+        color: #e0e0e0;
+    }
+
+    .modal-header h2 {
+        color: #6B8CFF;
+    }
+
+    .modal-header .subtitle {
+        color: #999;
+    }
+
+    #serviceRequestForm input,
+    #serviceRequestForm textarea,
+    #loginForm input,
+    #loginForm textarea {
+        background: #2a2a2a;
+        border-color: #333;
+        color: #e0e0e0;
+    }
+
+    #serviceRequestForm input:focus,
+    #serviceRequestForm textarea:focus,
+    #loginForm input:focus,
+    #loginForm textarea:focus {
+        background: #333;
+        border-color: #6B8CFF;
+        box-shadow: 0 0 0 3px rgba(107, 140, 255, 0.2);
+    }
+
+    .modal-close {
+        color: #777;
+    }
+
+    .modal-close:hover {
+        background: #2a2a2a;
+        color: #e0e0e0;
+    }
+
+    .icon-circle {
+        background: #6B8CFF;
+    }
+
+    /* Wider layout for Service Request modal only */
+    #serviceRequestModal .modal-content {
+        max-width: 720px;
+        /* widen only this modal */
+    }
+}
+
+/* Visual separation between sections */
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.modal-body {
+    padding-top: 16px;
+}
+
+/* Footer and action areas */
+.modal-footer,
+.modal-actions,
+.modal-footer-text {
+    border-top: 1px solid #e9ecef;
+    margin-top: 20px;
+    padding-top: 16px;
+}
+
+/* Right-align buttons in modal footers and action areas */
+.modal-footer,
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Keep form vertical layout but align the submit button to the right */
+.modal-body form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-body form .btn-submit,
+.modal-body form button[type="submit"],
+.modal-body .modal-actions .btn,
+.modal-footer .btn {
+    align-self: flex-end;
+}

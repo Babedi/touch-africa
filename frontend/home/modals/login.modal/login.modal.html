@@ -1,0 +1,104 @@
+<!-- Login Modal -->
+<div class="modal-content">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <div class="modal-header">
+        <h2>
+            <div class="logo-icon">
+                <img src="./assets/logo.png" alt="TouchAfrica Logo">
+            </div>
+            Sign in to TouchAfrica
+        </h2>
+        <p class="subtitle">Choose your account type to continue</p>
+    </div>
+    <div class="modal-body">
+        <div id="login_loginSelection">
+            <div class="login-options">
+                <button class="login-option" data-type="internal">
+                    <div>
+                        <h3>Service Admin</h3>
+                        <p>TouchAfrica staff and system administrators</p>
+                    </div>
+                </button>
+                <button class="login-option" data-type="tenant-admin">
+                    <div>
+                        <h3>Tenant Admin</h3>
+                        <p>Organization administrators and managers</p>
+                    </div>
+                </button>
+                <button class="login-option" data-type="tenant-user">
+                    <div>
+                        <h3>Tenant User</h3>
+                        <p>Farmers and field workers</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div id="login_internalLogin" class="login-form hidden">
+            <h3>Service Admin</h3>
+            <form id="internalForm">
+                <div class="form-group">
+                    <input type="email" id="login_internalEmail" name="email" placeholder="Email" required />
+                    <div class="error-message" data-for="login_internalEmail"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login_internalPassword" name="password" placeholder="Password"
+                        required />
+                    <div class="error-message" data-for="login_internalPassword"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-action="back">Back</button>
+                    <button type="submit" class="btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="login_tenantAdminLogin" class="login-form hidden">
+            <h3>Tenant Admin</h3>
+            <form id="tenantAdminForm">
+                <div class="form-group">
+                    <select id="login_adminOrganization" name="organization" required>
+                        <option value="">Select Organization</option>
+                    </select>
+                    <div class="error-message" data-for="login_adminOrganization"></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="login_adminEmail" name="email" placeholder="Email" required />
+                    <div class="error-message" data-for="login_adminEmail"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login_adminPassword" name="password" placeholder="Password" required />
+                    <div class="error-message" data-for="login_adminPassword"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-action="back">Back</button>
+                    <button type="submit" class="btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="login_tenantUserLogin" class="login-form hidden">
+            <h3>Tenant User</h3>
+            <form id="tenantUserForm">
+                <div class="form-group">
+                    <select id="login_userOrganization" name="organization" required>
+                        <option value="">Select Organization</option>
+                    </select>
+                    <div class="error-message" data-for="login_userOrganization"></div>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="login_userPhone" name="phone" placeholder="Phone Number" required />
+                    <div class="error-message" data-for="login_userPhone"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login_userPin" name="pin" maxlength="6" placeholder="PIN" required />
+                    <div class="error-message" data-for="login_userPin"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-action="back">Back</button>
+                    <button type="submit" class="btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

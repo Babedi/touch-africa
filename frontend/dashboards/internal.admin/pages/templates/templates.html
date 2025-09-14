@@ -1,0 +1,65 @@
+<section class="content-section page-templates" id="section-templates">
+    <h1>Manage Templates</h1>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Templates</h3>
+            <p class="stat-value" id="templates-total">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active</h3>
+            <p class="stat-value" id="templates-active">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Draft</h3>
+            <p class="stat-value" id="templates-draft">—</p>
+        </div>
+    </div>
+    <div class="table-controls no-wrap">
+        <div class="search-box">
+            <input class="search-input form-control" placeholder="Search templates..." />
+            <button class="btn-clear">Clear</button>
+        </div>
+        <div class="sort-controls">
+            <label for="templates-sort" class="form-label">Sort by:</label>
+            <select id="templates-sort" class="filter-select form-control">
+                <option value="name">Name</option>
+                <option value="category">Category</option>
+                <option value="cycleTime">Cycle Time</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Cultivar Templates</h3>
+            <div class="table-actions">
+                <button class="btn btn-primary"><i class="fas fa-plus"></i> New Template</button>
+            </div>
+        </div>
+
+        <!-- Template Cards Grid -->
+        <div class="templates-grid" id="templates-grid">
+            <!-- Cards will be populated by JavaScript -->
+        </div>
+
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="templates-page-size" class="form-label">Rows per page</label>
+                <select id="templates-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="templates-page-info">Page 1</div>
+            <div class="pager">
+                <button id="templates-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="templates-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="templates-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="templates-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/frontend/dashboards/internal.admin/pages/templates/templates.js"></script>

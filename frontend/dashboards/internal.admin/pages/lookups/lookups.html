@@ -1,0 +1,192 @@
+<section class="content-section page-lookups" id="section-lookups">
+    <h1>Manage Lookups</h1>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Lookups</h3>
+            <p class="stat-value" id="lookups-total">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Categories</h3>
+            <p class="stat-value" id="lookup-categories-total">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Sub-Categories</h3>
+            <p class="stat-value" id="lookup-sub-categories-total">—</p>
+        </div>
+    </div>
+    <!-- Search moved into table header below -->
+
+    <!-- Color Legend -->
+    <div class="color-legend hidden" id="color-legend">
+        <h4>Category & Subcategory Colors</h4>
+        <div class="legend-items" id="legend-items">
+            <!-- Legend will be populated dynamically -->
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Lookups</h3>
+            <div class="table-actions">
+                <div class="search-box">
+                    <input id="lookups-search" class="search-input form-control" placeholder="Search lookups..." />
+                    <button id="lookups-clear" class="btn-clear">Clear</button>
+                </div>
+                <button id="btn-new-lookup-category" class="btn btn-primary"><i class="fas fa-plus"></i> New
+                    Category</button>
+                <button id="btn-new-lookup-subcategory" class="btn btn-primary"><i class="fas fa-plus"></i> New Sub
+                    Category</button>
+                <button id="btn-new-lookup" class="btn btn-primary"><i class="fas fa-plus"></i> New Lookup</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th data-sort="category" tabindex="0" role="button" aria-sort="none">Category</th>
+                        <th data-sort="subCategory" tabindex="0" role="button" aria-sort="none">Sub-Category</th>
+                        <th data-sort="items" tabindex="0" role="button" aria-sort="none">Items</th>
+                        <th data-sort="description" tabindex="0" role="button" aria-sort="none">Description</th>
+                        <th data-sort="status" tabindex="0" role="button" aria-sort="none">Status</th>
+                        <th class="actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="lookups-tbody">
+                    <tr>
+                        <td colspan="6">Loading…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="lookups-page-size" class="form-label">Rows per page</label>
+                <select id="lookups-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="lookups-page-info">Page 1</div>
+            <div class="pager">
+                <button id="lookups-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="lookups-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="lookups-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="lookups-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lookup Categories Table -->
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Categories</h3>
+            <div class="table-actions">
+                <div class="search-box">
+                    <input id="lookup-categories-search" class="search-input form-control"
+                        placeholder="Search categories..." />
+                    <button id="lookup-categories-clear" class="btn-clear">Clear</button>
+                </div>
+                <button id="btn-new-lookup-category-inline" class="btn btn-primary" title="Create new category"><i
+                        class="fas fa-plus"></i> New Category</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table" id="lookup-categories-table">
+                <thead>
+                    <tr>
+                        <th data-sort="category" tabindex="0" role="button" aria-sort="none">Category</th>
+                        <th data-sort="description" tabindex="0" role="button" aria-sort="none">Description</th>
+                        <th data-sort="status" tabindex="0" role="button" aria-sort="none">Status</th>
+                        <th class="actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="lookup-categories-tbody">
+                    <tr>
+                        <td colspan="4">Loading…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="lookup-categories-page-size" class="form-label">Rows per page</label>
+                <select id="lookup-categories-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="lookup-categories-page-info">Page 1</div>
+            <div class="pager">
+                <button id="lookup-categories-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="lookup-categories-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="lookup-categories-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="lookup-categories-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lookup Sub-Categories Table -->
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Sub-Categories</h3>
+            <div class="table-actions">
+                <div class="search-box">
+                    <input id="lookup-sub-categories-search" class="search-input form-control"
+                        placeholder="Search sub-categories..." />
+                    <button id="lookup-sub-categories-clear" class="btn-clear">Clear</button>
+                </div>
+                <button id="btn-new-lookup-subcategory-inline" class="btn btn-primary"
+                    title="Create new sub-category"><i class="fas fa-plus"></i> New Sub Category</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table" id="lookup-sub-categories-table">
+                <thead>
+                    <tr>
+                        <th data-sort="subcategory" tabindex="0" role="button" aria-sort="none">Sub-Category</th>
+                        <th data-sort="description" tabindex="0" role="button" aria-sort="none">Description</th>
+                        <th data-sort="status" tabindex="0" role="button" aria-sort="none">Status</th>
+                        <th class="actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="lookup-sub-categories-tbody">
+                    <tr>
+                        <td colspan="4">Loading…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="lookup-sub-categories-page-size" class="form-label">Rows per page</label>
+                <select id="lookup-sub-categories-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="lookup-sub-categories-page-info">Page 1</div>
+            <div class="pager">
+                <button id="lookup-sub-categories-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="lookup-sub-categories-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="lookup-sub-categories-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="lookup-sub-categories-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="module"
+    src="/frontend/dashboards/internal.admin/modals/lookup.category.create.modal/lookup.category.create.modal.js"></script>
+<script type="module"
+    src="/frontend/dashboards/internal.admin/modals/lookup.subcategory.create.modal/lookup.subcategory.create.modal.js"></script>
+<script type="module"
+    src="/frontend/dashboards/internal.admin/modals/lookup.create.modal/lookup.create.modal.js"></script>
+<script type="module" src="/frontend/dashboards/internal.admin/modals/lookup.view.modal/lookup.view.modal.js"></script>
+<script type="module" src="/frontend/dashboards/internal.admin/modals/lookup.edit.modal/lookup.edit.modal.js"></script>
+<script src="/frontend/dashboards/internal.admin/pages/lookups/lookups.js"></script>

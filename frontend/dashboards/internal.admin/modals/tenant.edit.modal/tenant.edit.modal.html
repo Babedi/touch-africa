@@ -1,0 +1,52 @@
+<!-- Edit Tenant Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-edit-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Edit Tenant</h2>
+                    <p class="subtitle">Update tenant details.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="tenantEdit_tenantEditRecordId">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="tenantEditForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tenant_edit_name" class="form-label">Tenant Name *</label>
+                        <input type="text" id="tenant_edit_name" name="tenant_edit_name" class="form-control"
+                            required />
+                        <div class="invalid-feedback" data-for="tenant_edit_name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenant_edit_email" class="form-label">Contact Email</label>
+                        <input type="email" id="tenant_edit_email" name="tenant_edit_email" class="form-control"
+                            readonly />
+                        <div class="invalid-feedback" data-for="tenant_edit_email"></div>
+                        <small class="form-text text-muted">Email cannot be changed</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenant_edit_phone" class="form-label">Contact Phone *</label>
+                        <input type="tel" id="tenant_edit_phone" name="tenant_edit_phone" class="form-control"
+                            required />
+                        <div class="invalid-feedback" data-for="tenant_edit_phone"></div>
+                    </div>
+                    <div class="form-group checkbox">
+                        <label class="form-label">
+                            <input type="checkbox" id="tenant_edit_active" name="tenant_edit_active" /> Active
+                        </label>
+                        <div class="invalid-feedback" data-for="tenant_edit_active"></div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+                <div id="tenantEdit_tenantEditStatus" class="form-status" aria-live="polite"></div>
+            </form>
+        </div>
+    </div>
+</div>

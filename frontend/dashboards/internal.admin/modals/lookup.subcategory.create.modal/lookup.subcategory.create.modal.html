@@ -1,0 +1,36 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Create Lookup Sub-Category</h2>
+                    <p class="subtitle">Define a new lookup sub-category.</p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="lookupSubCategoryCreateForm" novalidate>
+                <div class="form-group">
+                    <label for="lookupSubCreate_subcategory" class="form-label">Sub-Category</label>
+                    <input id="lookupSubCreate_subcategory" name="subcategory" type="text" class="form-control" maxlength="50"
+                        required />
+                    <div class="invalid-feedback" data-for="lookupSubCreate_subcategory"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lookupSubCreate_description" class="form-label">Description</label>
+                    <textarea id="lookupSubCreate_description" name="description" class="form-control" rows="3" maxlength="200"
+                        required></textarea>
+                    <div class="invalid-feedback" data-for="lookupSubCreate_description"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

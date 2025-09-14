@@ -1,0 +1,72 @@
+<!-- Create Role Modal for Tenant Admin (external roles) -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-create-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Create Custom Role</h2>
+                    <p class="subtitle">Define a new tenant custom role and its permissions.</p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="tenantRoleCreateForm" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="roleCreate_tenantRoleTenantId">Tenant</label>
+                    <select id="roleCreate_tenantRoleTenantId" name="tenantId" class="form-control" required>
+                        <option value="">Loading tenants…</option>
+                    </select>
+                    <div class="invalid-feedback" data-for="tenantId"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="roleCreate_roleName">Role Name</label>
+                    <input id="roleCreate_roleName" name="roleName" class="form-control" required />
+                    <div class="invalid-feedback" data-for="roleCreate_roleName"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="roleCreate_roleCode">Role Code</label>
+                    <input id="roleCreate_roleCode" name="roleCode" class="form-control" placeholder="UPPER_SNAKE_CASE"
+                        required />
+                    <div class="invalid-feedback" data-for="roleCreate_roleCode"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="roleCreate_description">Description</label>
+                    <textarea id="roleCreate_description" name="description" class="form-control" rows="3"
+                        placeholder="Purpose of this role"></textarea>
+                    <div class="invalid-feedback" data-for="roleCreate_description"></div>
+                </div>
+
+                <fieldset class="fieldset" data-permissions-fieldset aria-live="polite">
+                    <legend>Permissions</legend>
+                    <div class="small text-muted">Select one or more permissions for this role. Standard permissions are
+                        shown by default. Select a tenant to see tenant-specific permissions.</div>
+
+                    <div class="permission-quick-actions">
+                        <label class="perm-item">
+                            <input type="checkbox" id="roleCreate_allAccessCheckbox" name="permissions[]"
+                                value="all.access" />
+                            <span>All Access (Super Admin)</span>
+                        </label>
+                        <small class="text-muted">Grant complete system access. This overrides all other
+                            permissions.</small>
+                    </div>
+
+                    <div class="loading-permissions text-muted">Loading standard permissions…</div>
+                    <div class="invalid-feedback" data-for="permissions"></div>
+                </fieldset>
+
+                <div class="form-group checkbox">
+                    <label class="form-label">
+                        <input type="checkbox" id="roleCreate_roleIsActive" name="isActive" checked /> Active
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Role</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

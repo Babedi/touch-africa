@@ -1,0 +1,580 @@
+<!-- View Person Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-view-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>View Person</h2>
+                    <p class="subtitle">Read-only view of the person's details.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="personView_recordIdDisplay">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="personViewForm" novalidate>
+                <!-- Personal Details -->
+                <fieldset class="fieldset">
+                    <legend>Personal Details</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_firstName" class="form-label">First Name</label>
+                            <input type="text" id="personView_firstName" name="firstName" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_firstName"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_surname" class="form-label">Surname</label>
+                            <input type="text" id="personView_surname" name="surname" class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_surname"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_middleNames" class="form-label">Middle Names</label>
+                            <input type="text" id="personView_middleNames" name="middleNames" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_middleNames"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_preferredName" class="form-label">Preferred Name</label>
+                            <input type="text" id="personView_preferredName" name="preferredName" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_preferredName"></div>
+                        </div>
+
+
+                    </div>
+                </fieldset>
+
+                <!-- Contact Information -->
+                <fieldset class="fieldset">
+                    <legend>Contact Information</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_email" class="form-label">Email</label>
+                            <input type="email" id="personView_email" name="email" class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_email"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_mobile" class="form-label">Mobile</label>
+                            <input type="tel" id="personView_mobile" name="mobile" class="form-control"
+                                placeholder="+27xxxxxxxxx or 0xxxxxxxxx" readonly />
+                            <div class="invalid-feedback" data-for="personView_mobile"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_home" class="form-label">Home Phone</label>
+                            <input type="tel" id="personView_home" name="home" class="form-control"
+                                placeholder="+27xxxxxxxxx or 0xxxxxxxxx" readonly />
+                            <div class="invalid-feedback" data-for="personView_home"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_work" class="form-label">Work Phone</label>
+                            <input type="tel" id="personView_work" name="work" class="form-control"
+                                placeholder="+27xxxxxxxxx or 0xxxxxxxxx" readonly />
+                            <div class="invalid-feedback" data-for="personView_work"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Residential Address -->
+                <fieldset class="fieldset">
+                    <legend>Residential Address</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_addr_line1" class="form-label">Address Line 1</label>
+                            <input type="text" id="personView_addr_line1" name="addr_line1" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_line1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_line2" class="form-label">Address Line 2</label>
+                            <input type="text" id="personView_addr_line2" name="addr_line2" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_line2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_unit" class="form-label">Unit</label>
+                            <input type="text" id="personView_addr_unit" name="addr_unit" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_unit"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_complex" class="form-label">Complex</label>
+                            <input type="text" id="personView_addr_complex" name="addr_complex" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_complex"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_streetNumber" class="form-label">Street Number</label>
+                            <input type="text" id="personView_addr_streetNumber" name="addr_streetNumber"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_streetNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_streetName" class="form-label">Street Name</label>
+                            <input type="text" id="personView_addr_streetName" name="addr_streetName"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_streetName"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_suburb" class="form-label">Suburb</label>
+                            <input type="text" id="personView_addr_suburb" name="addr_suburb" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_suburb"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_city" class="form-label">City</label>
+                            <input type="text" id="personView_addr_city" name="addr_city" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_city"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_municipality" class="form-label">Municipality</label>
+                            <input type="text" id="personView_addr_municipality" name="addr_municipality"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_municipality"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_province" class="form-label">Province</label>
+                            <select id="personView_addr_province" name="addr_province" class="form-control" disabled>
+                                <option value="">Select province</option>
+                                <option>Eastern Cape</option>
+                                <option>Free State</option>
+                                <option>Gauteng</option>
+                                <option>KwaZulu-Natal</option>
+                                <option>Limpopo</option>
+                                <option>Mpumalanga</option>
+                                <option>Northern Cape</option>
+                                <option>North West</option>
+                                <option>Western Cape</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_addr_province"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_addr_postalCode" class="form-label">Postal Code</label>
+                            <input type="text" id="personView_addr_postalCode" name="addr_postalCode"
+                                class="form-control" inputmode="numeric" maxlength="4" readonly />
+                            <div class="invalid-feedback" data-for="personView_addr_postalCode"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Postal Address -->
+                <fieldset class="fieldset">
+                    <legend>Postal Address</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_postal_line1" class="form-label">Address Line 1</label>
+                            <input type="text" id="personView_postal_line1" name="postal_line1" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_line1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_line2" class="form-label">Address Line 2</label>
+                            <input type="text" id="personView_postal_line2" name="postal_line2" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_line2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_unit" class="form-label">Unit</label>
+                            <input type="text" id="personView_postal_unit" name="postal_unit" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_unit"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_complex" class="form-label">Complex</label>
+                            <input type="text" id="personView_postal_complex" name="postal_complex" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_complex"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_streetNumber" class="form-label">Street Number</label>
+                            <input type="text" id="personView_postal_streetNumber" name="postal_streetNumber"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_streetNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_streetName" class="form-label">Street Name</label>
+                            <input type="text" id="personView_postal_streetName" name="postal_streetName"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_streetName"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_suburb" class="form-label">Suburb</label>
+                            <input type="text" id="personView_postal_suburb" name="postal_suburb" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_suburb"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_city" class="form-label">City</label>
+                            <input type="text" id="personView_postal_city" name="postal_city" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_city"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_municipality" class="form-label">Municipality</label>
+                            <input type="text" id="personView_postal_municipality" name="postal_municipality"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_municipality"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_province" class="form-label">Province</label>
+                            <select id="personView_postal_province" name="postal_province" class="form-control"
+                                disabled>
+                                <option value="">Select province</option>
+                                <option>Eastern Cape</option>
+                                <option>Free State</option>
+                                <option>Gauteng</option>
+                                <option>KwaZulu-Natal</option>
+                                <option>Limpopo</option>
+                                <option>Mpumalanga</option>
+                                <option>Northern Cape</option>
+                                <option>North West</option>
+                                <option>Western Cape</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_postal_province"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_postal_postalCode" class="form-label">Postal Code</label>
+                            <input type="text" id="personView_postal_postalCode" name="postal_postalCode"
+                                class="form-control" inputmode="numeric" maxlength="4" readonly />
+                            <div class="invalid-feedback" data-for="personView_postal_postalCode"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Demographics -->
+                <fieldset class="fieldset">
+                    <legend>Demographics</legend>
+                    <div class="form-grid">
+                        <!-- Priority fields in requested order: Nationality, ID Number, Birth Date, Gender -->
+                        <div class="form-group">
+                            <label for="personView_demographics_nationality" class="form-label">Nationality</label>
+                            <input type="text" id="personView_demographics_nationality" name="demographics_nationality"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_demographics_nationality"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_demographics_idNumber" class="form-label">ID Number</label>
+                            <input type="text" id="personView_demographics_idNumber" name="demographics_idNumber"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_demographics_idNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_demographics_birthDate" class="form-label">Birth Date</label>
+                            <input type="date" id="personView_demographics_birthDate" name="demographics_birthDate"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_demographics_birthDate"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_demographics_gender" class="form-label">Gender</label>
+                            <select id="personView_demographics_gender" name="demographics_gender" class="form-control"
+                                disabled>
+                                <option value="">Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                                <option>Prefer not to say</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_demographics_gender"></div>
+                        </div>
+
+                        <!-- Remaining demographic fields -->
+                        <div class="form-group">
+                            <label for="personView_demographics_race" class="form-label">Race</label>
+                            <select id="personView_demographics_race" name="demographics_race" class="form-control"
+                                disabled>
+                                <option value="">Select race</option>
+                                <option>Black African</option>
+                                <option>Coloured</option>
+                                <option>Indian/Asian</option>
+                                <option>White</option>
+                                <option>Other</option>
+                                <option>Prefer not to say</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_demographics_race"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_demographics_maritalStatus" class="form-label">Marital Status</label>
+                            <select id="personView_demographics_maritalStatus" name="demographics_maritalStatus"
+                                class="form-control" disabled>
+                                <option value="">Select marital status</option>
+                                <option>Single</option>
+                                <option>Married</option>
+                                <option>Divorced</option>
+                                <option>Widowed</option>
+                                <option>Separated</option>
+                                <option>Customary Union</option>
+                                <option>Life Partner</option>
+                                <option>Unknown</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_demographics_maritalStatus"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_demographics_dependentsCount" class="form-label">Number of
+                                Dependents</label>
+                            <input type="number" id="personView_demographics_dependentsCount"
+                                name="demographics_dependentsCount" class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_demographics_dependentsCount"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_demographics_passportNumber" class="form-label">Passport
+                                Number</label>
+                            <input type="text" id="personView_demographics_passportNumber"
+                                name="demographics_passportNumber" class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_demographics_passportNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_demographics_homeLanguage" class="form-label">Home Language</label>
+                            <input type="text" id="personView_demographics_homeLanguage"
+                                name="demographics_homeLanguage" class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_demographics_homeLanguage"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Employment Information -->
+                <fieldset class="fieldset">
+                    <legend>Employment Information</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_employment_status" class="form-label">Employment Status</label>
+                            <select id="personView_employment_status" name="employment_status" class="form-control"
+                                disabled>
+                                <option value="">Select status</option>
+                                <option>Employed</option>
+                                <option>Unemployed</option>
+                                <option>Self-employed</option>
+                                <option>Student</option>
+                                <option>Retired</option>
+                                <option>Unknown</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_employment_status"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_employment_company" class="form-label">Company</label>
+                            <input type="text" id="personView_employment_company" name="employment_company"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_employment_company"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_employment_position" class="form-label">Position</label>
+                            <input type="text" id="personView_employment_position" name="employment_position"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_employment_position"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_employment_industry" class="form-label">Industry</label>
+                            <input type="text" id="personView_employment_industry" name="employment_industry"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_employment_industry"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_employment_monthlyIncome" class="form-label">Monthly Income</label>
+                            <input type="text" id="personView_employment_monthlyIncome" name="employment_monthlyIncome"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_employment_monthlyIncome"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Education Information -->
+                <fieldset class="fieldset">
+                    <legend>Education Information</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_education_level" class="form-label">Education Level</label>
+                            <select id="personView_education_level" name="education_level" class="form-control"
+                                disabled>
+                                <option value="">Select education level</option>
+                                <option>No formal education</option>
+                                <option>Primary school</option>
+                                <option>Secondary school</option>
+                                <option>Matric/Grade 12</option>
+                                <option>Certificate/Diploma</option>
+                                <option>Bachelor's degree</option>
+                                <option>Honours degree</option>
+                                <option>Master's degree</option>
+                                <option>Doctoral degree</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_education_level"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_education_institution" class="form-label">Institution</label>
+                            <input type="text" id="personView_education_institution" name="education_institution"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_education_institution"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_education_fieldOfStudy" class="form-label">Field of Study</label>
+                            <input type="text" id="personView_education_fieldOfStudy" name="education_fieldOfStudy"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_education_fieldOfStudy"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_education_graduationYear" class="form-label">Graduation Year</label>
+                            <input type="text" id="personView_education_graduationYear" name="education_graduationYear"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_education_graduationYear"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Disability Information -->
+                <fieldset class="fieldset">
+                    <legend>Disability Information</legend>
+                    <div class="form-grid">
+                        <div class="form-group checkbox">
+                            <label class="form-label">
+                                <input type="checkbox" id="personView_disability_hasDisability"
+                                    name="disability_hasDisability" disabled />
+                                Has disability
+                            </label>
+                            <div class="invalid-feedback" data-for="personView_disability_hasDisability"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_disability_type" class="form-label">Type of Disability</label>
+                            <input type="text" id="personView_disability_type" name="disability_type"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_disability_type"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_disability_assistanceRequired" class="form-label">Assistance
+                                Required</label>
+                            <textarea id="personView_disability_assistanceRequired" name="disability_assistanceRequired"
+                                class="form-control" rows="2" readonly></textarea>
+                            <div class="invalid-feedback" data-for="personView_disability_assistanceRequired"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Socio-Economic Information -->
+                <fieldset class="fieldset">
+                    <legend>Socio-Economic Information</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_taxNumber" class="form-label">SARS Tax Number</label>
+                            <input type="text" id="personView_taxNumber" name="taxNumber" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_taxNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_uifNumber" class="form-label">UIF Number</label>
+                            <input type="text" id="personView_uifNumber" name="uifNumber" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_uifNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_medicalAidNumber" class="form-label">Medical Aid Number</label>
+                            <input type="text" id="personView_medicalAidNumber" name="medicalAidNumber"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_medicalAidNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_employmentStatus" class="form-label">Employment Status</label>
+                            <select id="personView_employmentStatus" name="employmentStatus" class="form-control"
+                                disabled>
+                                <option value="">Select status</option>
+                                <option>Employed</option>
+                                <option>Unemployed</option>
+                                <option>Self-employed</option>
+                                <option>Student</option>
+                                <option>Retired</option>
+                                <option>Unknown</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personView_employmentStatus"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_employer_name" class="form-label">Employer Name</label>
+                            <input type="text" id="personView_employer_name" name="employer_name" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_employer_name"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_employer_employeeNumber" class="form-label">Employee Number</label>
+                            <input type="text" id="personView_employer_employeeNumber" name="employer_employeeNumber"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_employer_employeeNumber"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Next of Kin -->
+                <fieldset class="fieldset">
+                    <legend>Next of Kin</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personView_nextOfKin_name" class="form-label">Name</label>
+                            <input type="text" id="personView_nextOfKin_name" name="nextOfKin_name" class="form-control"
+                                readonly />
+                            <div class="invalid-feedback" data-for="personView_nextOfKin_name"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_nextOfKin_relationship" class="form-label">Relationship</label>
+                            <input type="text" id="personView_nextOfKin_relationship" name="nextOfKin_relationship"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_nextOfKin_relationship"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_nextOfKin_phoneNumber" class="form-label">Phone Number</label>
+                            <input type="tel" id="personView_nextOfKin_phoneNumber" name="nextOfKin_phoneNumber"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_nextOfKin_phoneNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personView_nextOfKin_email" class="form-label">Email</label>
+                            <input type="email" id="personView_nextOfKin_email" name="nextOfKin_email"
+                                class="form-control" readonly />
+                            <div class="invalid-feedback" data-for="personView_nextOfKin_email"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- POPIA -->
+                <fieldset class="fieldset">
+                    <legend>POPIA Compliance</legend>
+                    <div class="form-group checkbox">
+                        <label class="form-label">
+                            <input type="checkbox" id="personView_popia_consent" name="popia_consent" disabled />
+                            Consent to process personal information
+                        </label>
+                        <div class="invalid-feedback" data-for="personView_popia_consent"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="personView_processingBasis" class="form-label">Processing Basis</label>
+                        <select id="personView_processingBasis" name="processingBasis" class="form-control" disabled>
+                            <option value="">Select basis</option>
+                            <option value="consent">Consent</option>
+                            <option value="contract">Contract</option>
+                            <option value="legal_obligation">Legal Obligation</option>
+                            <option value="legitimate_interest">Legitimate Interest</option>
+                            <option value="vital_interest">Vital Interest</option>
+                            <option value="public_task">Public Task</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="personView_processingBasis"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="personView_dataSubjectCategory" class="form-label">Data Subject Category</label>
+                        <select id="personView_dataSubjectCategory" name="dataSubjectCategory" class="form-control"
+                            disabled>
+                            <option value="">Select category</option>
+                            <option value="customer">Customer</option>
+                            <option value="employee">Employee</option>
+                            <option value="contractor">Contractor</option>
+                            <option value="student">Student</option>
+                            <option value="beneficiary">Beneficiary</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="personView_dataSubjectCategory"></div>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="close">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

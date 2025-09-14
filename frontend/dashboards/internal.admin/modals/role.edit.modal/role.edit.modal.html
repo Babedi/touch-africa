@@ -1,0 +1,69 @@
+<!-- Edit Role Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-edit-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Edit Custom Role</h2>
+                    <p class="subtitle">Update this internal custom role and its permissions.</p>
+                    <p class="subtitle"><strong>Role ID:</strong> <span id="roleEdit_roleRecordIdDisplay">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="roleEditForm" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="roleEdit_roleEditName">Role Name *</label>
+                    <input id="roleEdit_roleEditName" name="roleName" class="form-control" required />
+                    <div class="invalid-feedback" data-for="roleName"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="roleEdit_roleEditCode">Role Code *</label>
+                    <input id="roleEdit_roleEditCode" name="roleCode" class="form-control"
+                        placeholder="UPPER_SNAKE_CASE" required />
+                    <div class="invalid-feedback" data-for="roleCode"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="roleEdit_roleEditDescription">Description *</label>
+                    <textarea id="roleEdit_roleEditDescription" name="description" class="form-control" rows="3"
+                        placeholder="Purpose of this role"></textarea>
+                    <div class="invalid-feedback" data-for="description"></div>
+                </div>
+
+                <!-- Permissions Section -->
+                <fieldset class="fieldset" data-permissions-fieldset aria-live="polite">
+                    <legend>Permissions</legend>
+                    <div class="small text-muted">Select one or more permissions for this role.</div>
+
+                    <!-- Quick Actions -->
+                    <div class="permission-quick-actions">
+                        <label class="perm-item">
+                            <input type="checkbox" id="roleEdit_roleEditAllAccessCheckbox" name="permissions[]"
+                                value="all.access" />
+                            <span>All Access (Super Admin)</span>
+                        </label>
+                        <small class="text-muted">
+                            Grant complete system access. This overrides all other permissions.
+                        </small>
+                    </div>
+
+                    <!-- Permission modules will be injected here directly (no intermediate container) -->
+                    <div class="loading-permissions text-muted">Loading permissions…</div>
+                    <div class="invalid-feedback" data-for="permissions"></div>
+                </fieldset>
+
+                <div class="form-group checkbox">
+                    <label class="form-label">
+                        <input type="checkbox" id="roleEdit_roleEditIsActive" name="isActive" checked /> Active
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Role</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

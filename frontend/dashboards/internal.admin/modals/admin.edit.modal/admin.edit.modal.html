@@ -1,0 +1,71 @@
+<!-- Edit Service Admin Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-edit-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Edit Admin</h2>
+                    <p class="subtitle">Modify admin details, roles, and account status.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="adminEdit_recordIdDisplay">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="adminEditForm" novalidate>
+                <input type="hidden" id="adminEdit_adminId" name="adminId" />
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="adminEdit_personId" class="form-label">Person</label>
+                        <input type="text" id="adminEdit_personId" name="personId" class="form-control" readonly />
+                        <div class="invalid-feedback" data-for="adminEdit_personId"></div>
+                        <small class="form-text text-muted">The person assigned admin access (cannot be
+                            changed).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminEdit_roles" class="form-label">Roles</label>
+                        <select id="adminEdit_roles" name="roles" class="form-control" multiple required>
+                        </select>
+                        <div class="invalid-feedback" data-for="adminEdit_roles"></div>
+                        <small class="form-text text-muted">
+                            <strong>Hold Ctrl (Windows) or Cmd (Mac)</strong> to select multiple roles.
+                            Select one or more roles to grant permissions.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminEdit_email" class="form-label">Admin Email</label>
+                        <input type="email" id="adminEdit_email" name="email" class="form-control" readonly />
+                        <div class="invalid-feedback" data-for="adminEdit_email"></div>
+                        <small class="form-text text-muted">TouchAfrica email address (cannot be changed).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminEdit_password" class="form-label">Password</label>
+                        <input type="password" id="adminEdit_password" name="password" class="form-control"
+                            autocomplete="new-password" />
+                        <div class="invalid-feedback" data-for="adminEdit_password"></div>
+                        <small class="form-text text-muted">Minimum 8 characters. Leave blank to keep current
+                            password.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminEdit_isActive" class="form-label">Active</label>
+                        <select id="adminEdit_isActive" name="isActive" class="form-control">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="adminEdit_isActive"></div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

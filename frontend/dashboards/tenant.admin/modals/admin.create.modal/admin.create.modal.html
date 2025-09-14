@@ -1,0 +1,75 @@
+<!-- Create Tenant Root Admin Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-create-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Add Tenant Root Admin</h2>
+                    <p class="subtitle">Create a root admin for this tenant. Requires an existing PERSON record.</p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="tenantAdminCreateForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="adminCreate_adminTenantId" class="form-label">Tenant</label>
+                        <select id="adminCreate_adminTenantId" name="tenantId" class="form-control" required>
+                            <option value="">Select a tenant...</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="tenantId"></div>
+                        <small class="form-text text-muted">Choose the tenant context for this admin.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_personId" class="form-label">Person (PERSON ID)</label>
+                        <select id="adminCreate_personId" name="personId" class="form-control" required>
+                            <option value="">Select a person...</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="adminCreate_personId"></div>
+                        <small class="form-text text-muted">Person must exist (format PERSON1234567890123).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_adminRoles" class="form-label">Roles</label>
+                        <select id="adminCreate_adminRoles" name="roles" class="form-control" multiple required></select>
+                        <div class="invalid-feedback" data-for="roles"></div>
+                        <small class="form-text text-muted">Select one or more roles (Ctrl/Cmd for
+                            multi-select).</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_adminEmail" class="form-label">Admin Email</label>
+                        <input type="email" id="adminCreate_adminEmail" name="email" class="form-control"
+                            placeholder="user@touchafrica.co.za" required />
+                        <div class="invalid-feedback" data-for="adminCreate_email"></div>
+                        <small class="form-text text-muted">Must end with @touchafrica.co.za</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_adminPassword" class="form-label">Temporary Password</label>
+                        <input type="password" id="adminCreate_adminPassword" name="password" class="form-control"
+                            autocomplete="new-password" required />
+                        <div class="invalid-feedback" data-for="password"></div>
+                        <small class="form-text text-muted">Minimum 8 characters.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_adminIsActive" class="form-label">Active</label>
+                        <select id="adminCreate_adminIsActive" name="isActive" class="form-control">
+                            <option value="true" selected>Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="isActive"></div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Root Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,171 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-wiser dependency directory (https://github.com/Marak/node-wiser)
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Logs
+logs
+*.log
+
+# Editor directories and files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+*~
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Firebase
+.firebase/
+.firebaserc
+firebase-debug.log
+firestore-debug.log
+
+# Secrets and credentials
+secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+service-account.json
+
+# Test outputs
+test-results/
+playwright-report/
+coverage/
+
+# Build outputs
+build/
+dist/
+public/build/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuration files that may contain sensitive data
+config/production.js
+config/local.js
+
+# Screenshot and image artifacts from testing
+screenshots/
+modal-screenshots/
+*.png
+*.jpg
+*.jpeg
+*.gif
+!frontend/shared/assets/**/*.png
+!frontend/shared/assets/**/*.jpg
+!frontend/shared/assets/**/*.jpeg
+!frontend/shared/assets/**/*.gif
+
+# Generated files
+*.generated.js
+*.generated.ts
+*.map
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Sample data files (if they contain sensitive information)
+*samples*.json
+tenant-person-samples-*.json
+
+# Error images and debug files
+error-debug.png
+test-error.png

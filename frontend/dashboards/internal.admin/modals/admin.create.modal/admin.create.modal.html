@@ -1,0 +1,71 @@
+<!-- Create Service Admin Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-create-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Add New Admin</h2>
+                    <p class="subtitle">Create a service admin account and assign roles.</p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="adminCreateForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="adminCreate_personId" class="form-label">Person *</label>
+                        <select id="adminCreate_personId" name="personId" class="form-control" required>
+                            <option value="">Select a person...</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="adminCreate_personId"></div>
+                        <small class="form-text text-muted">Select the person to assign admin access to.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_roles" class="form-label">Roles *</label>
+                        <select id="adminCreate_roles" name="roles" class="form-control" multiple required>
+                        </select>
+                        <div class="invalid-feedback" data-for="adminCreate_roles"></div>
+                        <small class="form-text text-muted">
+                            <strong>Hold Ctrl (Windows) or Cmd (Mac)</strong> to select multiple roles.
+                            Select one or more roles to grant permissions.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_email" class="form-label">Admin Email *</label>
+                        <input type="email" id="adminCreate_email" name="email" class="form-control"
+                            placeholder="user@touchafrica.co.za" required />
+                        <div class="invalid-feedback" data-for="adminCreate_email"></div>
+                        <small class="form-text text-muted">Must be a TouchAfrica email address.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_password" class="form-label">Temporary Password *</label>
+                        <input type="password" id="adminCreate_password" name="password" class="form-control"
+                            autocomplete="new-password" required />
+                        <div class="invalid-feedback" data-for="adminCreate_password"></div>
+                        <small class="form-text text-muted">Minimum 8 characters. The user can change it after first
+                            login.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminCreate_isActive" class="form-label">Active</label>
+                        <select id="adminCreate_isActive" name="isActive" class="form-control">
+                            <option value="true" selected>Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="adminCreate_isActive"></div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

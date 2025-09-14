@@ -1,0 +1,51 @@
+<!-- View Role Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-view-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>View Role</h2>
+                    <p class="subtitle">View details for this role.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="roleView_recordIdDisplay">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="roleViewForm">
+                <div class="form-group">
+                    <label class="form-label" for="view_roleName">Role Name</label>
+                    <input id="view_roleName" name="roleName" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="view_roleCode">Role Code</label>
+                    <input id="view_roleCode" name="roleCode" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="view_description">Description</label>
+                    <textarea id="view_description" name="description" class="form-control" rows="3"
+                        readonly></textarea>
+                </div>
+
+                <!-- Permissions Section -->
+                <fieldset class="fieldset">
+                    <legend>Permissions</legend>
+                    <div class="permissions-container">
+                        <div id="view_rolePermissions" class="permissions-list"></div>
+                        <div class="permissions-counter" id="view_permissionsCounter">0 permissions</div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <label class="form-label" for="view_isActive">Status</label>
+                    <input type="text" id="view_isActive" class="form-control" readonly />
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="close">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

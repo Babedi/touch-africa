@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TouchAfrica - Modals Utilities</title>
+
+    <!-- Include utility scripts globally for all modals -->
+    <script src="/frontend/shared/utils/security.utils.js"></script>
+    <script src="/frontend/shared/utils/validation.utils.js"></script>
+    <script src="/frontend/shared/utils/modal.utils.js"></script>
+
+    <style>
+        /* Global modal security indicator styles */
+        .modal-security-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            opacity: 0.8;
+        }
+
+        .modal-security-indicator::before {
+            content: "🔒 SECURED";
+        }
+
+        /* Validation error styling improvements */
+        .asterisk-highlight {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .is-invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+
+        .invalid-feedback {
+            display: block;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 0.875em;
+            color: #dc3545;
+        }
+
+        /* Loading overlay styles */
+        .modal-loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            z-index: 1050;
+        }
+
+        .modal-loading-overlay .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Global initialization script for modal utilities
+        (function () {
+            // Ensure utilities are available
+            if (!window.SecurityUtils || !window.ValidationUtils || !window.ModalUtils) {
+                console.warn('Modal utilities not fully loaded. Some security features may not be available.');
+                return;
+            }
+
+            console.log('✅ Modal utilities loaded successfully');
+            console.log('🔒 Security functions available:', Object.keys(window.SecurityUtils));
+            console.log('✅ Validation functions available:', Object.keys(window.ValidationUtils));
+            console.log('⚙️ Modal management functions available:', Object.keys(window.ModalUtils));
+
+            // Add security indicators to all modals
+            function addSecurityIndicators() {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (!modal.querySelector('.modal-security-indicator')) {
+                        const indicator = document.createElement('div');
+                        indicator.className = 'modal-security-indicator';
+                        indicator.title = 'This modal uses security utilities to prevent XSS attacks';
+
+                        const modalContent = modal.querySelector('.modal-content');
+                        if (modalContent) {
+                            modalContent.style.position = 'relative';
+                            modalContent.appendChild(indicator);
+                        }
+                    }
+                });
+            }
+
+            // Monitor for new modals being added
+            const observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(function (node) {
+                            if (node.nodeType === 1) { // Element node
+                                if (node.classList && node.classList.contains('modal')) {
+                                    addSecurityIndicators();
+                                } else if (node.querySelector && node.querySelector('.modal')) {
+                                    addSecurityIndicators();
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+            // Add indicators to existing modals
+            document.addEventListener('DOMContentLoaded', addSecurityIndicators);
+
+            // Global error handler for modal operations
+            window.addEventListener('error', function (e) {
+                if (e.error && e.error.message && e.error.message.includes('modal')) {
+                    console.error('Modal error detected:', e.error);
+                }
+            });
+
+            // Global validation setup for forms
+            document.addEventListener('DOMContentLoaded', function () {
+                // Setup real-time validation for all forms in modals
+                const modalForms = document.querySelectorAll('.modal form');
+                modalForms.forEach(form => {
+                    if (window.ValidationUtils && window.ValidationUtils.setupRealtimeValidation) {
+                        window.ValidationUtils.setupRealtimeValidation(form);
+                    }
+                });
+            });
+
+            console.log('🚀 Modal security and validation system initialized');
+        })();
+    </script>
+</body>
+
+</html>

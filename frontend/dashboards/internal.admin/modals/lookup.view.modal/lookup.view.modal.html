@@ -1,0 +1,81 @@
+<!-- View Lookup Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-view-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>View Lookup</h2>
+                    <p class="subtitle">View details for this lookup.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="lookupView_recordIdDisplay">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="lookupViewForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="view_category" class="form-label">Category</label>
+                        <select id="view_category" name="category" class="form-control" readonly disabled>
+                            <option value="">—</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="view_subCategory" class="form-label">Sub-Category</label>
+                        <select id="view_subCategory" name="subCategory" class="form-control" readonly disabled>
+                            <option value="">—</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Items</label>
+                    <div class="items-container">
+                        <div class="items-list" id="view_itemsList"></div>
+                        <small class="form-text text-muted">Items associated with this lookup.</small>
+                        <div class="items-counter" id="view_itemsCounter">0 items</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="view_description" class="form-label">Description</label>
+                    <textarea id="view_description" name="description" class="form-control" rows="3"
+                        readonly></textarea>
+                </div>
+
+                <!-- Additional metadata -->
+                <div class="form-group">
+                    <label for="view_active" class="form-label">Status</label>
+                    <input type="text" id="view_active" class="form-control" readonly />
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="view_createdBy" class="form-label">Created By</label>
+                        <input type="text" id="view_createdBy" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="view_createdAt" class="form-label">Created At</label>
+                        <input type="text" id="view_createdAt" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="view_updatedBy" class="form-label">Updated By</label>
+                        <input type="text" id="view_updatedBy" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="view_updatedAt" class="form-label">Updated At</label>
+                        <input type="text" id="view_updatedAt" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="close">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

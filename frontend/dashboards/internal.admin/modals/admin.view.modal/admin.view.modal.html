@@ -1,0 +1,66 @@
+<!-- View Service Admin Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-view-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>View Admin</h2>
+                    <p class="subtitle">Read-only view of the service admin details.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="adminView_recordIdDisplay">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="adminViewForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="view_personId" class="form-label">Person</label>
+                        <input type="text" id="view_personId" name="personId" class="form-control" readonly />
+                        <small class="form-text text-muted">The person assigned admin access.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="view_roles" class="form-label">Roles</label>
+                        <div id="view_roles" class="roles-display"></div>
+                        <small class="form-text text-muted">Assigned roles and permissions.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="view_email" class="form-label">Admin Email</label>
+                        <input type="email" id="view_email" name="email" class="form-control" readonly />
+                        <small class="form-text text-muted">TouchAfrica email address for admin access.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="view_isActive" class="form-label">Status</label>
+                        <input type="text" id="view_isActive" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="view_lastLogin" class="form-label">Last Login</label>
+                        <input type="text" id="view_lastLogin" class="form-control" readonly />
+                        <small class="form-text text-muted">Most recent login activity.</small>
+                    </div>
+                </div>
+
+                <!-- Additional metadata -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="view_created" class="form-label">Created</label>
+                        <input type="text" id="view_created" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="view_modified" class="form-label">Last Modified</label>
+                        <input type="text" id="view_modified" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="close">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

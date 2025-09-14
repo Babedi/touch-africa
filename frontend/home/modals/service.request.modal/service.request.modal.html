@@ -1,0 +1,60 @@
+<!-- Service Request Modal -->
+<div class="modal-content">
+    <button class="modal-close" aria-label="Close">&times;</button>
+
+    <div class="modal-header">
+        <h2>
+            <div class="logo-icon">
+                <img src="./assets/logo.png" alt="TouchAfrica Logo">
+            </div>
+            Service Request
+        </h2>
+    </div>
+
+    <div class="modal-body">
+        <form id="serviceReq_serviceRequestForm" novalidate>
+            <select id="serviceReq_title" name="title" class="sr-title-select" aria-label="Title" required>
+                <option value="">Select Title</option>
+            </select>
+            <div class="error-message" data-for="title"></div>
+
+            <div class="form-row">
+                <input type="text" id="serviceReq_names" name="names" placeholder="First name" required minlength="3"
+                    maxlength="50" />
+                <input type="text" id="serviceReq_surname" name="surname" placeholder="Last name" required minlength="3"
+                    maxlength="50" />
+            </div>
+            <div class="error-row">
+                <div class="error-message" data-for="names"></div>
+                <div class="error-message" data-for="surname"></div>
+            </div>
+
+            <input type="email" id="serviceReq_email" name="contactInfo.email" placeholder="Email" required />
+            <div class="error-message" data-for="contactInfo.email"></div>
+
+            <input type="tel" id="serviceReq_phone" name="contactInfo.phoneNumber" placeholder="Phone number" required
+                minlength="10" maxlength="13" />
+            <div class="error-message" data-for="contactInfo.phoneNumber"></div>
+
+            <input type="text" id="serviceReq_company" name="company" placeholder="Company (optional)" maxlength="50" />
+            <div class="error-message" data-for="company"></div>
+
+            <input type="text" id="serviceReq_role" name="role" placeholder="Role (optional)" maxlength="50" />
+            <div class="error-message" data-for="role"></div>
+
+            <textarea id="serviceReq_message" name="message" placeholder="Describe your issue or request..." required
+                minlength="3" maxlength="200" rows="4"></textarea>
+            <div class="error-message" data-for="message"></div>
+
+            <!-- Hidden fields for required schema -->
+            <input type="hidden" name="typeOfUser" value="visitor" />
+            <input type="hidden" name="messageRelationTo" value="support" />
+
+            <button type="submit" class="btn-submit">Submit Request</button>
+        </form>
+
+        <div class="modal-footer-text">
+            Need immediate help? <a href="tel:+27123456789">Call us</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<section class="content-section" id="section-roles">
+    <h1>Manage Roles</h1>
+    <div class="table-controls">
+        <div class="search-box">
+            <input class="search-input" placeholder="Search roles..." />
+            <button class="btn-clear">Clear</button>
+        </div>
+        <div class="filters">
+            <select class="filter-select">
+                <option>All Statuses</option>
+                <option>Active</option>
+                <option>Disabled</option>
+            </select>
+            <button class="btn btn-secondary">Reset Filters</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Roles</h3>
+            <div class="table-actions">
+                <button class="btn btn-primary"><i class="fas fa-plus"></i> New Role</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Users</th>
+                        <th>Permissions</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Administrator</td>
+                        <td>4</td>
+                        <td class="text-wrap">All access</td>
+                        <td><span class="badge badge-success">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Manager</td>
+                        <td>12</td>
+                        <td class="text-wrap">Approve, Edit, View</td>
+                        <td><span class="badge badge-success">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Viewer</td>
+                        <td>58</td>
+                        <td class="text-wrap">View only</td>
+                        <td><span class="badge badge-secondary">Disabled</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

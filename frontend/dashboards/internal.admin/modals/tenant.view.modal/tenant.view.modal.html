@@ -1,0 +1,53 @@
+<!-- View Tenant Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-view-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>View Tenant</h2>
+                    <p class="subtitle">Read-only view of the tenant details.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="tenantView_tenantRecordId">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="tenantViewForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tenant_name" class="form-label">Tenant Name</label>
+                        <input type="text" id="tenant_name" name="tenant_name" class="form-control" readonly />
+                        <div class="invalid-feedback" data-for="tenant_name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenant_email" class="form-label">Contact Email</label>
+                        <input type="email" id="tenant_email" name="tenant_email" class="form-control" readonly />
+                        <div class="invalid-feedback" data-for="tenant_email"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenant_phone" class="form-label">Contact Phone</label>
+                        <input type="tel" id="tenant_phone" name="tenant_phone" class="form-control" readonly />
+                        <div class="invalid-feedback" data-for="tenant_phone"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenant_active" class="form-label">Active</label>
+                        <input type="text" id="tenant_active" name="tenant_active" class="form-control" readonly />
+                        <div class="invalid-feedback" data-for="tenant_active"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenant_created" class="form-label">Created</label>
+                        <input type="text" id="tenant_created" name="tenant_created" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="tenant_updated" class="form-label">Updated</label>
+                        <input type="text" id="tenant_updated" name="tenant_updated" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="close">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

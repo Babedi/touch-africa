@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TouchAfrica | tenant Admin Dashboard</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/shared/styles/theme.css" />
+    <link rel="stylesheet" href="/shared/styles/base.css" />
+    <link rel="stylesheet" href="/shared/styles/layout.css" />
+    <link rel="stylesheet" href="/shared/styles/components.css" />
+    <link rel="stylesheet" href="/shared/styles/forms.css" />
+    <link rel="stylesheet" href="/shared/styles/tables.css" />
+    <link rel="stylesheet" href="/shared/styles/modals.css" />
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <img src="/assets/logo.png" alt="Logo" class="sidebar-logo" />
+                <h2>TouchAfrica</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active" data-section="dashboard"><i
+                        class="fas fa-gauge"></i><span>Dashboard</span></a>
+                <a href="#roles" class="nav-link" data-section="roles"><i class="fas fa-user-gear"></i><span>Manage
+                        Roles</span></a>
+                <a href="#settings" class="nav-link" data-section="settings"><i
+                        class="fas fa-gear"></i><span>Settings</span></a>
+            </nav>
+        </aside>
+        <!-- Mobile overlay for sidebar popup -->
+        <div id="sidebarOverlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+        <div class="main-container">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="icon-button" title="Toggle sidebar"><i
+                            class="fas fa-bars"></i></button>
+                </div>
+                <div class="header-right">
+                    <button id="themeToggle" class="icon-button" title="Toggle theme" aria-pressed="false">
+                        <i id="themeToggleIcon" class="fas fa-sun"></i>
+                    </button>
+                    <button class="icon-button" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <button id="userButton" class="user-button" title="Account">
+                        <img class="avatar" src="https://i.pravatar.cc/40?u=touchafrica" alt="User avatar" />
+                        <span class="user-meta">
+                            <span class="user-name">-</span>
+                            <span class="user-role">-</span>
+                        </span>
+                    </button>
+                    <button id="logoutButton" class="icon-button" title="Logout">
+                        <i class="fas fa-right-from-bracket"></i>
+                    </button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div id="pageRoot"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Load utilities for modals -->
+    <script src="../../shared/utils/security.utils.js"></script>
+    <script src="../../shared/utils/modal.utils.js"></script>
+    <script src="../../shared/utils/validation.utils.js"></script>
+    <script src="./dashboard.js" defer></script>
+    <script>
+        (function () {
+            function doRedirect() { window.location.href = "/"; }
+            function clearSession() {
+                try { localStorage.removeItem("token"); } catch { }
+                try { localStorage.removeItem("userRole"); } catch { }
+                try { localStorage.removeItem("user"); } catch { }
+            }
+            async function callLogout() {
+                const role = localStorage.getItem("userRole");
+                const token = localStorage.getItem("token");
+                const map = {
+                    internal_admin: "/internal/admins/logout",
+                    tenant_admin: "/external/tenant-admins/logout",
+                    tenant_user: "/external/tenant-users/logout",
+                };
+                const endpoint = map[role];
+                if (!endpoint) return;
+                try {
+                    await fetch(endpoint, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                        },
+                    });
+                } catch { }
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+                const btn = document.getElementById("logoutButton");
+                if (!btn) return;
+                btn.addEventListener("click", async function () {
+                    try { await callLogout(); } finally { clearSession(); doRedirect(); }
+                });
+            });
+        })();
+    </script>
+
+    <!-- Account Modal -->
+    <div id="accountModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Account</h4>
+                    <button class="modal-close" data-close-modal aria-label="Close">×</button>
+                </div>
+                <div class="modal-body">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <img class="avatar" src="https://i.pravatar.cc/64?u=touchafrica" alt="User avatar" />
+                        <div>
+                            <div class="user-name">-</div>
+                            <div class="user-role">-</div>
+                            <div class="text-muted" style="font-size:0.85rem;">alex.johnson@example.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-close-modal>Close</button>
+                    <button class="btn btn-primary">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

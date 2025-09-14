@@ -1,0 +1,71 @@
+<section class="content-section page-roles" id="section-roles">
+    <!-- Actions column styles centralized in shared/styles/tables.css -->
+    <h1>Manage Roles</h1>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Roles</h3>
+            <p class="stat-value" id="roles-total">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Standard Roles</h3>
+            <p class="stat-value" id="roles-standard">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Custom Roles</h3>
+            <p class="stat-value" id="roles-custom">—</p>
+        </div>
+    </div>
+    <div class="table-controls no-wrap">
+        <div class="search-box">
+            <input class="search-input form-control" placeholder="Search roles..." />
+            <button class="btn-clear">Clear</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Roles</h3>
+            <div class="table-actions">
+                <button type="button" class="btn btn-primary btn-new-role"><i class="fas fa-plus"></i> New Role</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th data-sort="roleName,roleCode">Role Name</th>
+                        <th data-sort="description">Description</th>
+                        <th data-sort="isSystem">Type</th>
+                        <th data-sort="permissions">Permissions</th>
+                        <th data-sort="isActive,status">Status</th>
+                        <th class="no-wrap actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="roles-tbody">
+                    <tr>
+                        <td colspan="6">Loading…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="roles-page-size" class="form-label">Rows per page</label>
+                <select id="roles-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="roles-page-info">Page 1</div>
+            <div class="pager">
+                <button id="roles-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="roles-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="roles-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="roles-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/frontend/dashboards/internal.admin/pages/roles/roles.js"></script>

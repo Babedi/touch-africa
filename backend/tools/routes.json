@@ -1,0 +1,815 @@
+{
+  "count": 162,
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/external/tenant-admins/login",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenant-admins/logout",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-admins/me",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenant-admins/:tenantId",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-admins/:tenantId/:id",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/external/tenant-admins/:tenantId/:id",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/external/tenant-admins/:tenantId/:id",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/external/tenant-admins/:tenantId/:id",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-admins/:tenantId",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-admins/:tenantId/search",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenant-admins/:tenantId/bulk",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-admins/:tenantId/export",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-admins/:tenantId/stats",
+      "file": "external\\tenant.admin\\tenant.admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenant-users/login",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenant-users/logout",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenant-users",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-users",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-users/search",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenant-users/bulk",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-users/export",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-users/stats",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenant-users/:id",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/external/tenant-users/:id",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/external/tenant-users/:id",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/external/tenant-users/:id/activate",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/external/tenant-users/:id/deactivate",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/external/tenant-users/:id",
+      "file": "external\\tenant.user\\tenant.user.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/service-info",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/general/service-info",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/general/service-info",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/service-info/search",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/general/service-info/bulk",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/service-info/export",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/service-info/stats",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/service-info/ping",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/service-info/news",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/tenants",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/general/service-info/features",
+      "file": "general\\service.info\\service.info.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/admins/login",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/admins/logout",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/admins",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/admins/me",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/admins/search",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/admins/export",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/admins/stats",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/admins/bulk",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/admins",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/admins/:id",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/admins/:id",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/admins/:id",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/admins/:id",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/admins/:id/activate",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/admins/:id/deactivate",
+      "file": "internal\\admin\\admin.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/cultivar-templates",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/cultivar-templates/:id",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/cultivar-templates/:id",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/cultivar-templates/:id",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/cultivar-templates/:id",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/cultivar-templates",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/cultivar-templates/search",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/cultivar-templates/bulk",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/cultivar-templates/export",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/cultivar-templates/stats",
+      "file": "internal\\cultivar.template\\cultivar.template.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/lookups",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookups",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookups/search",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/lookups/bulk",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookups/export",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookups/stats",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookups/:id",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/lookups/:id",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/lookups/:id",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/lookups/:id",
+      "file": "internal\\lookup\\lookup.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/lookup-categories",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-categories",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-categories/search",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-categories/query",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-categories/:id",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/lookup-categories/:id",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/lookup-categories/:id",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/lookup-categories/:id",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-categories/:id/exists",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/lookup-categories/bulk",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-categories/export",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-categories/stats",
+      "file": "internal\\lookup.category\\lookup.category.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/lookup-sub-categories",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-sub-categories",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-sub-categories/search",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-sub-categories/query",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-sub-categories/:id",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/lookup-sub-categories/:id",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/lookup-sub-categories/:id",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/lookup-sub-categories/:id",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-sub-categories/:id/exists",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/lookup-sub-categories/bulk",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-sub-categories/export",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/lookup-sub-categories/stats",
+      "file": "internal\\lookup.sub.category\\lookup.sub.category.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/permissions",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/permissions",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/permissions/search",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/permissions/bulk",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/permissions/export",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/permissions/stats",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/permissions/:id",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/permissions/:id",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/permissions/:id",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/permissions/:id",
+      "file": "internal\\permission\\permission.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/persons",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/persons/search",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/persons/export",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/persons/stats",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/persons/bulk",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/persons/validate",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/persons",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/persons/:id",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/persons/:id",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/persons/:id",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/persons/:id",
+      "file": "internal\\person\\person.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/roles",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/roles/search",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/roles/export",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/roles/stats",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/roles/:id",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/roles",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/roles/bulk",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/roles/:id",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/roles/:id",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/roles/:id",
+      "file": "internal\\role\\role.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/role-mappings",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/role-mappings/search",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/role-mappings/bulk",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/role-mappings/export",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/role-mappings/stats",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/role-mappings",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/role-mappings/reload",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/role-mapping",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/role-mapping/:id",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/role-mapping/:id",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/role-mapping/:id",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/role-mapping/:roleName",
+      "file": "internal\\role.mapping\\role.mapping.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/service-requests",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/service-requests/:id",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/internal/service-requests/:id",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/internal/service-requests/:id",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/internal/service-requests/:id",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/service-requests",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/service-requests/search",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/internal/service-requests/bulk",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/service-requests/export",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/internal/service-requests/stats",
+      "file": "internal\\service.request\\service.request.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenants",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenants/search",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenants/export",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenants/stats",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "POST",
+      "path": "/external/tenants/bulk",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenants",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "GET",
+      "path": "/external/tenants/:id",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/external/tenants/:id",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "PATCH",
+      "path": "/external/tenants/:id",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "DELETE",
+      "path": "/external/tenants/:id",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/external/tenants/:id/activate",
+      "file": "internal\\tenant\\tenant.route.js"
+    },
+    {
+      "method": "PUT",
+      "path": "/external/tenants/:id/deactivate",
+      "file": "internal\\tenant\\tenant.route.js"
+    }
+  ]
+}

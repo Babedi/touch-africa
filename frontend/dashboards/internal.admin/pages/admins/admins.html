@@ -1,0 +1,72 @@
+<section class="content-section page-admins" id="section-admins">
+    <h1>Manage Admins</h1>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Admins</h3>
+            <p class="stat-value" id="admins-total">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active Admins</h3>
+            <p class="stat-value" id="admins-active">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Inactive Admins</h3>
+            <p class="stat-value" id="admins-inactive">—</p>
+        </div>
+    </div>
+    <div class="table-controls no-wrap">
+        <div class="search-box">
+            <input class="search-input form-control" placeholder="Search admins..." />
+            <button class="btn-clear">Clear</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Admins</h3>
+            <div class="table-actions">
+                <button class="btn btn-primary" data-action="create-admin"><i class="fas fa-plus"></i> New
+                    Admin</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="avatar-col">Avatar</th>
+                        <th data-sort="personalInfo.firstName" tabindex="0" aria-sort="none">Name</th>
+                        <th data-sort="personalInfo.email" tabindex="0" aria-sort="none">Email</th>
+                        <th data-sort="role">Role</th>
+                        <th data-sort="status">Status</th>
+                        <th data-sort="createdAt" tabindex="0" aria-sort="none">Created</th>
+                        <th class="actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admins-tbody">
+                    <tr>
+                        <td colspan="7">Loading…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="admins-page-size" class="form-label">Rows per page</label>
+                <select id="admins-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="admins-page-info">Page 1</div>
+            <div class="pager">
+                <button id="admins-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="admins-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="admins-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="admins-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/frontend/dashboards/internal.admin/pages/admins/admins.js"></script>

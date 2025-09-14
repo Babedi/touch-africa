@@ -1,0 +1,184 @@
+/* Nature Theme — Variables */
+:root {
+    /* Brand Colors (greens) */
+    --primary-color: #34D399;
+    /* emerald 400 */
+    --primary-dark: #059669;
+    /* emerald 600 */
+    --primary-light: #6EE7B7;
+    /* emerald 300 */
+    --accent-color: #A3E635;
+    /* lime 400 */
+    --accent-dark: #65A30D;
+    /* lime 600 */
+    --accent-light: #BEF264;
+    /* lime 300 */
+
+    /* Surfaces (dark, earthy) */
+    --bg-primary: #0B1F17;
+    /* deep forest */
+    --bg-secondary: #0F241A;
+    /* header/nav strips */
+    --bg-card: #0E221A;
+    /* cards and panels */
+    --bg-hover: #163225;
+    /* hover surface */
+
+    /* Text */
+    --text-primary: #E5E7EB;
+    /* gray-200 */
+    --text-secondary: #A1A7B3;
+    /* gray-400 */
+    --text-muted: #6B7280;
+    /* gray-500 */
+
+    /* Status */
+    --success-color: #22C55E;
+    --success-dark: #16A34A;
+    --warning-color: #F59E0B;
+    --warning-dark: #D97706;
+    --error-color: #EF4444;
+    --danger-color: var(--error-color);
+    /* alias */
+    --info-color: #0EA5E9;
+    --info-dark: #0284C7;
+
+    /* Status Background Colors */
+    --bg-success: rgba(34, 197, 94, 0.1);
+    --bg-warning: rgba(245, 158, 11, 0.1);
+    --bg-error: rgba(239, 68, 68, 0.1);
+    --bg-info: rgba(14, 165, 233, 0.1);
+
+    /* Borders & Shadows */
+    --border-color: #1A3A2C;
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.25s ease;
+    --transition-slow: 0.4s ease;
+}
+
+/* Utilities */
+body {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+/* Light Theme Overrides (activated by adding .theme-light to <body>) */
+body.theme-light {
+    /* Surfaces */
+    --bg-primary: #F8FAF9;
+    /* near-white with a hint of green warmth */
+    --bg-secondary: #FFFFFF;
+    /* header/nav strips */
+    --bg-card: #FFFFFF;
+    /* cards and panels */
+    --bg-hover: #F1F5F2;
+    /* subtle hover */
+
+    /* Text */
+    --text-primary: #0B1F17;
+    /* deep forest (inverted) */
+    --text-secondary: #2E4A3E;
+    /* muted greenish-gray */
+    --text-muted: #5B6B62;
+
+    /* Status Colors - Ensure visibility in light mode */
+    --error-color: #DC2626;
+    /* More vibrant red for light mode */
+    --success-color: #16A34A;
+    --warning-color: #CA8A04;
+    --info-color: #0284C7;
+
+    /* Status Background Colors for Light Theme */
+    --bg-success: rgba(34, 197, 94, 0.08);
+    --bg-warning: rgba(245, 158, 11, 0.08);
+    --bg-error: rgba(239, 68, 68, 0.08);
+    --bg-info: rgba(14, 165, 233, 0.08);
+
+    /* Borders & Shadows */
+    --border-color: #D8E3DC;
+    --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.08);
+    --shadow-md: 0 8px 20px rgba(16, 24, 40, 0.12);
+    --shadow-lg: 0 24px 40px rgba(16, 24, 40, 0.16);
+}
+
+.gradient-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-success {
+    color: var(--success-color);
+}
+
+.text-warning {
+    color: var(--warning-color);
+}
+
+.text-error {
+    color: var(--error-color);
+}
+
+.text-info {
+    color: var(--info-color);
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary);
+}
+
+.bg-success {
+    background-color: var(--success-color);
+}
+
+.bg-warning {
+    background-color: var(--warning-color);
+}
+
+.bg-error {
+    background-color: var(--error-color);
+}
+
+.bg-info {
+    background-color: var(--info-color);
+}

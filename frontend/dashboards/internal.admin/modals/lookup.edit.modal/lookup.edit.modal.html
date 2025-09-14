@@ -1,0 +1,69 @@
+<!-- Edit Lookup Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-edit-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Edit Lookup</h2>
+                    <p class="subtitle">Update the items and description for this lookup.</p>
+                    <p class="subtitle"><strong>Record ID:</strong> <span id="lookupEdit_recordIdDisplay">—</span></p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="lookupEditForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="edit_category" class="form-label">Category</label>
+                        <select id="edit_category" name="category" class="form-control" disabled>
+                            <option value="">—</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="category"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_subCategory" class="form-label">Sub-Category</label>
+                        <select id="edit_subCategory" name="subCategory" class="form-control" disabled>
+                            <option value="">—</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="subCategory"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Items *</label>
+                    <div class="items-container">
+                        <div class="items-list" id="edit_itemsList"></div>
+                        <div class="add-item-section">
+                            <div class="input-group">
+                                <input id="edit_newItemInput" type="text" class="form-control"
+                                    placeholder="Enter new item..." maxlength="100" />
+                                <button type="button" id="edit_addItemBtn" class="btn btn-outline">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback" data-for="items"></div>
+                        <small class="form-text text-muted">Add 1-25 items. Each item should be descriptive and
+                            unique.</small>
+                        <div class="items-counter" id="edit_itemsCounter">0/25 items</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit_description" class="form-label">Description</label>
+                    <textarea id="edit_description" name="description" class="form-control" rows="3" maxlength="200"
+                        required></textarea>
+                    <div class="invalid-feedback" data-for="description"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+                <div id="lookupEdit_lookupEditStatus" class="form-status" aria-live="polite"></div>
+            </form>
+        </div>
+    </div>
+</div>

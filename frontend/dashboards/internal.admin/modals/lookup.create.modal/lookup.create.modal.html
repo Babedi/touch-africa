@@ -1,0 +1,68 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-create-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Create Lookup</h2>
+                    <p class="subtitle">Add a new lookup with category, sub-category, and items.</p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="lookupCreateForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="lookupCreate_category" class="form-label">Category *</label>
+                        <select id="lookupCreate_category" name="category" class="form-control" required>
+                            <option value="">Select a category…</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="lookupCreate_category"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lookupCreate_subCategory" class="form-label">Sub-Category *</label>
+                        <select id="lookupCreate_subCategory" name="subCategory" class="form-control" required>
+                            <option value="">Select a sub-category…</option>
+                        </select>
+                        <div class="invalid-feedback" data-for="lookupCreate_subCategory"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Items *</label>
+                    <div class="items-container">
+                        <div class="items-list" id="lookupCreate_itemsList">
+                            <!-- Dynamic items will be inserted here -->
+                        </div>
+                        <div class="add-item-section">
+                            <div class="input-group">
+                                <input id="lookupCreate_newItemInput" type="text" class="form-control"
+                                    placeholder="Enter new item..." maxlength="100" />
+                                <button type="button" id="lookupCreate_addItemBtn" class="btn btn-outline">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback" data-for="items"></div>
+                        <small class="form-text text-muted">Add 1-25 items. Each item should be descriptive and
+                            unique.</small>
+                        <div class="items-counter" id="lookupCreate_itemsCounter">0/25 items</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lookupCreate_description" class="form-label">Description</label>
+                    <textarea id="lookupCreate_description" name="description" class="form-control" rows="3" maxlength="200"
+                        required></textarea>
+                    <div class="invalid-feedback" data-for="lookupCreate_description"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

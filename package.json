@@ -1,0 +1,43 @@
+{
+  "name": "touch-africa-api",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "seed:root": "node ./backend/setup/seed-root.js",
+    "seed:permissions": "node seed-permissions.js",
+    "seed:people": "node ./backend/setup/seed-people.js --count 50",
+    "test:search": "node ./integration/search-persons.mjs",
+    "check:modals": "node ./tools/check-modal-sizes.js",
+    "test:demo": "playwright test tests/full-frontend-demo.spec.js --workers=1",
+    "test:quick": "playwright test tests/quick-demo.spec.js --workers=1 --reporter=list"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "commander": "^14.0.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.0",
+    "firebase": "^12.1.0",
+    "firebase-admin": "^12.6.0",
+    "firestore-export-import": "^1.6.0",
+    "helmet": "^7.0.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "nocache": "^4.0.0",
+    "node-fetch": "^3.3.2",
+    "playwright": "^1.55.0",
+    "xss-clean": "^0.1.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "cross-env": "^7.0.3",
+    "jsdom": "^22.1.0"
+  }
+}

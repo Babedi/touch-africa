@@ -1,0 +1,64 @@
+/* Local Image Placeholders CSS */
+/* Provides elegant fallbacks when external images fail to load */
+
+.local-hero-image {
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.local-hero-image-1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.local-hero-image-1::after {
+  content: "🌍 Community Growth & Development";
+}
+
+.local-hero-image-2 {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.local-hero-image-2::after {
+  content: "💡 Innovation & Technology Solutions";
+}
+
+.local-hero-image-3 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.local-hero-image-3::after {
+  content: "🤝 Partnership & Collaboration";
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .local-hero-image {
+    height: 200px;
+    font-size: 1em;
+  }
+}
+
+/* Image error handling */
+img[src*="unsplash.com"] {
+  background: var(--primary-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+}
+
+img[src*="unsplash.com"]:after {
+  content: "Image Loading...";
+}

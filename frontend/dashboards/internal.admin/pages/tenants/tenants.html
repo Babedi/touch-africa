@@ -1,0 +1,75 @@
+<section class="content-section" id="section-tenants">
+    <h1>Manage Tenants</h1>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Tenants</h3>
+            <p class="stat-value" id="tenants-total">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active Tenants</h3>
+            <p class="stat-value" id="tenants-active">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Inactive Tenants</h3>
+            <p class="stat-value" id="tenants-inactive">—</p>
+        </div>
+    </div>
+    <div class="table-controls no-wrap">
+        <div class="search-box">
+            <input class="search-input form-control" placeholder="Search tenants..." />
+            <button class="btn-clear">Clear</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">Tenants</h3>
+            <div class="table-actions">
+                <button class="btn btn-primary" id="btn-new-tenant"><i class="fas fa-plus"></i> New Tenant</button>
+                <button class="btn btn-primary" id="btn-tenant-role"><i class="fas fa-plus"></i> New Role</button>
+                <button class="btn btn-primary" id="btn-tenant-person"><i class="fas fa-plus"></i> Tenant
+                    Person</button>
+                <button class="btn btn-primary" id="btn-tenant-root-admin"><i class="fas fa-plus"></i> Tenant Root
+                    Admin</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th class="actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tenants-tbody">
+                    <tr>
+                        <td colspan="6">Loading…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="tenants-page-size" class="form-label">Rows per page</label>
+                <select id="tenants-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="tenants-page-info">Page 1</div>
+            <div class="pager">
+                <button id="tenants-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="tenants-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="tenants-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="tenants-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/frontend/dashboards/internal.admin/pages/tenants/tenants.js?v=20250911-internal"></script>

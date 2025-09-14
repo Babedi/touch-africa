@@ -1,0 +1,484 @@
+<!-- Add New Person Modal -->
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header modal-create-header">
+            <div class="modal-title-group">
+                <img src="/assets/logo.png" alt="TouchAfrica Logo" class="modal-title-logo" />
+                <div class="modal-title-content">
+                    <h2>Add New Person</h2>
+                    <p class="subtitle">Capture personal details of the new person.</p>
+                </div>
+            </div>
+            <button class="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="personCreateForm" novalidate>
+                <!-- Personal Details -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="personCreate_firstName" class="form-label">First Name</label>
+                        <input type="text" id="personCreate_firstName" name="firstName" class="form-control" required />
+                        <div class="invalid-feedback" data-for="personCreate_firstName"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="personCreate_surname" class="form-label">Surname</label>
+                        <input type="text" id="personCreate_surname" name="surname" class="form-control" required />
+                        <div class="invalid-feedback" data-for="personCreate_surname"></div>
+                    </div>
+
+                    <!-- Middle Names (optional array) -->
+                    <div class="form-group">
+                        <label for="personCreate_middleNames" class="form-label">Middle Names</label>
+                        <input type="text" id="personCreate_middleNames" name="middleNames" class="form-control"
+                            placeholder="Enter middle names separated by commas" />
+                        <div class="invalid-feedback" data-for="personCreate_middleNames"></div>
+                        <small class="form-text text-muted">Optional: separate multiple names with commas</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="personCreate_preferredName" class="form-label">Preferred Name</label>
+                        <input type="text" id="personCreate_preferredName" name="preferredName" class="form-control"
+                            required />
+                        <div class="invalid-feedback" data-for="personCreate_preferredName"></div>
+                    </div>
+
+
+                </div>
+
+                <!-- Contact Information -->
+                <fieldset class="fieldset">
+                    <legend>Contact Information</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="contact_email" class="form-label">Email</label>
+                            <input type="email" id="contact_email" name="contact_email" class="form-control" required />
+                            <div class="invalid-feedback" data-for="contact_email"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_mobile" class="form-label">Mobile</label>
+                            <input type="tel" id="contact_mobile" name="contact_mobile" class="form-control"
+                                placeholder="+27xxxxxxxxx or 0xxxxxxxxx" required />
+                            <div class="invalid-feedback" data-for="contact_mobile"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_home" class="form-label">Home Phone</label>
+                            <input type="tel" id="contact_home" name="contact_home" class="form-control"
+                                placeholder="+27xxxxxxxxx or 0xxxxxxxxx" />
+                            <div class="invalid-feedback" data-for="contact_home"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_work" class="form-label">Work Phone</label>
+                            <input type="tel" id="contact_work" name="contact_work" class="form-control"
+                                placeholder="+27xxxxxxxxx or 0xxxxxxxxx" />
+                            <div class="invalid-feedback" data-for="contact_work"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Residential Address -->
+                <fieldset class="fieldset">
+                    <legend>Residential Address</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="res_line1" class="form-label">Address Line 1</label>
+                            <input type="text" id="res_line1" name="res_line1" class="form-control" required />
+                            <div class="invalid-feedback" data-for="res_line1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_line2" class="form-label">Address Line 2</label>
+                            <input type="text" id="res_line2" name="res_line2" class="form-control" required />
+                            <div class="invalid-feedback" data-for="res_line2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_unit" class="form-label">Unit</label>
+                            <input type="text" id="res_unit" name="res_unit" class="form-control" />
+                            <div class="invalid-feedback" data-for="res_unit"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_complex" class="form-label">Complex</label>
+                            <input type="text" id="res_complex" name="res_complex" class="form-control" />
+                            <div class="invalid-feedback" data-for="res_complex"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_streetNumber" class="form-label">Street Number</label>
+                            <input type="text" id="res_streetNumber" name="res_streetNumber" class="form-control" />
+                            <div class="invalid-feedback" data-for="res_streetNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_streetName" class="form-label">Street Name</label>
+                            <input type="text" id="res_streetName" name="res_streetName" class="form-control"
+                                required />
+                            <div class="invalid-feedback" data-for="res_streetName"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_suburb" class="form-label">Suburb</label>
+                            <input type="text" id="res_suburb" name="res_suburb" class="form-control" required />
+                            <div class="invalid-feedback" data-for="res_suburb"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_city" class="form-label">City</label>
+                            <input type="text" id="res_city" name="res_city" class="form-control" required />
+                            <div class="invalid-feedback" data-for="res_city"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_municipality" class="form-label">Municipality</label>
+                            <input type="text" id="res_municipality" name="res_municipality" class="form-control" />
+                            <div class="invalid-feedback" data-for="res_municipality"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_province" class="form-label">Province</label>
+                            <select id="res_province" name="res_province" class="form-control" required>
+                                <option value="">Select province</option>
+                                <option value="Eastern Cape">Eastern Cape</option>
+                                <option value="Free State">Free State</option>
+                                <option value="Gauteng">Gauteng</option>
+                                <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                <option value="Limpopo">Limpopo</option>
+                                <option value="Mpumalanga">Mpumalanga</option>
+                                <option value="Northern Cape">Northern Cape</option>
+                                <option value="North West">North West</option>
+                                <option value="Western Cape">Western Cape</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="res_province"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res_postalCode" class="form-label">Postal Code</label>
+                            <input type="text" id="res_postalCode" name="res_postalCode" class="form-control"
+                                inputmode="numeric" maxlength="4" pattern="^\d{4}$" required />
+                            <div class="invalid-feedback" data-for="res_postalCode"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Postal Address -->
+                <fieldset class="fieldset">
+                    <legend>Postal Address *</legend>
+                    <div class="form-group checkbox">
+                        <label class="form-label">
+                            <input type="checkbox" id="postal_same_as_residential" />
+                            Same as residential address
+                        </label>
+                    </div>
+                    <div class="form-grid" id="personCreate_postal-address-fields">
+                        <div class="form-group">
+                            <label for="personCreate_postal_line1" class="form-label">Address Line 1</label>
+                            <input type="text" id="personCreate_postal_line1" name="postal_line1" class="form-control"
+                                required />
+                            <div class="invalid-feedback" data-for="personCreate_postal_line1"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_postal_line2" class="form-label">Address Line 2</label>
+                            <input type="text" id="personCreate_postal_line2" name="postal_line2" class="form-control"
+                                required />
+                            <div class="invalid-feedback" data-for="personCreate_postal_line2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_postal_streetName" class="form-label">Street Name</label>
+                            <input type="text" id="personCreate_postal_streetName" name="postal_streetName"
+                                class="form-control" required />
+                            <div class="invalid-feedback" data-for="personCreate_postal_streetName"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_postal_suburb" class="form-label">Suburb</label>
+                            <input type="text" id="personCreate_postal_suburb" name="postal_suburb" class="form-control"
+                                required />
+                            <div class="invalid-feedback" data-for="personCreate_postal_suburb"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_postal_city" class="form-label">City</label>
+                            <input type="text" id="personCreate_postal_city" name="postal_city" class="form-control"
+                                required />
+                            <div class="invalid-feedback" data-for="personCreate_postal_city"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_postal_province" class="form-label">Province</label>
+                            <select id="personCreate_postal_province" name="postal_province" class="form-control"
+                                required>
+                                <option value="">Select province</option>
+                                <option value="Eastern Cape">Eastern Cape</option>
+                                <option value="Free State">Free State</option>
+                                <option value="Gauteng">Gauteng</option>
+                                <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                <option value="Limpopo">Limpopo</option>
+                                <option value="Mpumalanga">Mpumalanga</option>
+                                <option value="Northern Cape">Northern Cape</option>
+                                <option value="North West">North West</option>
+                                <option value="Western Cape">Western Cape</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personCreate_postal_province"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_postal_postalCode" class="form-label">Postal Code</label>
+                            <input type="text" id="personCreate_postal_postalCode" name="postal_postalCode"
+                                class="form-control" inputmode="numeric" maxlength="4" pattern="^\d{4}$" required />
+                            <div class="invalid-feedback" data-for="personCreate_postal_postalCode"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Demographics -->
+                <fieldset class="fieldset">
+                    <legend>Demographics</legend>
+                    <div class="form-grid">
+                        <!-- Priority fields in requested order: Nationality, ID Number, Birth Date, Gender -->
+                        <div class="form-group">
+                            <label for="demo_nationality" class="form-label">Nationality</label>
+                            <input type="text" id="demo_nationality" name="demo_nationality" class="form-control"
+                                required />
+                            <div class="invalid-feedback" data-for="demo_nationality"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo_idNumber" class="form-label">ID Number</label>
+                            <input type="text" id="demo_idNumber" name="demo_idNumber" class="form-control"
+                                pattern="^\d{13}$" maxlength="13" required />
+                            <div class="invalid-feedback" data-for="demo_idNumber"></div>
+                            <small class="form-text text-muted">13-digit South African ID number</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo_birthDate" class="form-label">Birth Date</label>
+                            <input type="date" id="demo_birthDate" name="demo_birthDate" class="form-control" />
+                            <div class="invalid-feedback" data-for="demo_birthDate"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo_gender" class="form-label">Gender</label>
+                            <select id="demo_gender" name="demo_gender" class="form-control" required>
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="demo_gender"></div>
+                        </div>
+
+                        <!-- Remaining demographic fields -->
+                        <div class="form-group">
+                            <label for="demo_race" class="form-label">Race</label>
+                            <select id="demo_race" name="demo_race" class="form-control" required>
+                                <option value="">Select race</option>
+                                <option value="Black African">Black African</option>
+                                <option value="Coloured">Coloured</option>
+                                <option value="Indian/Asian">Indian/Asian</option>
+                                <option value="White">White</option>
+                                <option value="Other">Other</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="demo_race"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo_maritalStatus" class="form-label">Marital Status</label>
+                            <select id="demo_maritalStatus" name="demo_maritalStatus" class="form-control" required>
+                                <option value="">Select marital status</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Widowed">Widowed</option>
+                                <option value="Separated">Separated</option>
+                                <option value="Customary Union">Customary Union</option>
+                                <option value="Life Partner">Life Partner</option>
+                                <option value="Unknown">Unknown</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="demo_maritalStatus"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo_dependentsCount" class="form-label">Number of Dependents</label>
+                            <input type="number" id="demo_dependentsCount" name="demo_dependentsCount"
+                                class="form-control" min="0" required />
+                            <div class="invalid-feedback" data-for="demo_dependentsCount"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo_passportNumber" class="form-label">Passport Number</label>
+                            <input type="text" id="demo_passportNumber" name="demo_passportNumber"
+                                class="form-control" />
+                            <div class="invalid-feedback" data-for="demo_passportNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo_homeLanguage" class="form-label">Home Language</label>
+                            <input type="text" id="demo_homeLanguage" name="demo_homeLanguage" class="form-control"
+                                required />
+                            <div class="invalid-feedback" data-for="demo_homeLanguage"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Employment Information -->
+                <fieldset class="fieldset">
+                    <legend>Employment</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personCreate_employment_status" class="form-label">Employment Status</label>
+                            <select id="personCreate_employment_status" name="employment_status" class="form-control">
+                                <option value="">Select employment status</option>
+                                <option value="Employed">Employed</option>
+                                <option value="Self-employed">Self-employed</option>
+                                <option value="Unemployed">Unemployed</option>
+                                <option value="Student">Student</option>
+                                <option value="Retired">Retired</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personCreate_employment_status"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_employment_company" class="form-label">Company</label>
+                            <input type="text" id="personCreate_employment_company" name="employment_company"
+                                class="form-control" required />
+                            <div class="invalid-feedback" data-for="personCreate_employment_company"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_employment_position" class="form-label">Position</label>
+                            <input type="text" id="personCreate_employment_position" name="employment_position"
+                                class="form-control" required />
+                            <div class="invalid-feedback" data-for="personCreate_employment_position"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_employment_industry" class="form-label">Industry</label>
+                            <input type="text" id="personCreate_employment_industry" name="employment_industry"
+                                class="form-control" required />
+                            <div class="invalid-feedback" data-for="personCreate_employment_industry"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_employment_monthlyIncome" class="form-label">Monthly Income
+                                (ZAR)</label>
+                            <input type="number" id="personCreate_employment_monthlyIncome"
+                                name="employment_monthlyIncome" class="form-control" min="0" step="0.01" required />
+                            <div class="invalid-feedback" data-for="personCreate_employment_monthlyIncome"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Education Information -->
+                <fieldset class="fieldset">
+                    <legend>Education</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="personCreate_education_level" class="form-label">Education Level</label>
+                            <select id="personCreate_education_level" name="education_level" class="form-control">
+                                <option value="">Select education level</option>
+                                <option value="No formal education">No formal education</option>
+                                <option value="Primary school">Primary school</option>
+                                <option value="Secondary school">Secondary school</option>
+                                <option value="Matric/Grade 12">Matric/Grade 12</option>
+                                <option value="Certificate/Diploma">Certificate/Diploma</option>
+                                <option value="Bachelor's degree">Bachelor's degree</option>
+                                <option value="Honours degree">Honours degree</option>
+                                <option value="Master's degree">Master's degree</option>
+                                <option value="Doctoral degree">Doctoral degree</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="personCreate_education_level"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_education_institution" class="form-label">Institution</label>
+                            <input type="text" id="personCreate_education_institution" name="education_institution"
+                                class="form-control" required />
+                            <div class="invalid-feedback" data-for="personCreate_education_institution"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_education_fieldOfStudy" class="form-label">Field of Study</label>
+                            <input type="text" id="personCreate_education_fieldOfStudy" name="education_fieldOfStudy"
+                                class="form-control" required />
+                            <div class="invalid-feedback" data-for="personCreate_education_fieldOfStudy"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_education_graduationYear" class="form-label">Graduation
+                                Year</label>
+                            <input type="number" id="personCreate_education_graduationYear"
+                                name="education_graduationYear" class="form-control" min="1900" max="2040" required />
+                            <div class="invalid-feedback" data-for="personCreate_education_graduationYear"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Disability Information -->
+                <fieldset class="fieldset">
+                    <legend>Disability</legend>
+                    <div class="form-grid">
+                        <div class="form-group checkbox">
+                            <label class="form-label">
+                                <input type="checkbox" id="personCreate_disability_hasDisability"
+                                    name="disability_hasDisability" required />
+                                Has Disability *
+                            </label>
+                            <div class="invalid-feedback" data-for="personCreate_disability_hasDisability"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_disability_type" class="form-label">Disability Type</label>
+                            <input type="text" id="personCreate_disability_type" name="disability_type"
+                                class="form-control" required />
+                            <div class="invalid-feedback" data-for="personCreate_disability_type"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="personCreate_disability_assistanceRequired" class="form-label">Assistance
+                                Required</label>
+                            <textarea id="personCreate_disability_assistanceRequired"
+                                name="disability_assistanceRequired" class="form-control" rows="3" required></textarea>
+                            <div class="invalid-feedback" data-for="personCreate_disability_assistanceRequired"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Next of Kin -->
+                <fieldset class="fieldset">
+                    <legend>Next of Kin</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="kin_name" class="form-label">Full Name</label>
+                            <input type="text" id="kin_name" name="kin_name" class="form-control" required />
+                            <div class="invalid-feedback" data-for="kin_name"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kin_relationship" class="form-label">Relationship</label>
+                            <input type="text" id="kin_relationship" name="kin_relationship" class="form-control"
+                                placeholder="e.g., Spouse, Parent, Sibling" required />
+                            <div class="invalid-feedback" data-for="kin_relationship"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kin_phoneNumber" class="form-label">Phone Number</label>
+                            <input type="tel" id="kin_phoneNumber" name="kin_phoneNumber" class="form-control"
+                                placeholder="+27xxxxxxxxx or 0xxxxxxxxx" required />
+                            <div class="invalid-feedback" data-for="kin_phoneNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kin_email" class="form-label">Email</label>
+                            <input type="email" id="kin_email" name="kin_email" class="form-control" />
+                            <div class="invalid-feedback" data-for="kin_email"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- POPIA Compliance -->
+                <fieldset class="fieldset">
+                    <legend>POPIA Compliance</legend>
+                    <div class="form-grid">
+                        <div class="form-group checkbox">
+                            <label class="form-label">
+                                <input type="checkbox" id="personCreate_popia_consent" name="popia_consent" required />
+                                I consent to the processing of my personal information *
+                            </label>
+                            <div class="invalid-feedback" data-for="personCreate_popia_consent"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="popia_processingBasis" class="form-label">Processing Basis</label>
+                            <select id="popia_processingBasis" name="popia_processingBasis" class="form-control"
+                                required>
+                                <option value="">Select processing basis</option>
+                                <option value="consent">Consent</option>
+                                <option value="contract">Contract</option>
+                                <option value="legal_obligation">Legal Obligation</option>
+                                <option value="legitimate_interest">Legitimate Interest</option>
+                                <option value="vital_interest">Vital Interest</option>
+                                <option value="public_task">Public Task</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="invalid-feedback" data-for="popia_processingBasis"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" data-action="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Person</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

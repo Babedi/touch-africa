@@ -1,0 +1,77 @@
+<section class="content-section page-people" id="section-people">
+    <!-- Actions column styles centralized in shared/styles/tables.css -->
+    <h1>Manage People</h1>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>People</h3>
+            <p class="stat-value" id="people-total">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Males</h3>
+            <p class="stat-value" id="people-male">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Females</h3>
+            <p class="stat-value" id="people-female">—</p>
+        </div>
+        <div class="stat-card">
+            <h3>Others</h3>
+            <p class="stat-value" id="people-other-gender">—</p>
+        </div>
+    </div>
+    <div class="table-controls no-wrap">
+        <div class="search-box">
+            <input class="search-input form-control" placeholder="Search people..." />
+            <button class="btn-clear">Clear</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3 class="table-title">People</h3>
+            <div class="table-actions">
+                <button id="btn-new-person" class="btn btn-primary"><i class="fas fa-plus"></i> New Person</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="avatar-col">Avatar</th>
+                        <th data-sort="firstName,surname" role="button" tabindex="0" aria-sort="none">Name</th>
+                        <th data-sort="email" role="button" tabindex="0" aria-sort="none">Email</th>
+                        <th data-sort="idNumber" role="button" tabindex="0" aria-sort="none">ID Number</th>
+                        <th data-sort="gender" role="button" tabindex="0" aria-sort="none">Gender</th>
+                        <th data-sort="audit.createdAt,createdAt" role="button" tabindex="0" aria-sort="none">Created
+                        </th>
+                        <th class="actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="people-tbody">
+                    <tr>
+                        <td colspan="7">Loading…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="page-size">
+                <label for="people-page-size" class="form-label">Rows per page</label>
+                <select id="people-page-size" class="filter-select form-control">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="page-info" id="people-page-info">Page 1</div>
+            <div class="pager">
+                <button id="people-first" class="btn btn-secondary" title="First">« First</button>
+                <button id="people-prev" class="btn btn-secondary" title="Previous">‹ Prev</button>
+                <button id="people-next" class="btn btn-secondary" title="Next">Next ›</button>
+                <button id="people-last" class="btn btn-secondary" title="Last">Last »</button>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/frontend/dashboards/internal.admin/pages/people/people.js"></script>
