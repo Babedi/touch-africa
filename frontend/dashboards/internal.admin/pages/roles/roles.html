@@ -33,11 +33,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th data-sort="roleName,roleCode">Role Name</th>
-                        <th data-sort="description">Description</th>
-                        <th data-sort="isSystem">Type</th>
-                        <th data-sort="permissions">Permissions</th>
-                        <th data-sort="isActive,status">Status</th>
+                        <th data-sort="roleName" tabindex="0" role="button" aria-sort="none">Role Name</th>
+                        <th data-sort="description" tabindex="0" role="button" aria-sort="none">Description</th>
+                        <th data-sort="isSystem" tabindex="0" role="button" aria-sort="none">Type</th>
+                        <th data-sort="permissions" tabindex="0" role="button" aria-sort="none">Permissions</th>
+                        <th data-sort="isActive" tabindex="0" role="button" aria-sort="none">Status</th>
                         <th class="no-wrap actions-col">Actions</th>
                     </tr>
                 </thead>
@@ -68,4 +68,6 @@
         </div>
     </div>
 </section>
+<script src="/frontend/shared/scripts/core-utils.js"></script>
+<script src="/frontend/shared/scripts/unified-table.js"></script>
 <script src="/frontend/dashboards/internal.admin/pages/roles/roles.js"></script>

@@ -1,10 +1,11 @@
-// People page script: fetch stats from internal persons API via TouchAfricaApiClient and update cards
+// People page script: Using unified table management system
 (function () {
   const totalEl = document.getElementById("people-total");
   const maleEl = document.getElementById("people-male");
   const femaleEl = document.getElementById("people-female");
   const otherEl = document.getElementById("people-other-gender");
   const tbody = document.getElementById("people-tbody");
+  const table = tbody?.closest("table");
   const searchInput = document.querySelector(".search-input");
   const clearBtn = document.querySelector(".btn-clear");
   const pageSizeSelect = document.getElementById("people-page-size");
@@ -14,15 +15,39 @@
   const btnNext = document.getElementById("people-next");
   const btnLast = document.getElementById("people-last");
 
-  const state = {
-    page: 1,
-    limit: 20,
-    q: "",
-    pages: 1,
-    total: 0,
-    sortBy: null, // e.g., "audit.createdAt" or "firstName"
-    order: "asc", // "asc" | "desc"
-  };
+  // Search fields for unified table filtering
+  const searchFields = [
+    "personalInfo.firstName",
+    "firstName",
+    "personalInfo.lastName",
+    "surname",
+    "lastName",
+    "personalInfo.fullName",
+    "contactInfo.email",
+    "contact.email",
+    "email",
+    "idNumber",
+    "personalInfo.idNumber",
+    "gender",
+    "personalInfo.gender",
+    "demographics.gender",
+  ];
+
+  // Backend allowed sort fields
+  const allowedSort = [
+    "firstName",
+    "surname",
+    "lastName",
+    "email",
+    "idNumber",
+    "gender",
+    "audit.createdAt",
+    "createdAt",
+  ];
+
+  // Create table manager instance
+  let tableManager;
+  let currentData = [];
 
   function setValue(el, value) {
     if (!el) return;
@@ -265,17 +290,17 @@
   }
 
   async function loadPeople({
-    page = state.page,
-    limit = state.limit,
-    q = state.q,
-    sortBy = state.sortBy,
-    order = state.order,
+    page = tableManager?.state.page || 1,
+    limit = tableManager?.state.limit || 20,
+    q = tableManager?.state.q || "",
+    sortBy = tableManager?.state.sortBy || null,
+    order = tableManager?.state.order || "asc",
   } = {}) {
     if (!tbody) return;
     tbody.innerHTML = '<tr><td colspan="7">Loading…</td></tr>';
+
     try {
       const api = await getApi();
-      let res;
       const params = { page, limit };
       if (q) params.q = q;
       if (sortBy) params.sortBy = sortBy;
@@ -283,10 +308,11 @@
 
       console.info("[People] Loading with params:", params);
 
-      res = q
+      const res = q
         ? await api.persons.search(params)
         : await api.persons.list(params);
-      // Preserve the response envelope so we can read pagination metadata
+
+      // Extract data and pagination
       const envelope = res && typeof res === "object" ? res : { data: res };
       const items = Array.isArray(envelope.data)
         ? envelope.data
@@ -294,94 +320,62 @@
         ? res
         : [];
       const pagination = envelope.pagination || null;
+
       console.info(
         "[People] Loaded",
-        Array.isArray(items) ? items.length : 0,
+        items.length,
         "items",
         pagination ? `page ${pagination.page}/${pagination.pages}` : ""
       );
-      console.info("[People] Sort params sent:", { sortBy, order });
-      console.info(
-        "[People] Backend sort applied:",
-        pagination && sortBy && allowedSort.includes(sortBy)
-      );
 
+      // Update current data for the table manager
+      currentData = items;
+
+      // If we have backend pagination, render directly and update UI
       if (pagination) {
-        state.page = Number(pagination.page) || page || 1;
-        state.limit = Number(pagination.limit) || limit || 20;
-        state.pages = Number(pagination.pages) || 1;
-        state.total = Number(pagination.total) || items.length || 0;
+        renderRows(items);
+        updatePagination({
+          page: Number(pagination.page) || page,
+          pages: Number(pagination.pages) || 1,
+          total: Number(pagination.total) || items.length,
+          limit: Number(pagination.limit) || limit,
+          hasNext: pagination.page < pagination.pages,
+          hasPrev: pagination.page > 1,
+        });
       } else {
-        state.page = page || 1;
-        state.limit = limit || 20;
-        state.pages = 1;
-        state.total = items.length || 0;
+        // No backend pagination - let table manager handle everything
+        if (tableManager) {
+          tableManager.setData(items);
+        } else {
+          renderRows(items);
+          updatePagination({
+            page: 1,
+            pages: 1,
+            total: items.length,
+            limit: items.length,
+            hasNext: false,
+            hasPrev: false,
+          });
+        }
       }
-      let rows = items;
-
-      // Apply client-side sorting if:
-      // 1. Backend sort was requested but failed, OR
-      // 2. The requested sort field is not in allowedSort list, OR
-      // 3. No backend sort was applied but we have a sort preference
-      const backendSortApplied =
-        pagination && sortBy && allowedSort.includes(sortBy);
-      const needsClientSort =
-        sortBy &&
-        order &&
-        (!backendSortApplied || !allowedSort.includes(sortBy));
-
-      if (needsClientSort && window.CoreUtils && CoreUtils.table) {
-        console.info("[People] Applying client-side sort:", sortBy, order);
-        rows = sortTableClientSide(rows, sortBy, order);
-      } else if ((!sortBy || !order) && window.CoreUtils && CoreUtils.table) {
-        // Pick a deterministic column (full name) if present for stable display
-        rows = CoreUtils.table.sort(
-          rows.map((p) => ({
-            ...p,
-            _fullName:
-              p.personalInfo?.fullName ||
-              [
-                p.personalInfo?.firstName || p.firstName || "",
-                p.personalInfo?.lastName || p.surname || p.lastName || "",
-              ]
-                .filter(Boolean)
-                .join(" "),
-          })),
-          "_fullName",
-          "asc"
-        );
-      }
-
-      renderRows(rows);
-      updateSortHeaderIndicators();
-      updatePager({
-        page: state.page,
-        pages: state.pages,
-        total: state.total,
-        limit: state.limit,
-      });
     } catch (err) {
       const status = err?.status || 0;
       const isTimeout =
         err && (err.message === "timeout" || err.name === "AbortError");
       const isConnectionError = status === 0;
 
-      let logMessage, displayMessage;
+      let displayMessage;
       if (isTimeout) {
-        logMessage = "timeout";
         displayMessage = "Connection timeout - please refresh to try again";
       } else if (isConnectionError) {
-        logMessage = "connection failed";
         displayMessage = "Unable to connect to server";
       } else if (status === 401 || status === 403) {
-        logMessage = status;
         displayMessage = "Unauthorized";
       } else {
-        logMessage = status;
         displayMessage = "Error loading people";
       }
 
-      console.error("Failed to load people:", logMessage, err?.data || err);
+      console.error("Failed to load people:", status, err?.data || err);
 
       tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: #666;">
         ${displayMessage}
@@ -391,229 +385,69 @@
             : ""
         }
       </td></tr>`;
-
-      updatePager({
-        page: state.page,
-        pages: state.pages,
-        total: state.total,
-        limit: state.limit,
-      });
     }
   }
 
-  // Comprehensive list of allowed sort fields that match actual backend data structure
-  const allowedSort = [
-    // Flat structure fields that actually exist in the data
-    "firstName",
-    "surname",
-    "gender",
-    "idNumber",
-    "audit.createdAt",
-    "createdAt",
-    "contact.email",
-    "contact.mobile",
-    "addresses.residential.city",
-    "addresses.residential.province",
-    // Legacy nested structure fields (may not exist but kept for backwards compatibility)
-    "personalInfo.firstName",
-    "personalInfo.lastName",
-    "personalInfo.fullName",
-    "personalInfo.gender",
-    "contactInfo.email",
-    "contactInfo.mobile",
-    "address.city",
-    "address.province",
-    // Additional flat fields
-    "lastName",
-    "email",
-  ];
-
-  // Client-side sorting fallback for unsupported backend fields
-  function sortTableClientSide(data, sortField, order = "asc") {
-    if (!Array.isArray(data) || !sortField) return data;
-
-    return [...data].sort((a, b) => {
-      let aVal, bVal;
-
-      // Extract values based on sort field, supporting nested paths
-      const getNestedValue = (obj, path) => {
-        return path.split(".").reduce((o, p) => o?.[p], obj);
-      };
-
-      // Handle different field mappings based on actual data structure
-      switch (sortField) {
-        case "firstName":
-        case "firstName,surname":
-          // For name sorting, combine firstName and surname from flat structure
-          aVal = [
-            getNestedValue(a, "firstName") || "",
-            getNestedValue(a, "surname") || "",
-          ]
-            .filter(Boolean)
-            .join(" ");
-          bVal = [
-            getNestedValue(b, "firstName") || "",
-            getNestedValue(b, "surname") || "",
-          ]
-            .filter(Boolean)
-            .join(" ");
-          break;
-        case "email":
-          // Backend sorts by "email" field, but data structure contains contact.email
-          // Try both paths for robustness
-          aVal =
-            getNestedValue(a, "email") ||
-            getNestedValue(a, "contact.email") ||
-            "";
-          bVal =
-            getNestedValue(b, "email") ||
-            getNestedValue(b, "contact.email") ||
-            "";
-          break;
-        case "gender":
-          aVal = getNestedValue(a, "gender") || "";
-          bVal = getNestedValue(b, "gender") || "";
-          break;
-        case "idNumber":
-          aVal = getNestedValue(a, "idNumber") || "";
-          bVal = getNestedValue(b, "idNumber") || "";
-          break;
-        case "audit.createdAt":
-        case "createdAt":
-          aVal =
-            getNestedValue(a, "audit.createdAt") ||
-            getNestedValue(a, "createdAt") ||
-            "";
-          bVal =
-            getNestedValue(b, "audit.createdAt") ||
-            getNestedValue(b, "createdAt") ||
-            "";
-          break;
-        default:
-          aVal = getNestedValue(a, sortField) || "";
-          bVal = getNestedValue(b, sortField) || "";
-      }
-
-      // Handle different data types
-      if (aVal === "" && bVal === "") return 0;
-      if (aVal === "") return 1;
-      if (bVal === "") return -1;
-
-      // Date handling
-      if (sortField.includes("createdAt") || sortField.includes("Date")) {
-        const dateA = new Date(aVal);
-        const dateB = new Date(bVal);
-        if (!isNaN(dateA.getTime()) && !isNaN(dateB.getTime())) {
-          return order === "asc" ? dateA - dateB : dateB - dateA;
-        }
-      }
-
-      // Numeric handling
-      const numA = parseFloat(aVal);
-      const numB = parseFloat(bVal);
-      if (!isNaN(numA) && !isNaN(numB)) {
-        return order === "asc" ? numA - numB : numB - numA;
-      }
-
-      // String comparison (case-insensitive)
-      const strA = String(aVal).toLowerCase();
-      const strB = String(bVal).toLowerCase();
-
-      if (order === "asc") {
-        return strA.localeCompare(strB);
-      } else {
-        return strB.localeCompare(strA);
-      }
-    });
-  }
-
-  // Sorting: map header clicks to sortBy/order and reload
-  function getSortableHeaders() {
-    const table = tbody?.closest("table");
-    if (!table) return [];
-    return Array.from(table.querySelectorAll("thead th[data-sort]"));
-  }
-
-  function normalizeSortField(th) {
-    if (!th) return null;
-    const raw = (th.getAttribute("data-sort") || "").trim();
-    if (!raw) return null;
-    // data-sort may contain multiple candidates, pick the first allowed one
-    const candidates = raw
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    // Find the first candidate that's actually supported by the backend
-    for (const candidate of candidates) {
-      if (allowedSort.includes(candidate)) {
-        return candidate;
-      }
+  // Initialize unified table manager
+  function initializeTableManager() {
+    if (!window.UnifiedTable) {
+      console.warn("UnifiedTable not available, will retry...");
+      return null;
     }
 
-    // Fallback to first candidate if none are in allowedSort (for client-side sorting)
-    return candidates[0] || null;
-  }
-
-  function updateSortHeaderIndicators() {
-    const headers = getSortableHeaders();
-    headers.forEach((th) => {
-      const field = normalizeSortField(th);
-      const isActive = field && state.sortBy === field;
-      th.setAttribute("aria-sort", isActive ? state.order || "asc" : "none");
-      // Optional: small arrow indicator
-      const label = th.textContent.replace(/[\s▲▼]+$/, "");
-      if (isActive) {
-        th.textContent = `${label} ${state.order === "desc" ? "▼" : "▲"}`;
-      } else {
-        th.textContent = label;
-      }
-    });
-  }
-
-  function wireSorting() {
-    const headers = getSortableHeaders();
-    if (headers.length === 0) return;
-    headers.forEach((th) => {
-      if (th.dataset._wired) return;
-      th.dataset._wired = "1";
-      const activate = () => {
-        const field = normalizeSortField(th);
-        if (!field) return;
-        if (state.sortBy === field) {
-          // toggle order
-          state.order = state.order === "asc" ? "desc" : "asc";
-        } else {
-          state.sortBy = field;
-          state.order = field.toLowerCase().includes("createdat")
-            ? "desc"
-            : "asc";
+    return window.UnifiedTable.createManager({
+      data: currentData,
+      searchFields: searchFields,
+      storageKey: "people-table-sort",
+      onDataUpdate: function (data, meta) {
+        renderRows(data);
+        updatePagination(meta);
+      },
+      onSort: function (field, order) {
+        // For backend-supported fields, reload from server
+        if (allowedSort.includes(field)) {
+          loadPeople({
+            page: 1,
+            sortBy: field,
+            order: order,
+          });
         }
-
-        // Try backend sorting first, fall back to client-side if field not supported
+      },
+      onSearch: function (query) {
+        // Always reload from server for search
         loadPeople({
           page: 1,
-          limit: state.limit,
-          q: state.q,
-          sortBy: state.sortBy,
-          order: state.order,
+          q: query,
         });
-      };
-      th.addEventListener("click", activate);
-      th.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          activate();
-        }
-      });
+      },
     });
+  }
+
+  // Update pagination UI
+  function updatePagination(meta) {
+    if (!pageInfo) return;
+    const { page, pages, total, limit } = meta;
+
+    pageInfo.textContent = `Page ${page} of ${pages} • ${total.toLocaleString()} total`;
+
+    if (btnFirst) btnFirst.disabled = page <= 1;
+    if (btnPrev) btnPrev.disabled = page <= 1;
+    if (btnNext) btnNext.disabled = page >= pages;
+    if (btnLast) btnLast.disabled = page >= pages;
+
+    if (pageSizeSelect) {
+      const val = String(limit);
+      if (pageSizeSelect.value !== val) {
+        pageSizeSelect.value = val;
+      }
+    }
   }
 
   // expose a reload hook used by modals to refresh list after create
   window.reloadPeopleList = function reloadPeopleList() {
     try {
       loadStats();
-      loadPeople({ page: 1, limit: state.limit, q: state.q });
+      loadPeople({ page: 1 });
     } catch (e) {
       console.warn("reloadPeopleList failed", e);
     }
@@ -642,75 +476,136 @@
     });
   }
 
-  // kick off after DOM is ready
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      loadStats();
-      const initLimit = pageSizeSelect
-        ? Number(pageSizeSelect.value) || 20
-        : 20;
-      state.limit = initLimit;
-      wireSorting();
-      loadPeople({ page: 1, limit: initLimit });
-      wireNewPersonButton();
-    });
-  } else {
+  function initializePage() {
     loadStats();
-    const initLimit = pageSizeSelect ? Number(pageSizeSelect.value) || 20 : 20;
-    state.limit = initLimit;
-    wireSorting();
-    loadPeople({ page: 1, limit: initLimit });
+
+    // Initialize table manager with retry mechanism
+    function tryInitializeTable(attempts = 0) {
+      tableManager = initializeTableManager();
+
+      if (!tableManager && attempts < 5) {
+        console.log(
+          `[People] Retrying table initialization... (attempt ${attempts + 1})`
+        );
+        setTimeout(() => tryInitializeTable(attempts + 1), 100);
+        return;
+      }
+
+      if (!tableManager) {
+        console.error(
+          "[People] Failed to initialize table manager after retries"
+        );
+        // Continue without UnifiedTable - basic functionality will still work
+      }
+
+      // Setup unified table functionality
+      if (window.UnifiedTable && table) {
+        // Setup search with unified table system
+        window.UnifiedTable.setupSearch(searchInput, function (query) {
+          loadPeople({ page: 1, q: query });
+        });
+
+        // Setup sorting with unified table system
+        window.UnifiedTable.setupSorting(
+          table,
+          function (field, direction) {
+            loadPeople({ page: 1, sortBy: field, order: direction });
+          },
+          {
+            field: tableManager?.state.sortBy || null,
+            order: tableManager?.state.order || "asc",
+          }
+        );
+      }
+    }
+
+    tryInitializeTable();
+
+    // Setup pagination controls
+    if (btnFirst) {
+      btnFirst.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(1);
+        else loadPeople({ page: 1 });
+      });
+    }
+    if (btnPrev) {
+      btnPrev.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(tableManager.state.page - 1);
+        else
+          loadPeople({
+            page: Math.max(1, (tableManager?.state.page || 1) - 1),
+          });
+      });
+    }
+    if (btnNext) {
+      btnNext.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(tableManager.state.page + 1);
+        else loadPeople({ page: (tableManager?.state.page || 1) + 1 });
+      });
+    }
+    if (btnLast) {
+      btnLast.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(tableManager.state.pages);
+        else loadPeople({ page: tableManager?.state.pages || 1 });
+      });
+    }
+
+    // Setup page size selector
+    if (pageSizeSelect) {
+      pageSizeSelect.addEventListener("change", () => {
+        const newLimit = Number(pageSizeSelect.value) || 20;
+        if (tableManager) {
+          tableManager.setPageSize(newLimit);
+        }
+        loadPeople({ page: 1, limit: newLimit });
+      });
+    }
+
+    // Setup clear button
+    if (clearBtn && searchInput) {
+      clearBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        if (tableManager) {
+          tableManager.search("");
+        } else {
+          loadPeople({ page: 1, q: "" });
+        }
+      });
+    }
+
     wireNewPersonButton();
+
+    // Initial load
+    const initLimit = pageSizeSelect ? Number(pageSizeSelect.value) || 20 : 20;
+    loadPeople({ page: 1, limit: initLimit });
   }
 
-  // Basic search wiring
-  if (searchInput) {
-    let t;
-    searchInput.addEventListener("input", () => {
-      clearTimeout(t);
-      t = setTimeout(() => {
-        const q = searchInput.value.trim();
-        state.q = q;
-        loadPeople({ page: 1, limit: state.limit, q });
-      }, 300);
-    });
-  }
-  if (clearBtn && searchInput) {
-    clearBtn.addEventListener("click", () => {
-      searchInput.value = "";
-      state.q = "";
-      loadPeople({ page: 1, limit: state.limit });
-    });
-  }
-
-  // Page size change
-  if (pageSizeSelect) {
-    pageSizeSelect.addEventListener("change", () => {
-      const newLimit = Number(pageSizeSelect.value) || 20;
-      state.limit = newLimit;
-      loadPeople({ page: 1, limit: newLimit, q: state.q });
-    });
+  // Initialize when DOM is ready
+  // Wait for dependencies to load before initializing
+  function waitForDependencies(callback, maxAttempts = 10, attempt = 0) {
+    if (window.UnifiedTable) {
+      callback();
+    } else if (attempt < maxAttempts) {
+      console.log(
+        `[People] Waiting for dependencies... (attempt ${attempt + 1})`
+      );
+      setTimeout(
+        () => waitForDependencies(callback, maxAttempts, attempt + 1),
+        50
+      );
+    } else {
+      console.warn(
+        "[People] Dependencies not loaded, initializing without UnifiedTable"
+      );
+      callback();
+    }
   }
 
-  // Pager buttons
-  if (btnFirst)
-    btnFirst.addEventListener("click", () => {
-      if (state.page > 1)
-        loadPeople({ page: 1, limit: state.limit, q: state.q });
-    });
-  if (btnPrev)
-    btnPrev.addEventListener("click", () => {
-      if (state.page > 1)
-        loadPeople({ page: state.page - 1, limit: state.limit, q: state.q });
-    });
-  if (btnNext)
-    btnNext.addEventListener("click", () => {
-      if (state.page < state.pages)
-        loadPeople({ page: state.page + 1, limit: state.limit, q: state.q });
-    });
-  if (btnLast)
-    btnLast.addEventListener("click", () => {
-      if (state.page < state.pages)
-        loadPeople({ page: state.pages, limit: state.limit, q: state.q });
-    });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () =>
+      waitForDependencies(initializePage)
+    );
+  } else {
+    waitForDependencies(initializePage);
+  }
 })();

@@ -36,8 +36,8 @@
       description:
         "Large, meaty tomatoes perfect for slicing. Rich flavor and excellent for sandwiches and salads.",
       cycleTime: "75-85 days",
-      image:
-        "https://images.unsplash.com/photo-1546470427-e5ac89c8589a?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"], // warm season crop
+      image: "/frontend/shared/images/templates/beefsteak-tomato.jpg",
       status: "Active",
     },
     {
@@ -48,8 +48,8 @@
       description:
         "Sweet, nutty flavored winter squash with orange flesh. Excellent storage qualities.",
       cycleTime: "100-120 days",
-      image:
-        "https://images.unsplash.com/photo-1570586166260-8b0c51fa5be6?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"], // plant in spring/early summer for fall harvest
+      image: "/frontend/shared/images/templates/butternut-squash.jpg",
       status: "Active",
     },
     {
@@ -60,8 +60,8 @@
       description:
         "Traditional yellow sweet corn with excellent flavor. Early maturing variety.",
       cycleTime: "65-75 days",
-      image:
-        "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"],
+      image: "/frontend/shared/images/templates/sweet-corn-golden-bantam.jpg",
       status: "Active",
     },
     {
@@ -72,8 +72,8 @@
       description:
         "Long, smooth skinned cucumbers with crisp texture and mild flavor.",
       cycleTime: "55-65 days",
-      image:
-        "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"],
+      image: "/frontend/shared/images/templates/english-cucumber.jpg",
       status: "Active",
     },
     {
@@ -84,8 +84,8 @@
       description:
         "Sweet, thick-walled red peppers perfect for fresh eating or cooking.",
       cycleTime: "70-80 days",
-      image:
-        "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"],
+      image: "/frontend/shared/images/templates/red-bell-pepper.jpg",
       status: "Active",
     },
     {
@@ -96,8 +96,8 @@
       description:
         "Tender baby spinach leaves perfect for salads and quick cooking.",
       cycleTime: "30-40 days",
-      image:
-        "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "fall", "winter"], // cool season crop
+      image: "/frontend/shared/images/templates/baby-spinach.jpg",
       status: "Active",
     },
     {
@@ -108,8 +108,8 @@
       description:
         "Classic turnip variety with white flesh and purple shoulders. Excellent for storage.",
       cycleTime: "50-60 days",
-      image:
-        "https://images.unsplash.com/photo-1609501676725-7186f4bc2c90?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "fall"], // cool season crop
+      image: "/frontend/shared/images/templates/purple-top-turnip.jpg",
       status: "Active",
     },
     {
@@ -120,8 +120,8 @@
       description:
         "Compact bush-type green beans with tender pods. No staking required.",
       cycleTime: "50-60 days",
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"],
+      image: "/frontend/shared/images/templates/green-bean-bush.jpg",
       status: "Active",
     },
     {
@@ -132,8 +132,8 @@
       description:
         "Giant sunflowers reaching up to 12 feet tall with large yellow blooms.",
       cycleTime: "90-120 days",
-      image:
-        "https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"],
+      image: "/frontend/shared/images/templates/sunflower-mammoth.jpg",
       status: "Active",
     },
     {
@@ -144,8 +144,8 @@
       description:
         "Small, round watermelons with dark green skin and sweet red flesh.",
       cycleTime: "80-90 days",
-      image:
-        "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"],
+      image: "/frontend/shared/images/templates/watermelon-sugar-baby.jpg",
       status: "Active",
     },
     {
@@ -156,8 +156,8 @@
       description:
         "Classic orange carrots with cylindrical shape and sweet flavor.",
       cycleTime: "70-80 days",
-      image:
-        "https://images.unsplash.com/photo-1582515073490-39981397c445?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer", "fall"],
+      image: "/frontend/shared/images/templates/carrot-nantes.jpg",
       status: "Active",
     },
     {
@@ -168,8 +168,8 @@
       description:
         "Crispy lettuce with buttery texture and excellent heat tolerance.",
       cycleTime: "45-55 days",
-      image:
-        "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "fall", "winter"],
+      image: "/frontend/shared/images/templates/lettuce-buttercrunch.jpg",
       status: "Active",
     },
     {
@@ -180,8 +180,8 @@
       description:
         "Small, round red radishes with crisp white flesh and mild flavor.",
       cycleTime: "25-30 days",
-      image:
-        "https://images.unsplash.com/photo-1584543737151-6e4b999deec8?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "fall"],
+      image: "/frontend/shared/images/templates/radish-cherry-belle.jpg",
       status: "Active",
     },
     {
@@ -192,8 +192,8 @@
       description:
         "Giant pumpkins that can reach over 100 pounds. Perfect for competitions.",
       cycleTime: "120-140 days",
-      image:
-        "https://images.unsplash.com/photo-1539818181019-0ae8405fda14?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring"], // plant in spring for fall harvest
+      image: "/frontend/shared/images/templates/pumpkin-atlantic-giant.jpg",
       status: "Active",
     },
     {
@@ -204,8 +204,8 @@
       description:
         "Classic sweet basil with large, aromatic leaves perfect for cooking.",
       cycleTime: "60-75 days",
-      image:
-        "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=400&h=200&fit=crop&crop=center",
+      seasons: ["spring", "summer"],
+      image: "/frontend/shared/images/templates/herb-basil-sweet.jpg",
       status: "Active",
     },
     {
@@ -216,8 +216,7 @@
       description:
         "Round, compact cabbage heads with excellent keeping quality.",
       cycleTime: "70-80 days",
-      image:
-        "https://images.unsplash.com/photo-1594282432163-5c36f2393e54?w=400&h=200&fit=crop&crop=center",
+      image: "/frontend/shared/images/templates/cabbage-copenhagen.jpg",
       status: "Active",
     },
     {
@@ -227,8 +226,7 @@
       subcategory: "Broccoli",
       description: "Heat-tolerant broccoli with tight, dark green heads.",
       cycleTime: "60-70 days",
-      image:
-        "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=400&h=200&fit=crop&crop=center",
+      image: "/frontend/shared/images/templates/broccoli-green-magic.jpg",
       status: "Active",
     },
     {
@@ -238,8 +236,7 @@
       subcategory: "Squash",
       description: "Prolific zucchini with dark green skin and tender flesh.",
       cycleTime: "50-60 days",
-      image:
-        "https://images.unsplash.com/photo-1566558608692-39ce016b8457?w=400&h=200&fit=crop&crop=center",
+      image: "/frontend/shared/images/templates/zucchini-black-beauty.jpg",
       status: "Active",
     },
     {
@@ -250,8 +247,7 @@
       description:
         "Large, mild-flavored yellow onions with excellent storage life.",
       cycleTime: "110-120 days",
-      image:
-        "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=400&h=200&fit=crop&crop=center",
+      image: "/frontend/shared/images/templates/onion-yellow-sweet-spanish.jpg",
       status: "Active",
     },
     {
@@ -262,8 +258,7 @@
       description:
         "Colorful chard with stems in red, yellow, and orange. Nutritious and beautiful.",
       cycleTime: "50-60 days",
-      image:
-        "https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?w=400&h=200&fit=crop&crop=center",
+      image: "/frontend/shared/images/templates/swiss-chard-rainbow.jpg",
       status: "Active",
     },
   ];
@@ -345,9 +340,50 @@
     }
   }
 
+  // Helper function to generate seasonal icons
+  function generateSeasonalIcons(seasons) {
+    if (!seasons || !Array.isArray(seasons)) {
+      console.log("[Templates] No seasons data:", seasons);
+      return "";
+    }
+
+    console.log("[Templates] Generating seasonal icons for:", seasons);
+
+    const seasonIcons = {
+      spring: { icon: "fas fa-seedling", color: "#4CAF50", title: "Spring" },
+      summer: { icon: "fas fa-sun", color: "#FF9800", title: "Summer" },
+      fall: { icon: "fas fa-leaf", color: "#F57C00", title: "Fall" },
+      winter: { icon: "fas fa-snowflake", color: "#2196F3", title: "Winter" },
+    };
+
+    const iconsHtml = seasons
+      .map((season) => {
+        const seasonData = seasonIcons[season];
+        if (seasonData) {
+          return `<i class="${seasonData.icon}" style="color: ${seasonData.color}; margin-right: 4px;" title="${seasonData.title}"></i>`;
+        }
+        console.warn("[Templates] Unknown season:", season);
+        return "";
+      })
+      .join("");
+
+    console.log("[Templates] Generated icons HTML:", iconsHtml);
+    return iconsHtml;
+  }
+
   function renderCards(items) {
-    if (!templatesGrid) return;
+    console.log("[Templates] Rendering cards", {
+      itemsCount: items?.length,
+      templatesGrid,
+    });
+    if (!templatesGrid) {
+      console.error(
+        "[Templates] templatesGrid element not found in renderCards"
+      );
+      return;
+    }
     if (!Array.isArray(items) || items.length === 0) {
+      console.log("[Templates] No items to render");
       templatesGrid.innerHTML =
         '<div class="col-12 text-center"><p>No templates found</p></div>';
       return;
@@ -360,9 +396,12 @@
         const subcategory = template.subcategory || "";
         const description = template.description || "No description available";
         const cycleTime = template.cycleTime || "Unknown";
+        const seasons = template.seasons || [];
         const image =
           template.image || "/frontend/shared/assets/images/place-holder.png";
         const status = template.status || "Active";
+
+        const seasonalIcons = generateSeasonalIcons(seasons);
 
         return `
           <div class="template-card" data-template-id="${template.id}">
@@ -381,6 +420,10 @@
               <div class="template-card-cycle">
                 <i class="fas fa-clock"></i>
                 <span>Cycle time: ${cycleTime}</span>
+              </div>
+              <div class="template-card-seasons">
+                <span style="margin-right: 8px; font-weight: 500;">Best seasons:</span>
+                ${seasonalIcons}
               </div>
               <div class="template-card-actions">
                 <div class="template-card-actions-left">
@@ -408,6 +451,15 @@
         `;
       })
       .join("");
+
+    console.log(
+      "[Templates] Cards HTML generated, length:",
+      templatesGrid.innerHTML.length
+    );
+    console.log(
+      "[Templates] First 200 chars of HTML:",
+      templatesGrid.innerHTML.substring(0, 200)
+    );
 
     // Add event listeners for template action buttons
     addTemplateActionListeners();
@@ -479,28 +531,7 @@
     }
   }
 
-  function getSortableHeaders() {
-    // Cards don't use table headers for sorting, return empty array
-    return [];
-  }
-  function normalizeSortField(th) {
-    if (!th) return null;
-    const raw = (th.getAttribute("data-sort") || "").trim();
-    if (!raw) return null;
-    const candidates = raw
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-    return candidates[0] || null;
-  }
-  function updateSortHeaderIndicators() {
-    // Cards don't use table headers for sorting, so no indicators to update
-    return;
-  }
-  function wireSorting() {
-    // Cards don't use table header sorting, so no wiring needed
-    return;
-  }
+  // Legacy table functions removed - templates use cards, not tables
   async function loadTemplates({
     page = state.page,
     limit = state.limit,
@@ -508,13 +539,29 @@
     sortBy = state.sortBy,
     order = state.order,
   } = {}) {
-    if (!templatesGrid) return;
+    console.log("[Templates] Loading templates...", {
+      page,
+      limit,
+      q,
+      sortBy,
+      order,
+    });
+    if (!templatesGrid) {
+      console.error("[Templates] templatesGrid element not found");
+      return;
+    }
     templatesGrid.innerHTML =
       '<div class="col-12 text-center"><p>Loading…</p></div>';
 
     try {
       // Filter sample data based on search query
       let items = sampleTemplates;
+      console.log(
+        "[Templates] Initial sampleTemplates:",
+        sampleTemplates.length,
+        sampleTemplates
+      );
+
       if (q && q.trim()) {
         const searchTerm = q.toLowerCase().trim();
         items = sampleTemplates.filter(
@@ -524,6 +571,7 @@
             template.subcategory.toLowerCase().includes(searchTerm) ||
             template.description.toLowerCase().includes(searchTerm)
         );
+        console.log("[Templates] Filtered items:", items.length);
       }
 
       // Sort the items if sortBy is specified
@@ -564,6 +612,14 @@
       state.pages = pages;
       state.total = total;
 
+      console.log("[Templates] About to render cards", {
+        total,
+        pages,
+        paginatedItemsCount: paginatedItems.length,
+        sampleTemplatesCount: sampleTemplates.length,
+        firstItem: paginatedItems[0]?.name,
+      });
+
       // Render the cards
       renderCards(paginatedItems);
       updatePager({
@@ -574,8 +630,28 @@
       });
     } catch (err) {
       console.error("[Templates] load error", err);
-      templatesGrid.innerHTML =
-        '<div class="col-12 text-center"><p>Error loading templates</p></div>';
+      console.error("[Templates] Error details:", err.message, err.stack);
+
+      // Fallback: show at least some basic template cards if there's an error
+      if (templatesGrid) {
+        templatesGrid.innerHTML = `
+          <div class="template-card" style="display: block; margin: 10px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+            <h4>Sample Template 1</h4>
+            <p>This is a test template to verify the display is working.</p>
+            <div style="background: #f0f0f0; padding: 10px; margin: 10px 0;">
+              <span>Category: Test</span> | <span>Status: Active</span>
+            </div>
+          </div>
+          <div class="template-card" style="display: block; margin: 10px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+            <h4>Sample Template 2</h4>
+            <p>Another test template to verify multiple cards show.</p>
+            <div style="background: #f0f0f0; padding: 10px; margin: 10px 0;">
+              <span>Category: Test</span> | <span>Status: Active</span>
+            </div>
+          </div>
+        `;
+      }
+
       updatePager({
         page: state.page,
         pages: state.pages,
@@ -586,11 +662,20 @@
   }
 
   function init() {
+    console.log("[Templates] Initializing templates page...");
+    console.log("[Templates] Elements check:", {
+      templatesGrid: !!templatesGrid,
+      pageSizeSelect: !!pageSizeSelect,
+      totalEl: !!totalEl,
+      activeEl: !!activeEl,
+      draftEl: !!draftEl,
+    });
+
     const initLimit = pageSizeSelect ? Number(pageSizeSelect.value) || 20 : 20;
     state.limit = initLimit;
     restoreSortSpec();
     loadStats();
-    wireSorting();
+    // Legacy wireSorting() call removed - templates use cards, not tables
     loadTemplates({
       page: 1,
       limit: initLimit,

@@ -85,6 +85,7 @@ import internalTenantRouter from "./backend/modules/internal/tenant/tenant.route
 import cultivarTemplateRouter from "./backend/modules/internal/cultivar.template/cultivar.template.route.js";
 import personRouter from "./backend/modules/internal/person/person.route.js";
 import { default as internalPermissionRouter } from "./backend/modules/internal/permission/permission.route.js";
+import todoRouter from "./backend/modules/internal/todo/todo.route.js";
 
 // External tenant-scoped routes
 import externalTenantPersonRouter from "./backend/modules/external/tenant/person/person.route.js";
@@ -250,6 +251,7 @@ app.use(API_PREFIX, serviceInfoRouter);
 app.use(API_PREFIX, internalTenantRouter);
 app.use(API_PREFIX, cultivarTemplateRouter);
 app.use(API_PREFIX, personRouter);
+app.use(API_PREFIX, todoRouter);
 
 // External tenant-scoped routes
 app.use(API_PREFIX, externalTenantPersonRouter);

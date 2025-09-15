@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Sorting Test</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/shared/styles/variables.css">
+    <link rel="stylesheet" href="/frontend/shared/styles/tables.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-note {
+            background: #e7f3ff;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            color: #0c5460;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Table Sorting Test</h1>
+
+        <div class="test-note">
+            <strong>Test Purpose:</strong> Click on column headers to test ascending/descending sort toggle
+            functionality.
+            Headers should show up/down arrows and toggle between ascending/descending order.
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th data-sort="name">Name</th>
+                    <th data-sort="email">Email</th>
+                    <th data-sort="role">Role</th>
+                    <th data-sort="status">Status</th>
+                    <th data-sort="date">Date</th>
+                </tr>
+            </thead>
+            <tbody id="test-tbody">
+                <tr>
+                    <td>John Doe</td>
+                    <td>john@example.com</td>
+                    <td>Admin</td>
+                    <td>Active</td>
+                    <td>2025-01-15</td>
+                </tr>
+                <tr>
+                    <td>Alice Smith</td>
+                    <td>alice@example.com</td>
+                    <td>Manager</td>
+                    <td>Active</td>
+                    <td>2025-02-01</td>
+                </tr>
+                <tr>
+                    <td>Bob Johnson</td>
+                    <td>bob@example.com</td>
+                    <td>User</td>
+                    <td>Inactive</td>
+                    <td>2024-12-20</td>
+                </tr>
+                <tr>
+                    <td>Carol Williams</td>
+                    <td>carol@example.com</td>
+                    <td>Admin</td>
+                    <td>Active</td>
+                    <td>2025-03-10</td>
+                </tr>
+                <tr>
+                    <td>David Brown</td>
+                    <td>david@example.com</td>
+                    <td>Manager</td>
+                    <td>Active</td>
+                    <td>2025-01-30</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="sort-log" style="margin-top: 20px; padding: 10px; background: #f8f9fa; border-radius: 4px;">
+            <strong>Sort Log:</strong>
+            <div id="log-entries"></div>
+        </div>
+    </div>
+
+    <script src="/frontend/shared/scripts/unified-table.js"></script>
+    <script>
+        // Test data for sorting
+        const testData = [
+            { name: "John Doe", email: "john@example.com", role: "Admin", status: "Active", date: "2025-01-15" },
+            { name: "Alice Smith", email: "alice@example.com", role: "Manager", status: "Active", date: "2025-02-01" },
+            { name: "Bob Johnson", email: "bob@example.com", role: "User", status: "Inactive", date: "2024-12-20" },
+            { name: "Carol Williams", email: "carol@example.com", role: "Admin", status: "Active", date: "2025-03-10" },
+            { name: "David Brown", email: "david@example.com", role: "Manager", status: "Active", date: "2025-01-30" }
+        ];
+
+        let currentData = [...testData];
+        const tbody = document.getElementById('test-tbody');
+        const table = tbody.closest('table');
+        const logEntries = document.getElementById('log-entries');
+
+        function logSort(field, direction) {
+            const entry = document.createElement('div');
+            entry.textContent = `Sorted by: ${field} (${direction}) at ${new Date().toLocaleTimeString()}`;
+            logEntries.appendChild(entry);
+            logEntries.scrollTop = logEntries.scrollHeight;
+        }
+
+        function renderTable(data) {
+            tbody.innerHTML = '';
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.name}</td>
+                    <td>${row.email}</td>
+                    <td>${row.role}</td>
+                    <td>${row.status}</td>
+                    <td>${row.date}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function sortData(field, direction) {
+            const sorted = window.UnifiedTable.sort(currentData, field, direction);
+            renderTable(sorted);
+            logSort(field, direction);
+        }
+
+        // Setup sorting using UnifiedTable
+        if (window.UnifiedTable) {
+            window.UnifiedTable.setupSorting(table, sortData, { field: null, order: 'asc' });
+            console.log('UnifiedTable sorting setup completed');
+        } else {
+            console.error('UnifiedTable not available');
+        }
+
+        // Initial render
+        renderTable(currentData);
+    </script>
+</body>
+
+</html>

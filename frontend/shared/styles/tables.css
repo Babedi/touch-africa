@@ -128,6 +128,35 @@
     background-color: var(--bg-hover);
 }
 
+/* Sortable Table Header Styles */
+.table thead th[data-sort] {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.table thead th[data-sort]:hover {
+    background-color: rgba(52, 211, 153, 0.1);
+}
+
+.table thead th[data-sort]:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: -2px;
+}
+
+.table thead th[data-sort][aria-sort="ascending"],
+.table thead th[data-sort][aria-sort="descending"] {
+    background-color: rgba(52, 211, 153, 0.05);
+    font-weight: 700;
+}
+
+.table thead th[data-sort] .sort-icon {
+    margin-left: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.8rem;
+}
+
 /* Standardized Actions Column (centralized from inline page styles) */
 .table th.actions-col,
 .table td.actions-col {

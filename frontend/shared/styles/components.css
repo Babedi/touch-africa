@@ -895,6 +895,9 @@ select:disabled {
     box-shadow: var(--shadow-sm);
     transition: var(--transition-base);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .template-card:hover {
@@ -907,10 +910,14 @@ select:disabled {
     height: 200px;
     object-fit: cover;
     background-color: var(--bg-secondary);
+    flex-shrink: 0;
 }
 
 .template-card-content {
     padding: var(--spacing-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .template-card-title {
@@ -953,6 +960,7 @@ select:disabled {
     margin-bottom: var(--spacing-md);
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -963,11 +971,29 @@ select:disabled {
     gap: var(--spacing-xs);
     color: var(--text-secondary);
     font-size: 0.85rem;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
 }
 
 .template-card-cycle i {
     color: var(--primary-color);
+}
+
+.template-card-seasons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-secondary);
+}
+
+.template-card-seasons i {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.template-card-seasons i:hover {
+    transform: scale(1.2);
 }
 
 .template-card-actions {
@@ -976,6 +1002,7 @@ select:disabled {
     align-items: center;
     padding-top: var(--spacing-md);
     border-top: 1px solid var(--border-color);
+    margin-top: auto;
 }
 
 .template-card-actions-left {

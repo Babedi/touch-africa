@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Tables Sorting Test</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/shared/styles/variables.css">
+    <link rel="stylesheet" href="/frontend/shared/styles/tables.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .test-note {
+            background: #e7f3ff;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            color: #0c5460;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .status-card {
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .status-pass {
+            background: #f0fdf4;
+            border-color: #22c55e;
+        }
+
+        .status-fail {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .status-partial {
+            background: #fffbeb;
+            border-color: #f59e0b;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Tables Sorting Verification</h1>
+
+    <div class="test-note">
+        <strong>Purpose:</strong> This page tests that all admin table headers are properly configured for sorting.
+        Each table shows which columns have data-sort attributes and proper accessibility features.
+    </div>
+
+    <!-- People Table Test -->
+    <div class="test-container">
+        <h2>People Table Headers</h2>
+        <div id="people-test"></div>
+    </div>
+
+    <!-- Admins Table Test -->
+    <div class="test-container">
+        <h2>Admins Table Headers</h2>
+        <div id="admins-test"></div>
+    </div>
+
+    <!-- Roles Table Test -->
+    <div class="test-container">
+        <h2>Roles Table Headers</h2>
+        <div id="roles-test"></div>
+    </div>
+
+    <!-- Tenants Table Test -->
+    <div class="test-container">
+        <h2>Tenants Table Headers</h2>
+        <div id="tenants-test"></div>
+    </div>
+
+    <!-- Lookups Table Test -->
+    <div class="test-container">
+        <h2>Lookups Table Headers</h2>
+        <div id="lookups-test"></div>
+    </div>
+
+    <script>
+        // Table configurations to test
+        const tableConfigs = {
+            'People': {
+                url: '/frontend/dashboards/internal.admin/pages/people/people.html',
+                targetId: 'people-test'
+            },
+            'Admins': {
+                url: '/frontend/dashboards/internal.admin/pages/admins/admins.html',
+                targetId: 'admins-test'
+            },
+            'Roles': {
+                url: '/frontend/dashboards/internal.admin/pages/roles/roles.html',
+                targetId: 'roles-test'
+            },
+            'Tenants': {
+                url: '/frontend/dashboards/internal.admin/pages/tenants/tenants.html',
+                targetId: 'tenants-test'
+            },
+            'Lookups': {
+                url: '/frontend/dashboards/internal.admin/pages/lookups/lookups.html',
+                targetId: 'lookups-test'
+            }
+        };
+
+        async function testTableHeaders(tableName, config) {
+            const targetEl = document.getElementById(config.targetId);
+
+            try {
+                // Fetch the HTML content
+                const response = await fetch(config.url);
+                const pageHtml = await response.text();
+
+                // Parse the HTML to extract table headers
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(pageHtml, 'text/html');
+                const table = doc.querySelector('table');
+
+                if (!table) {
+                    targetEl.innerHTML = '<div class="status-card status-fail">❌ No table found</div>';
+                    return;
+                }
+
+                const headers = table.querySelectorAll('thead th');
+                const results = [];
+
+                headers.forEach((th, index) => {
+                    const text = th.textContent.trim();
+                    const hasDataSort = th.hasAttribute('data-sort');
+                    const dataSort = th.getAttribute('data-sort');
+                    const hasTabindex = th.hasAttribute('tabindex');
+                    const hasRole = th.hasAttribute('role');
+                    const hasAriSort = th.hasAttribute('aria-sort');
+                    const isActionsCol = th.classList.contains('actions-col') || text === 'Actions';
+
+                    results.push({
+                        index,
+                        text,
+                        hasDataSort,
+                        dataSort,
+                        hasTabindex,
+                        hasRole,
+                        hasAriSort,
+                        isActionsCol,
+                        shouldBeSortable: !isActionsCol && text !== 'Avatar'
+                    });
+                });
+
+                // Generate report
+                let reportHtml = '<div class="status-grid">';
+
+                results.forEach(result => {
+                    const isComplete = !result.shouldBeSortable ||
+                        (result.hasDataSort && result.hasTabindex && result.hasRole && result.hasAriSort);
+                    const statusClass = !result.shouldBeSortable ? 'status-pass' :
+                        isComplete ? 'status-pass' : 'status-fail';
+
+                    reportHtml += `
+                        <div class="status-card ${statusClass}">
+                            <h4>${result.text || `Column ${result.index + 1}`}</h4>
+                            <p><strong>Should be sortable:</strong> ${result.shouldBeSortable ? 'Yes' : 'No'}</p>
+                            ${result.shouldBeSortable ? `
+                                <p><strong>data-sort:</strong> ${result.hasDataSort ? '✅' : '❌'} ${result.dataSort || ''}</p>
+                                <p><strong>tabindex:</strong> ${result.hasTabindex ? '✅' : '❌'}</p>
+                                <p><strong>role:</strong> ${result.hasRole ? '✅' : '❌'}</p>
+                                <p><strong>aria-sort:</strong> ${result.hasAriSort ? '✅' : '❌'}</p>
+                            ` : '<p>✅ Actions column - no sorting needed</p>'}
+                        </div>
+                    `;
+                });
+
+                reportHtml += '</div>';
+
+                // Summary
+                const sortableColumns = results.filter(r => r.shouldBeSortable);
+                const completeColumns = sortableColumns.filter(r =>
+                    r.hasDataSort && r.hasTabindex && r.hasRole && r.hasAriSort
+                );
+
+                const summaryClass = completeColumns.length === sortableColumns.length ?
+                    'status-pass' : 'status-partial';
+
+                reportHtml = `
+                    <div class="status-card ${summaryClass}">
+                        <h3>Summary: ${completeColumns.length}/${sortableColumns.length} sortable columns properly configured</h3>
+                    </div>
+                    ${reportHtml}
+                `;
+
+                targetEl.innerHTML = reportHtml;
+
+            } catch (error) {
+                targetEl.innerHTML = `<div class="status-card status-fail">❌ Error loading table: ${error.message}</div>`;
+            }
+        }
+
+        // Test all tables
+        async function runAllTests() {
+            for (const [tableName, config] of Object.entries(tableConfigs)) {
+                await testTableHeaders(tableName, config);
+            }
+        }
+
+        // Run tests when page loads
+        runAllTests();
+    </script>
+</body>
+
+</html>

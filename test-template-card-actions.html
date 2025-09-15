@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Card Actions Test</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --transition-base: all 0.15s ease;
+            --spacing-lg: 1.5rem;
+            --spacing-md: 1rem;
+            --spacing-sm: 0.5rem;
+            --spacing-xs: 0.25rem;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --primary-color: #34d399;
+            --bg-secondary: #f8fafc;
+            --radius-sm: 6px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+        }
+
+        .template-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .template-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .template-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--bg-secondary);
+            flex-shrink: 0;
+        }
+
+        .template-card-content {
+            padding: var(--spacing-lg);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.4;
+        }
+
+        .template-card-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        .template-card-category,
+        .template-card-subcategory {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+        }
+
+        .template-card-category {
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--primary-color);
+        }
+
+        .template-card-subcategory {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        .template-card-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .template-card-cycle {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .template-card-cycle i {
+            color: var(--primary-color);
+        }
+
+        .template-card-seasons {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: 0.85rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-secondary);
+        }
+
+        .template-card-seasons i {
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .template-card-seasons i:hover {
+            transform: scale(1.2);
+        }
+
+        .template-card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .template-card-actions-left {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .template-card-actions-right {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .btn {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.15s ease;
+        }
+
+        .btn-activate {
+            color: #fff;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-color: #28a745;
+        }
+
+        .btn-view {
+            color: #6c757d;
+            border-color: #6c757d;
+            background: transparent;
+        }
+
+        .btn-edit {
+            color: #007bff;
+            border-color: #007bff;
+            background: transparent;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .test-note {
+            background: #e7f3ff;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            color: #0c5460;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Template Card Actions Bottom Alignment Test</h1>
+
+    <div class="test-note">
+        <strong>Test Purpose:</strong> This test demonstrates that template card actions are properly bottom-aligned
+        regardless of content length.
+        Each card has different content lengths but the action buttons should always be aligned at the bottom of each
+        card.
+    </div>
+
+    <div class="test-grid">
+        <!-- Short content card -->
+        <div class="template-card">
+            <img src="/frontend/shared/images/templates/beefsteak-tomato.jpg" alt="Beefsteak Tomato"
+                class="template-card-image">
+            <div class="template-card-content">
+                <h4 class="template-card-title">Short Content Test</h4>
+                <div class="template-card-meta">
+                    <span class="template-card-category">Vegetables</span>
+                    <span class="template-card-subcategory">Tomatoes</span>
+                </div>
+                <p class="template-card-description">Short description.</p>
+                <div class="template-card-cycle">
+                    <i class="fas fa-clock"></i>
+                    <span>Cycle time: 75-85 days</span>
+                </div>
+                <div class="template-card-seasons">
+                    <span style="margin-right: 8px; font-weight: 500;">Best seasons:</span>
+                    <i class="fas fa-seedling" style="color: #4CAF50; margin-right: 4px;" title="Spring"></i>
+                    <i class="fas fa-sun" style="color: #FF9800; margin-right: 4px;" title="Summer"></i>
+                </div>
+                <div class="template-card-actions">
+                    <div class="template-card-actions-left">
+                        <button class="btn btn-activate">
+                            <i class="fas fa-play"></i> Activate
+                        </button>
+                    </div>
+                    <div class="template-card-actions-right">
+                        <button class="btn btn-view">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-edit">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medium content card -->
+        <div class="template-card">
+            <img src="/frontend/shared/images/templates/carrot-nantes.jpg" alt="Carrot Nantes"
+                class="template-card-image">
+            <div class="template-card-content">
+                <h4 class="template-card-title">Medium Content Test</h4>
+                <div class="template-card-meta">
+                    <span class="template-card-category">Root Vegetables</span>
+                    <span class="template-card-subcategory">Carrots</span>
+                </div>
+                <p class="template-card-description">This is a medium length description that takes up more space than
+                    the short one. Classic orange carrots with cylindrical shape and sweet flavor. Perfect for salads
+                    and cooking.</p>
+                <div class="template-card-cycle">
+                    <i class="fas fa-clock"></i>
+                    <span>Cycle time: 70-80 days</span>
+                </div>
+                <div class="template-card-seasons">
+                    <span style="margin-right: 8px; font-weight: 500;">Best seasons:</span>
+                    <i class="fas fa-seedling" style="color: #4CAF50; margin-right: 4px;" title="Spring"></i>
+                    <i class="fas fa-sun" style="color: #FF9800; margin-right: 4px;" title="Summer"></i>
+                    <i class="fas fa-leaf" style="color: #F57C00; margin-right: 4px;" title="Fall"></i>
+                </div>
+                <div class="template-card-actions">
+                    <div class="template-card-actions-left">
+                        <button class="btn btn-activate">
+                            <i class="fas fa-play"></i> Activate
+                        </button>
+                    </div>
+                    <div class="template-card-actions-right">
+                        <button class="btn btn-view">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-edit">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Long content card -->
+        <div class="template-card">
+            <img src="/frontend/shared/images/templates/pumpkin-atlantic-giant.jpg" alt="Pumpkin Atlantic Giant"
+                class="template-card-image">
+            <div class="template-card-content">
+                <h4 class="template-card-title">Long Content Test with Very Long Title That Might Wrap</h4>
+                <div class="template-card-meta">
+                    <span class="template-card-category">Vegetables</span>
+                    <span class="template-card-subcategory">Pumpkins</span>
+                </div>
+                <p class="template-card-description">This is a very long description that demonstrates how the card
+                    actions remain bottom-aligned even when there is significantly more content. Giant pumpkins that can
+                    reach over 100 pounds and are perfect for competitions. These require careful cultivation and lots
+                    of space. The growing season is quite long, requiring patience and dedication. Best planted in
+                    spring for fall harvest. Requires rich soil and consistent watering throughout the growing season.
+                </p>
+                <div class="template-card-cycle">
+                    <i class="fas fa-clock"></i>
+                    <span>Cycle time: 120-140 days</span>
+                </div>
+                <div class="template-card-seasons">
+                    <span style="margin-right: 8px; font-weight: 500;">Best seasons:</span>
+                    <i class="fas fa-seedling" style="color: #4CAF50; margin-right: 4px;" title="Spring"></i>
+                </div>
+                <div class="template-card-actions">
+                    <div class="template-card-actions-left">
+                        <button class="btn btn-activate">
+                            <i class="fas fa-play"></i> Activate
+                        </button>
+                    </div>
+                    <div class="template-card-actions-right">
+                        <button class="btn btn-view">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn btn-edit">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

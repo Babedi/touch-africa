@@ -346,6 +346,25 @@ window.TouchAfrica.ApiClient = class ApiClient {
     patch: (id, body) => this.patch(`/external/tenants/${id}`, { body }),
     remove: (id) => this.delete(`/external/tenants/${id}`),
   };
+
+  // Internal: Todos
+  todos = {
+    create: (body) => this.post("/internal/todos", { body }),
+    list: (params) => this.get("/internal/todos", { params }),
+    search: (params) => this.get("/internal/todos/search", { params }),
+    bulk: (body) => this.post("/internal/todos/bulk", { body }),
+    export: (params) => this.get("/internal/todos/export", { params }),
+    stats: (params) => this.get("/internal/todos/stats", { params }),
+    get: (id) => this.get(`/internal/todos/${id}`),
+    update: (id, body) => this.put(`/internal/todos/${id}`, { body }),
+    patch: (id, body) => this.patch(`/internal/todos/${id}`, { body }),
+    toggle: (id) => this.patch(`/internal/todos/${id}/toggle`),
+    remove: (id) => this.delete(`/internal/todos/${id}`),
+    completed: (params) => this.get("/internal/todos/completed", { params }),
+    pending: (params) => this.get("/internal/todos/pending", { params }),
+    byPriority: (priority, params) =>
+      this.get(`/internal/todos/priority/${priority}`, { params }),
+  };
 };
 
 // Create global instance

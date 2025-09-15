@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="/shared/styles/forms.css" />
     <link rel="stylesheet" href="/shared/styles/tables.css" />
     <link rel="stylesheet" href="/shared/styles/modals.css" />
+    <!-- Todo Styles - relocated to separate file -->
+    <link rel="stylesheet" href="/frontend/temp/todo-styles.css" />
 </head>
 
 <body>
@@ -78,6 +80,15 @@
             </main>
         </div>
     </div>
+
+    <!-- Todo Functionality - relocated to separate files -->
+    <!-- Floating Todo Button -->
+    <button class="todo-float-button">
+        Todo
+    </button>
+
+    <!-- Todo Modal Container -->
+    <div id="todoModalContainer"></div>
 
     <script src="/frontend/shared/scripts/core-utils.js"></script>
     <script src="/frontend/shared/js/base.js"></script>
@@ -163,6 +174,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="/frontend/shared/scripts/unified-table.js"></script>
+    <!-- Todo Modal JavaScript - relocated to separate file -->
+    <script type="module" src="/frontend/temp/todo-modal.js"></script>
 </body>
 
 </html>

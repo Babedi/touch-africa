@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Debug Table Sorting</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th[data-sort] {
+            cursor: pointer;
+            background: #f5f5f5;
+        }
+
+        th[data-sort]:hover {
+            background: #e5e5e5;
+        }
+
+        .sort-asc::after {
+            content: ' ↑';
+        }
+
+        .sort-desc::after {
+            content: ' ↓';
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Debug Table Sorting</h1>
+    <p>Click on table headers to test sorting functionality:</p>
+
+    <table id="test-table">
+        <thead>
+            <tr>
+                <th data-sort="name">Name</th>
+                <th data-sort="email">Email</th>
+                <th data-sort="status">Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td>Active</td>
+                <td>Edit</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>jane@example.com</td>
+                <td>Inactive</td>
+                <td>Edit</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="log"></div>
+
+    <script src="/frontend/shared/scripts/core-utils.js"></script>
+    <script src="/frontend/shared/scripts/unified-table.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.getElementById('test-table');
+            const log = document.getElementById('log');
+
+            function logMessage(msg) {
+                console.log(msg);
+                log.innerHTML += '<p>' + msg + '</p>';
+            }
+
+            logMessage('Page loaded, checking UnifiedTable...');
+
+            if (window.UnifiedTable) {
+                logMessage('UnifiedTable found!');
+
+                // Test sorting setup
+                window.UnifiedTable.setupSorting(
+                    table,
+                    function (field, direction) {
+                        logMessage('Sort callback called: ' + field + ' ' + direction);
+                    },
+                    { field: null, order: 'asc' }
+                );
+
+                logMessage('Sorting setup complete');
+
+                // Check if headers have click listeners
+                const headers = table.querySelectorAll('th[data-sort]');
+                logMessage('Found ' + headers.length + ' sortable headers');
+
+                headers.forEach(function (header, index) {
+                    logMessage('Header ' + index + ': ' + header.textContent + ' (data-sort=' + header.getAttribute('data-sort') + ')');
+                });
+
+            } else {
+                logMessage('ERROR: UnifiedTable not found!');
+            }
+        });
+    </script>
+</body>
+
+</html>

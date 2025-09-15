@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Modal Test</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="frontend/shared/styles/theme.css" />
+    <link rel="stylesheet" href="frontend/shared/styles/base.css" />
+    <link rel="stylesheet" href="frontend/shared/styles/layout.css" />
+    <link rel="stylesheet" href="frontend/shared/styles/components.css" />
+    <link rel="stylesheet" href="frontend/shared/styles/forms.css" />
+    <link rel="stylesheet" href="frontend/shared/styles/tables.css" />
+    <link rel="stylesheet" href="frontend/shared/styles/modals.css" />
+    <link rel="stylesheet" href="frontend/temp/todo-styles.css" />
+</head>
+
+<body style="padding: 20px; background: var(--bg-primary);">
+    <h1>Todo Modal Test</h1>
+    <p>Click the orange Todo button to test the functionality:</p>
+
+    <!-- Floating Todo Button -->
+    <button class="todo-float-button">
+        Todo
+    </button>
+
+    <!-- Todo Modal Container -->
+    <div id="todoModalContainer"></div>
+
+    <!-- Test Results -->
+    <div style="margin: 20px 0; padding: 20px; background: var(--bg-card); border-radius: 8px;">
+        <h3>Test Results:</h3>
+        <ul id="testResults">
+            <li>Loading test...</li>
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="frontend/temp/todo-modal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const testResults = document.getElementById('testResults');
+            const results = [];
+
+            // Test 1: Check if TodoModal class exists
+            try {
+                if (typeof TodoModal !== 'undefined') {
+                    results.push('✅ TodoModal class loaded successfully');
+                } else {
+                    results.push('❌ TodoModal class not found');
+                }
+            } catch (e) {
+                results.push('❌ Error checking TodoModal: ' + e.message);
+            }
+
+            // Test 2: Initialize TodoModal
+            try {
+                window.todoModal = new TodoModal('todoModalContainer');
+                results.push('✅ TodoModal instance created successfully');
+            } catch (e) {
+                results.push('❌ Error creating TodoModal: ' + e.message);
+            }
+
+            // Test 3: Add button click handler
+            try {
+                const todoButton = document.querySelector('.todo-float-button');
+                if (todoButton) {
+                    todoButton.addEventListener('click', () => {
+                        try {
+                            window.todoModal.show();
+                            results.push('✅ Modal show() method called');
+                            updateTestResults();
+                        } catch (e) {
+                            results.push('❌ Error showing modal: ' + e.message);
+                            updateTestResults();
+                        }
+                    });
+                    results.push('✅ Click handler attached to Todo button');
+                } else {
+                    results.push('❌ Todo button not found');
+                }
+            } catch (e) {
+                results.push('❌ Error setting up click handler: ' + e.message);
+            }
+
+            // Test 4: Check if modal HTML is generated
+            setTimeout(() => {
+                try {
+                    const modalContainer = document.getElementById('todoModalContainer');
+                    if (modalContainer && modalContainer.innerHTML.trim()) {
+                        results.push('✅ Modal HTML generated in container');
+                    } else {
+                        results.push('⚠️ Modal HTML not yet generated (normal until first show)');
+                    }
+                } catch (e) {
+                    results.push('❌ Error checking modal HTML: ' + e.message);
+                }
+                updateTestResults();
+            }, 500);
+
+            function updateTestResults() {
+                testResults.innerHTML = results.map(result => `<li>${result}</li>`).join('');
+            }
+
+            updateTestResults();
+        });
+    </script>
+</body>
+
+</html>

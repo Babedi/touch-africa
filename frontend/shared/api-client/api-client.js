@@ -460,6 +460,24 @@ export class TouchAfricaApiClient {
     remove: (tenantId, id) =>
       this.delete(`/api/v1/${tenantId}/permissions/${id}`),
   };
+
+  // Internal: Todos
+  todos = {
+    create: (body) => this.post("/api/v1/internal/todos", { body }),
+    list: (params) => this.get("/api/v1/internal/todos", { params }),
+    get: (id) => this.get(`/api/v1/internal/todos/${id}`),
+    update: (id, body) => this.put(`/api/v1/internal/todos/${id}`, { body }),
+    patch: (id, body) => this.patch(`/api/v1/internal/todos/${id}`, { body }),
+    toggle: (id) => this.patch(`/api/v1/internal/todos/${id}/toggle`),
+    remove: (id) => this.delete(`/api/v1/internal/todos/${id}`),
+    completed: (params) =>
+      this.get("/api/v1/internal/todos/completed", { params }),
+    pending: (params) => this.get("/api/v1/internal/todos/pending", { params }),
+    byPriority: (priority, params) =>
+      this.get(`/api/v1/internal/todos/priority/${priority}`, { params }),
+    bulk: (body) => this.patch("/api/v1/internal/todos/bulk", { body }),
+    stats: (params) => this.get("/api/v1/internal/todos/stats", { params }),
+  };
 }
 
 export default TouchAfricaApiClient;

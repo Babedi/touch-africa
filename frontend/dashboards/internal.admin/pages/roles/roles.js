@@ -1,9 +1,10 @@
-// Roles page: load stats and list using TouchAfricaApiClient (enhanced with single-column sorting, modals, permission popovers)
+// Roles page: Using unified table management system
 (function () {
   const totalEl = document.getElementById("roles-total");
   const standardEl = document.getElementById("roles-standard");
   const customEl = document.getElementById("roles-custom");
   const tbody = document.getElementById("roles-tbody");
+  const table = tbody?.closest("table");
   const searchInput = document.querySelector(".page-roles .search-input");
   const clearBtn = document.querySelector(".page-roles .btn-clear");
   const pageSizeSelect = document.getElementById("roles-page-size");
@@ -13,6 +14,10 @@
   const btnNext = document.getElementById("roles-next");
   const btnLast = document.getElementById("roles-last");
 
+  // Search fields for unified table filtering
+  const searchFields = ["name", "description", "module"];
+
+  // State object for table management
   const state = {
     page: 1,
     limit: 20,
@@ -25,17 +30,6 @@
 
   const SORT_STORAGE_KEY = "roles.sortSpec";
 
-  function saveSortSpec() {
-    try {
-      localStorage.setItem(
-        SORT_STORAGE_KEY,
-        JSON.stringify({
-          primary: state.sortBy,
-          order: state.order,
-        })
-      );
-    } catch (_) {}
-  }
   function restoreSortSpec() {
     try {
       const raw = localStorage.getItem(SORT_STORAGE_KEY);
@@ -47,6 +41,10 @@
       }
     } catch (_) {}
   }
+
+  // Table manager instance
+  let tableManager;
+  let currentData = [];
 
   function setValue(el, value) {
     if (!el) return;
@@ -186,8 +184,12 @@
     if (!tbody) return;
     if (!Array.isArray(items) || items.length === 0) {
       tbody.innerHTML = '<tr><td colspan="6">No roles found</td></tr>';
+      currentData = [];
       return;
     }
+
+    // Store current data for table manager
+    currentData = items;
     tbody.innerHTML = items
       .map((r) => {
         const name = r.roleName || r.name || r.roleCode || r.displayName || "—";
@@ -276,152 +278,79 @@
     }
   }
 
-  function getSortableHeaders() {
-    const table = tbody?.closest("table");
-    if (!table) return [];
-    return Array.from(table.querySelectorAll("thead th[data-sort]"));
-  }
-
-  function normalizeSortField(th) {
-    if (!th) return null;
-    const raw = (th.getAttribute("data-sort") || "").trim();
-    if (!raw) return null;
-    const candidates = raw
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-    return candidates[0] || null;
-  }
-
-  function updateSortHeaderIndicators() {
-    const headers = getSortableHeaders();
-    headers.forEach((th) => {
-      const field = normalizeSortField(th);
-      const isActive = field === state.sortBy;
-      const base = th.textContent.replace(/[▲▼].*$/, "").trim();
-      if (isActive) {
-        const arrow = state.order === "desc" ? "▼" : "▲";
-        th.textContent = `${base} ${arrow}`;
-        th.setAttribute("aria-sort", state.order);
-      } else {
-        th.textContent = base;
-        th.setAttribute("aria-sort", "none");
-      }
-    });
-  }
-
-  // Client-side sorting function as fallback
-  function sortTableClientSide(field, order) {
-    if (!tbody) return;
-    if (window.CoreUtils && CoreUtils.table) {
-      // Build a lightweight data model from rows
-      const rows = Array.from(tbody.querySelectorAll("tr")).map((r) => ({
-        _el: r,
-        roleName: r.cells[0]?.textContent.trim() || "",
-        description: r.cells[1]?.textContent.trim() || "",
-        type: r.cells[2]?.textContent.trim() || "",
-        permissions: parseInt(r.cells[3]?.textContent.trim()) || 0,
-        status: r.cells[4]?.textContent.trim() || "",
-      }));
-      const sorted = CoreUtils.table.sort(rows, field, order).map((r) => r._el);
-      tbody.innerHTML = "";
-      sorted.forEach((r) => tbody.appendChild(r));
-      return;
+  // Initialize unified table manager
+  function initializeTableManager() {
+    if (!window.UnifiedTable) {
+      console.error("UnifiedTable not available");
+      return null;
     }
-    // Legacy fallback
-    const rows = Array.from(tbody.querySelectorAll("tr"));
-    rows.sort((a, b) => {
-      let aVal, bVal;
-      switch (
-        field // derive per column
-      ) {
-        case "roleName":
-          aVal = a.cells[0]?.textContent.trim() || "";
-          bVal = b.cells[0]?.textContent.trim() || "";
-          break;
-        case "description":
-          aVal = a.cells[1]?.textContent.trim() || "";
-          bVal = b.cells[1]?.textContent.trim() || "";
-          break;
-        case "isSystem":
-        case "type":
-          aVal = a.cells[2]?.textContent.trim() || "";
-          bVal = b.cells[2]?.textContent.trim() || "";
-          break;
-        case "permissions":
-          aVal = parseInt(a.cells[3]?.textContent.trim()) || 0;
-          bVal = parseInt(b.cells[3]?.textContent.trim()) || 0;
-          break;
-        case "isActive":
-        case "status":
-          aVal = a.cells[4]?.textContent.trim() || "";
-          bVal = b.cells[4]?.textContent.trim() || "";
-          break;
-        default:
-          return 0;
-      }
-      if (typeof aVal === "number" && typeof bVal === "number")
-        return order === "asc" ? aVal - bVal : bVal - aVal;
-      const cmp = aVal.localeCompare(bVal);
-      return order === "asc" ? cmp : -cmp;
+
+    return window.UnifiedTable.createManager({
+      data: currentData,
+      searchFields: searchFields,
+      storageKey: "roles-table-sort",
+      onDataUpdate: function (data, meta) {
+        renderRows(data);
+        updatePagination(meta);
+      },
+      onSearch: function (query) {
+        loadRoles({ page: 1, q: query });
+      },
     });
-    tbody.innerHTML = "";
-    rows.forEach((r) => tbody.appendChild(r));
   }
 
-  function wireSorting() {
-    const headers = getSortableHeaders();
-    headers.forEach((th) => {
-      if (th.dataset._wired) return;
-      th.dataset._wired = "1";
-      const activate = (e) => {
-        const field = normalizeSortField(th);
-        if (!field) return;
+  // Update pagination UI using unified table system
+  function updatePagination(meta) {
+    if (!pageInfo) return;
+    const { page, pages, total, limit } = meta;
 
-        // Single column sorting only
-        if (state.sortBy === field) {
-          // Toggle order if same column
-          state.order = state.order === "asc" ? "desc" : "asc";
-        } else {
-          // Set new sort column
-          state.sortBy = field;
-          state.order = field.toLowerCase().includes("createdat")
-            ? "desc"
-            : "asc";
-        }
+    pageInfo.textContent = `Page ${page} of ${pages} • ${total.toLocaleString()} total`;
 
-        saveSortSpec();
+    if (btnFirst) btnFirst.disabled = page <= 1;
+    if (btnPrev) btnPrev.disabled = page <= 1;
+    if (btnNext) btnNext.disabled = page >= pages;
+    if (btnLast) btnLast.disabled = page >= pages;
 
-        // Try backend sorting first, fallback to client-side
-        loadRoles({
-          page: 1,
-          limit: state.limit,
-          q: state.q,
-          sortBy: state.sortBy,
-          order: state.order,
-        })
-          .then(() => {
-            // Check if backend sorting worked by comparing first few rows
-            // If it didn't work, apply client-side sorting
-            setTimeout(() => {
-              sortTableClientSide(state.sortBy, state.order);
-              updateSortHeaderIndicators();
-            }, 100);
-          })
-          .catch(() => {
-            // If backend fails, use client-side sorting
-            sortTableClientSide(state.sortBy, state.order);
-            updateSortHeaderIndicators();
-          });
-      };
-      th.addEventListener("click", activate);
-      th.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          activate(e);
-        }
+    if (pageSizeSelect) {
+      const val = String(limit);
+      if (pageSizeSelect.value !== val) {
+        pageSizeSelect.value = val;
+      }
+    }
+  }
+
+  // Initialize unified table features
+  function setupTableFeatures() {
+    tableManager = initializeTableManager();
+    if (!tableManager) return;
+
+    // Setup search using UnifiedTable directly
+    if (
+      searchInput &&
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSearch === "function"
+    ) {
+      window.UnifiedTable.setupSearch(searchInput, function (query) {
+        tableManager.search(query);
       });
-    });
+    }
+
+    // Setup sorting using UnifiedTable directly
+    if (
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSorting === "function"
+    ) {
+      const table = tbody?.closest("table");
+      if (table) {
+        window.UnifiedTable.setupSorting(
+          table,
+          function (field, order) {
+            loadRoles({ page: 1, sortBy: field, order: order });
+          },
+          { field: state.sortBy, order: state.order }
+        );
+      }
+    }
   }
 
   async function loadRoles({
@@ -435,6 +364,13 @@
     tbody.innerHTML = '<tr><td colspan="6">Loading…</td></tr>';
     try {
       const api = await getApi();
+
+      // Update state with current parameters
+      state.page = page;
+      state.limit = limit;
+      state.q = q;
+      state.sortBy = sortBy;
+      state.order = order;
 
       // Use current single sort state
       // sortBy and order are already set from state.sortBy and state.order
@@ -512,7 +448,9 @@
         state.total = items.length || 0;
       }
       renderRows(items);
-      updateSortHeaderIndicators();
+      if (tableManager) {
+        tableManager.setData(items);
+      }
       updatePager({
         page: state.page,
         pages: state.pages,
@@ -543,7 +481,11 @@
     state.limit = initLimit;
     restoreSortSpec();
     loadStats();
-    wireSorting();
+
+    // Setup table features with a small delay to ensure UnifiedTable is loaded
+    setTimeout(() => {
+      setupTableFeatures();
+    }, 100);
 
     loadRoles({
       page: 1,

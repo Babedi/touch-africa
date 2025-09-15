@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Simulation Test</title>
+    <link rel="stylesheet" href="http://localhost:5000/frontend/temp/todo-styles.css" />
+</head>
+
+<body>
+    <!-- Simulate main dashboard layout -->
+    <div class="dashboard-layout">
+        <!-- Main dashboard todo button (always present) -->
+        <button class="todo-float-button" id="main-todo-btn">
+            Main Todo
+        </button>
+
+        <!-- Page content container -->
+        <div id="pageRoot">
+            <!-- This simulates dynamically loaded dashboard page -->
+            <section>
+                <h1>Dashboard Page Content</h1>
+                <!-- Dashboard page todo button (loaded dynamically) -->
+                <button id="todo-float-btn" class="todo-float-button" title="Todo List">
+                    Dashboard Todo
+                </button>
+            </section>
+        </div>
+    </div>
+
+    <!-- Todo Modal Container -->
+    <div id="todoModalContainer"></div>
+
+    <!-- Load TouchAfricaApiClient first -->
+    <script src="http://localhost:5000/frontend/shared/api/touchafrica-api-client.js"></script>
+
+    <!-- Load TodoModal as module -->
+    <script type="module">
+        import TodoModal, { initializeTodoModal } from 'http://localhost:5000/frontend/temp/todo-modal.js';
+
+        // Wait for API client to be available
+        function waitForApiClient() {
+            return new Promise((resolve) => {
+                if (window.TouchAfricaApiClient) {
+                    resolve();
+                } else {
+                    setTimeout(() => waitForApiClient().then(resolve), 100);
+                }
+            });
+        }
+
+        waitForApiClient().then(() => {
+            initializeTodoModal();
+            console.log('TodoModal initialized in dashboard simulation');
+        });
+    </script>
+</body>
+
+</html>

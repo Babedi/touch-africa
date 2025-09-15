@@ -1,9 +1,10 @@
-// Tenants page: load stats and list using TouchAfricaApiClient (external tenants module)
+// Tenants page: Using unified table management system
 (function () {
   const totalEl = document.getElementById("tenants-total");
   const activeEl = document.getElementById("tenants-active");
   const inactiveEl = document.getElementById("tenants-inactive");
   const tbody = document.getElementById("tenants-tbody");
+  const table = tbody?.closest("table");
   const searchInput = document.querySelector(".search-input");
   const clearBtn = document.querySelector(".btn-clear");
   const pageSizeSelect = document.getElementById("tenants-page-size");
@@ -13,7 +14,22 @@
   const btnNext = document.getElementById("tenants-next");
   const btnLast = document.getElementById("tenants-last");
 
-  const state = { page: 1, limit: 20, q: "", pages: 1, total: 0 };
+  // Search fields for unified table filtering
+  const searchFields = [
+    "name",
+    "title",
+    "slug",
+    "contact.email",
+    "contactEmail",
+    "email",
+    "contact.phoneNumber",
+    "contactPhone",
+    "phone",
+  ];
+
+  // Table manager instance
+  let tableManager;
+  let currentData = [];
 
   function setValue(el, value) {
     if (!el) return;
@@ -130,43 +146,89 @@
       .join("");
   }
 
-  function updatePager(meta) {
-    const { page, pages, total, limit } = meta || state;
-    if (pageInfo)
-      pageInfo.textContent = `Page ${page} of ${pages} • ${total} total`;
+  // Initialize unified table manager
+  function initializeTableManager() {
+    if (!window.UnifiedTable) {
+      console.error("UnifiedTable not available");
+      return null;
+    }
+
+    return window.UnifiedTable.createManager({
+      data: currentData,
+      searchFields: searchFields,
+      storageKey: "tenants-table-sort",
+      onDataUpdate: function (data, meta) {
+        renderRows(data);
+        updatePagination(meta);
+      },
+      onSearch: function (query) {
+        loadTenants({ page: 1, q: query });
+      },
+    });
+  }
+
+  // Update pagination UI using unified table system
+  function updatePagination(meta) {
+    if (!pageInfo) return;
+    const { page, pages, total, limit } = meta;
+
+    pageInfo.textContent = `Page ${page} of ${pages} • ${total.toLocaleString()} total`;
+
     if (btnFirst) btnFirst.disabled = page <= 1;
     if (btnPrev) btnPrev.disabled = page <= 1;
     if (btnNext) btnNext.disabled = page >= pages;
     if (btnLast) btnLast.disabled = page >= pages;
+
     if (pageSizeSelect) {
-      const val = String(limit || state.limit);
-      if (pageSizeSelect.value !== val) pageSizeSelect.value = val;
+      const val = String(limit);
+      if (pageSizeSelect.value !== val) {
+        pageSizeSelect.value = val;
+      }
     }
   }
 
   async function loadTenants({
-    page = state.page,
-    limit = state.limit,
-    q = state.q,
-    clientSortField = null,
-    clientSortDir = "asc",
+    page = tableManager?.state.page || 1,
+    limit = tableManager?.state.limit || 20,
+    q = tableManager?.state.q || "",
+    sortBy = tableManager?.state.sortBy || null,
+    order = tableManager?.state.order || "asc",
   } = {}) {
     if (!tbody) return;
     tbody.innerHTML = '<tr><td colspan="6">Loading…</td></tr>';
 
-    console.log("[TENANTS DEBUG] loadTenants called with:", { page, limit, q });
+    console.log("[TENANTS DEBUG] loadTenants called with:", {
+      page,
+      limit,
+      q,
+      sortBy,
+      order,
+    });
 
     try {
       const api = await getApi();
       console.log("[TENANTS DEBUG] API client ready, making request...");
 
+      // Define allowed sort fields for security
+      const allowedSort = ["name", "email", "phone", "status", "createdAt"];
+      const validSortBy =
+        sortBy && allowedSort.includes(sortBy) ? sortBy : null;
+
+      // Build request parameters
+      const params = { page, limit };
+      if (q) params.q = q;
+      if (validSortBy) {
+        params.sortBy = validSortBy;
+        params.order = order || "asc";
+      }
+
       const res = q
-        ? await api.tenants.search({ page, limit, q })
-        : await api.tenants.list({ page, limit });
+        ? await api.tenants.search(params)
+        : await api.tenants.list(params);
 
       console.log("[TENANTS DEBUG] API response:", res);
 
-      // Use the same pattern as people.js - preserve the response envelope
+      // Extract data and pagination
       const envelope = res && typeof res === "object" ? res : { data: res };
       const items = Array.isArray(envelope.data)
         ? envelope.data
@@ -176,142 +238,155 @@
       const pagination = envelope.pagination || null;
 
       console.log("[TENANTS DEBUG] Parsed data:", {
-        envelope: !!envelope,
         items: items.length,
         pagination: pagination,
-        rawResponse: res,
-        envelopeKeys: Object.keys(envelope || {}),
-        responseType: typeof res,
-        hasData: !!envelope.data,
-        hasPagination: !!envelope.pagination,
       });
 
+      // Update current data for the table manager
+      currentData = items;
+
+      // If we have backend pagination, render directly and update UI
       if (pagination) {
-        state.page = Number(pagination.page) || page || 1;
-        state.limit = Number(pagination.limit) || limit || 20;
-        state.pages = Number(pagination.pages) || 1;
-        state.total = Number(pagination.total) || items.length || 0;
-        console.log("[TENANTS DEBUG] Updated state from pagination:", state);
+        renderRows(items);
+        updatePagination({
+          page: Number(pagination.page) || page,
+          pages: Number(pagination.pages) || 1,
+          total: Number(pagination.total) || items.length,
+          limit: Number(pagination.limit) || limit,
+          hasNext: pagination.page < pagination.pages,
+          hasPrev: pagination.page > 1,
+        });
       } else {
-        state.page = page || 1;
-        state.limit = limit || 20;
-        state.pages = 1;
-        state.total = items.length || 0;
-        console.log(
-          "[TENANTS DEBUG] No pagination data, using defaults:",
-          state
-        );
+        // No backend pagination - let table manager handle everything
+        if (tableManager) {
+          tableManager.setData(items);
+        } else {
+          renderRows(items);
+          updatePagination({
+            page: 1,
+            pages: 1,
+            total: items.length,
+            limit: items.length,
+            hasNext: false,
+            hasPrev: false,
+          });
+        }
       }
-      let rows = items;
-      if (clientSortField && window.CoreUtils && CoreUtils.table) {
-        rows = CoreUtils.table.sort(rows, clientSortField, clientSortDir);
-      }
-      renderRows(rows);
-      updatePager({
-        page: state.page,
-        pages: state.pages,
-        total: state.total,
-        limit: state.limit,
-      });
     } catch (err) {
       console.error("[Tenants] list error", err?.status, err?.data || err);
-      tbody.innerHTML = `<tr><td colspan="6">${
+      const errorMessage =
         err?.status === 401 || err?.status === 403
           ? "Unauthorized"
-          : "Error loading tenants"
-      }</td></tr>`;
-      updatePager({
-        page: state.page,
-        pages: state.pages,
-        total: state.total,
-        limit: state.limit,
-      });
+          : "Error loading tenants";
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: #666;">${errorMessage}</td></tr>`;
     }
   }
 
-  function init() {
+  function setupTableFeatures() {
+    // Setup unified table functionality
+    if (window.UnifiedTable && table) {
+      // Setup search with unified table system
+      window.UnifiedTable.setupSearch(searchInput, function (query) {
+        loadTenants({ page: 1, q: query });
+      });
+
+      // Setup sorting if table has sortable headers
+      const sortableHeaders = table.querySelectorAll("thead th[data-sort]");
+      if (sortableHeaders.length > 0) {
+        window.UnifiedTable.setupSorting(
+          table,
+          function (field, direction) {
+            loadTenants({ page: 1, sortBy: field, order: direction });
+          },
+          {
+            field: tableManager?.state.sortBy || null,
+            order: tableManager?.state.order || "asc",
+          }
+        );
+      }
+    } else {
+      console.warn("[TENANTS] UnifiedTable not available yet");
+    }
+  }
+
+  function initializePage() {
     console.log("[TENANTS DEBUG] Initializing tenants page...");
 
-    const initLimit = pageSizeSelect ? Number(pageSizeSelect.value) || 20 : 20;
-    state.limit = initLimit;
+    loadStats();
 
-    // Bind event handlers after DOM is ready
-    if (searchInput) {
-      let t;
-      searchInput.addEventListener("input", () => {
-        clearTimeout(t);
-        t = setTimeout(() => {
-          const q = searchInput.value.trim();
-          state.q = q;
-          loadTenants({ page: 1, limit: state.limit, q });
-        }, 300);
-      });
-      console.log("[TENANTS DEBUG] Search input event handler attached");
-    }
+    // Initialize table manager
+    tableManager = initializeTableManager();
 
-    if (clearBtn && searchInput) {
-      clearBtn.addEventListener("click", () => {
-        console.log("[TENANTS DEBUG] Clear button clicked");
-        searchInput.value = "";
-        state.q = "";
-        loadTenants({ page: 1, limit: state.limit });
-      });
-      console.log("[TENANTS DEBUG] Clear button event handler attached");
-    } else {
-      console.log("[TENANTS DEBUG] Clear button or search input not found", {
-        clearBtn: !!clearBtn,
-        searchInput: !!searchInput,
+    // Setup table features with a small delay to ensure UnifiedTable is loaded
+    setTimeout(() => {
+      setupTableFeatures();
+    }, 100);
+
+    // Setup pagination controls
+    if (btnFirst) {
+      btnFirst.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(1);
+        else loadTenants({ page: 1 });
       });
     }
+    if (btnPrev) {
+      btnPrev.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(tableManager.state.page - 1);
+        else
+          loadTenants({
+            page: Math.max(1, (tableManager?.state.page || 1) - 1),
+          });
+      });
+    }
+    if (btnNext) {
+      btnNext.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(tableManager.state.page + 1);
+        else loadTenants({ page: (tableManager?.state.page || 1) + 1 });
+      });
+    }
+    if (btnLast) {
+      btnLast.addEventListener("click", () => {
+        if (tableManager) tableManager.goToPage(tableManager.state.pages);
+        else loadTenants({ page: tableManager?.state.pages || 1 });
+      });
+    }
 
+    // Setup page size selector
     if (pageSizeSelect) {
       pageSizeSelect.addEventListener("change", () => {
         const newLimit = Number(pageSizeSelect.value) || 20;
-        state.limit = newLimit;
-        loadTenants({ page: 1, limit: newLimit, q: state.q });
-      });
-      console.log("[TENANTS DEBUG] Page size select event handler attached");
-    }
-
-    if (btnFirst) {
-      btnFirst.addEventListener("click", () => {
-        if (state.page > 1)
-          loadTenants({ page: 1, limit: state.limit, q: state.q });
+        if (tableManager) {
+          tableManager.setPageSize(newLimit);
+        }
+        loadTenants({ page: 1, limit: newLimit });
       });
     }
 
-    if (btnPrev) {
-      btnPrev.addEventListener("click", () => {
-        if (state.page > 1)
-          loadTenants({ page: state.page - 1, limit: state.limit, q: state.q });
+    // Setup clear button
+    if (clearBtn && searchInput) {
+      clearBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        if (tableManager) {
+          tableManager.search("");
+        } else {
+          loadTenants({ page: 1, q: "" });
+        }
       });
     }
 
-    if (btnNext) {
-      btnNext.addEventListener("click", () => {
-        if (state.page < state.pages)
-          loadTenants({ page: state.page + 1, limit: state.limit, q: state.q });
-      });
-    }
-
-    if (btnLast) {
-      btnLast.addEventListener("click", () => {
-        if (state.page < state.pages)
-          loadTenants({ page: state.pages, limit: state.limit, q: state.q });
-      });
-    }
-
-    console.log(
-      "[TENANTS DEBUG] All event handlers attached, loading initial data..."
-    );
-    loadStats();
-    loadTenants({ page: 1, limit: initLimit, q: state.q || "" });
     wireNewTenantButton();
+
+    // Initial load
+    const initLimit = pageSizeSelect ? Number(pageSizeSelect.value) || 20 : 20;
+    loadTenants({ page: 1, limit: initLimit });
   }
 
-  if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", init);
-  else init();
+  // Initialize when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializePage);
+  } else {
+    initializePage();
+  }
 
   // Action button event listeners
   if (tbody) {

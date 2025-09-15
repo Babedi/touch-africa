@@ -1,5 +1,37 @@
 // Lookups page: load stats and list using TouchAfricaApiClient
 (function () {
+  // Unified table managers
+  let tableManager = null;
+  let categoryTableManager = null;
+  let subcategoryTableManager = null;
+
+  // Current data for table managers
+  let currentData = [];
+  let currentCategoryData = [];
+  let currentSubcategoryData = [];
+
+  // Search fields configuration
+  const searchFields = [
+    "category",
+    "subcategory",
+    "value",
+    "description",
+    "status",
+  ];
+  const categorySearchFields = [
+    "categoryName",
+    "description",
+    "colorCode",
+    "status",
+  ];
+  const subcategorySearchFields = [
+    "subcategoryName",
+    "categoryName",
+    "description",
+    "colorCode",
+    "status",
+  ];
+
   const lookupsTotalEl = document.getElementById("lookups-total");
   const catTotalEl = document.getElementById("lookup-categories-total");
   const subCatTotalEl = document.getElementById("lookup-sub-categories-total");
@@ -166,6 +198,227 @@
       }
     } catch (e) {
       console.warn("[Lookups] Cannot restore sort spec", e);
+    }
+  }
+
+  // Initialize unified table manager for main lookups table
+  function initializeTableManager() {
+    if (!window.UnifiedTable) {
+      console.error("UnifiedTable not available");
+      return null;
+    }
+
+    return window.UnifiedTable.createManager({
+      data: currentData,
+      searchFields: searchFields,
+      storageKey: "lookups-table-sort",
+      onDataUpdate: function (data, meta) {
+        renderRows(data);
+        updatePagination(meta);
+      },
+      onSearch: function (query) {
+        loadLookups({ page: 1, q: query });
+      },
+    });
+  }
+
+  // Initialize unified table manager for categories table
+  function initializeCategoryTableManager() {
+    if (!window.UnifiedTable) {
+      console.error("UnifiedTable not available");
+      return null;
+    }
+
+    return window.UnifiedTable.createManager({
+      data: currentCategoryData,
+      searchFields: categorySearchFields,
+      storageKey: "lookup-categories-table-sort",
+      onDataUpdate: function (data, meta) {
+        renderCategories(data);
+        updateCategoryPagination(meta);
+      },
+      onSearch: function (query) {
+        loadCategories({ page: 1, q: query });
+      },
+    });
+  }
+
+  // Initialize unified table manager for subcategories table
+  function initializeSubcategoryTableManager() {
+    if (!window.UnifiedTable) {
+      console.error("UnifiedTable not available");
+      return null;
+    }
+
+    return window.UnifiedTable.createManager({
+      data: currentSubcategoryData,
+      searchFields: subcategorySearchFields,
+      storageKey: "lookup-subcategories-table-sort",
+      onDataUpdate: function (data, meta) {
+        renderSubCategories(data);
+        updateSubcategoryPagination(meta);
+      },
+      onSearch: function (query) {
+        loadSubcategories({ page: 1, q: query });
+      },
+    });
+  }
+
+  // Setup table features for main lookups table
+  function setupTableFeatures() {
+    tableManager = initializeTableManager();
+    if (!tableManager) return;
+
+    // Setup search using UnifiedTable directly
+    if (
+      searchInput &&
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSearch === "function"
+    ) {
+      window.UnifiedTable.setupSearch(searchInput, function (query) {
+        tableManager.search(query);
+      });
+    }
+
+    // Setup sorting using UnifiedTable directly
+    if (
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSorting === "function"
+    ) {
+      const table = tbody?.closest("table");
+      if (table) {
+        window.UnifiedTable.setupSorting(
+          table,
+          function (field, order) {
+            loadLookups({ page: 1, sortBy: field, order: order });
+          },
+          { field: state.sortBy, order: state.order }
+        );
+      }
+    }
+  }
+
+  // Setup table features for categories table
+  function setupCategoryTableFeatures() {
+    categoryTableManager = initializeCategoryTableManager();
+    if (!categoryTableManager) return;
+
+    // Setup search using UnifiedTable directly
+    if (
+      cat.searchInput &&
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSearch === "function"
+    ) {
+      window.UnifiedTable.setupSearch(cat.searchInput, function (query) {
+        categoryTableManager.search(query);
+      });
+    }
+
+    // Setup sorting using UnifiedTable directly
+    if (
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSorting === "function" &&
+      cat.table
+    ) {
+      window.UnifiedTable.setupSorting(
+        cat.table,
+        function (field, order) {
+          loadCategories({ page: 1, sortBy: field, order: order });
+        },
+        { field: catState.sortBy, order: catState.order }
+      );
+    }
+  }
+
+  // Setup table features for subcategories table
+  function setupSubcategoryTableFeatures() {
+    subcategoryTableManager = initializeSubcategoryTableManager();
+    if (!subcategoryTableManager) return;
+
+    // Setup search using UnifiedTable directly
+    if (
+      sub.searchInput &&
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSearch === "function"
+    ) {
+      window.UnifiedTable.setupSearch(sub.searchInput, function (query) {
+        subcategoryTableManager.search(query);
+      });
+    }
+
+    // Setup sorting using UnifiedTable directly
+    if (
+      window.UnifiedTable &&
+      typeof window.UnifiedTable.setupSorting === "function" &&
+      sub.table
+    ) {
+      window.UnifiedTable.setupSorting(
+        sub.table,
+        function (field, order) {
+          loadSubCategories({ page: 1, sortBy: field, order: order });
+        },
+        { field: subState.sortBy, order: subState.order }
+      );
+    }
+  }
+
+  // Update pagination UI for main table
+  function updatePagination(meta) {
+    if (!pageInfo) return;
+    const { page, pages, total, limit } = meta;
+
+    pageInfo.textContent = `Page ${page} of ${pages} • ${total.toLocaleString()} total`;
+
+    if (btnFirst) btnFirst.disabled = page <= 1;
+    if (btnPrev) btnPrev.disabled = page <= 1;
+    if (btnNext) btnNext.disabled = page >= pages;
+    if (btnLast) btnLast.disabled = page >= pages;
+
+    if (pageSizeSelect) {
+      const val = String(limit);
+      if (pageSizeSelect.value !== val) {
+        pageSizeSelect.value = val;
+      }
+    }
+  }
+
+  // Update pagination UI for categories table
+  function updateCategoryPagination(meta) {
+    if (!cat.pageInfo) return;
+    const { page, pages, total, limit } = meta;
+
+    cat.pageInfo.textContent = `Page ${page} of ${pages} • ${total.toLocaleString()} total`;
+
+    if (cat.first) cat.first.disabled = page <= 1;
+    if (cat.prev) cat.prev.disabled = page <= 1;
+    if (cat.next) cat.next.disabled = page >= pages;
+    if (cat.last) cat.last.disabled = page >= pages;
+
+    if (cat.pageSize) {
+      const val = String(limit);
+      if (cat.pageSize.value !== val) {
+        cat.pageSize.value = val;
+      }
+    }
+  }
+
+  // Update pagination UI for subcategories table
+  function updateSubcategoryPagination(meta) {
+    if (!sub.pageInfo) return;
+    const { page, pages, total, limit } = meta;
+
+    sub.pageInfo.textContent = `Page ${page} of ${pages} • ${total.toLocaleString()} total`;
+
+    if (sub.first) sub.first.disabled = page <= 1;
+    if (sub.prev) sub.prev.disabled = page <= 1;
+    if (sub.next) sub.next.disabled = page >= pages;
+    if (sub.last) sub.last.disabled = page >= pages;
+
+    if (sub.pageSize) {
+      const val = String(limit);
+      if (sub.pageSize.value !== val) {
+        sub.pageSize.value = val;
+      }
     }
   }
 
@@ -464,9 +717,13 @@
     if (!tbody) return;
     if (!Array.isArray(items) || items.length === 0) {
       tbody.innerHTML = '<tr><td colspan="6">No lookups found</td></tr>';
+      currentData = [];
       updateColorLegend();
       return;
     }
+
+    // Store current data for table manager
+    currentData = items;
 
     tbody.innerHTML = items
       .map((lookup) => {
@@ -599,6 +856,13 @@
     try {
       const api = await getApi();
 
+      // Update state with current parameters
+      state.page = page;
+      state.limit = limit;
+      state.q = q;
+      state.sortBy = sortBy;
+      state.order = order;
+
       // Build request parameters
       const params = { page, limit };
       if (q) params.q = q;
@@ -696,8 +960,12 @@
     if (!cat.tbody) return;
     if (!rows?.length) {
       cat.tbody.innerHTML = '<tr><td colspan="4">No categories found</td></tr>';
+      currentCategoryData = [];
       return;
     }
+
+    // Store current data for table manager
+    currentCategoryData = rows;
     cat.tbody.innerHTML = rows
       .map((r) => {
         const id = r.id || r._id || "—";
@@ -755,6 +1023,13 @@
   } = {}) {
     if (!cat.tbody) return;
     cat.tbody.innerHTML = '<tr><td colspan="4">Loading…</td></tr>';
+
+    // Update catState with current parameters
+    catState.page = page;
+    catState.limit = limit;
+    catState.q = q;
+    catState.sortBy = sortBy;
+    catState.order = order;
     try {
       const api = await getApi();
       const params = { page, limit };
@@ -835,8 +1110,12 @@
     if (!rows?.length) {
       sub.tbody.innerHTML =
         '<tr><td colspan="4">No sub-categories found</td></tr>';
+      currentSubcategoryData = [];
       return;
     }
+
+    // Store current data for table manager
+    currentSubcategoryData = rows;
     sub.tbody.innerHTML = rows
       .map((r) => {
         const id = r.id || r._id || "—";
@@ -894,6 +1173,14 @@
   } = {}) {
     if (!sub.tbody) return;
     sub.tbody.innerHTML = '<tr><td colspan="4">Loading…</td></tr>';
+
+    // Update subState with current parameters
+    subState.page = page;
+    subState.limit = limit;
+    subState.q = q;
+    subState.sortBy = sortBy;
+    subState.order = order;
+
     try {
       const api = await getApi();
       const params = { page, limit };
@@ -978,32 +1265,9 @@
 
     // Wire sorting after initial load
     setTimeout(() => {
-      wireSorting();
-      updateSortHeaderIndicators();
-      wireSortingScoped(
-        cat.table,
-        getCatState,
-        setCatState,
-        loadCategories,
-        CAT_SORT_STORAGE_KEY
-      );
-      updateSortHeaderIndicatorsScoped(
-        cat.table,
-        catState.sortBy,
-        catState.order
-      );
-      wireSortingScoped(
-        sub.table,
-        getSubState,
-        setSubState,
-        loadSubCategories,
-        SUB_SORT_STORAGE_KEY
-      );
-      updateSortHeaderIndicatorsScoped(
-        sub.table,
-        subState.sortBy,
-        subState.order
-      );
+      setupTableFeatures();
+      setupCategoryTableFeatures();
+      setupSubcategoryTableFeatures();
     }, 100);
 
     // Wire New Category button

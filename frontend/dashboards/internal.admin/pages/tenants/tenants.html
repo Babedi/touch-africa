@@ -37,11 +37,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Status</th>
-                        <th>Created</th>
+                        <th data-sort="name" tabindex="0" role="button" aria-sort="none">Name</th>
+                        <th data-sort="email" tabindex="0" role="button" aria-sort="none">Email</th>
+                        <th data-sort="phone" tabindex="0" role="button" aria-sort="none">Phone</th>
+                        <th data-sort="status" tabindex="0" role="button" aria-sort="none">Status</th>
+                        <th data-sort="createdAt" tabindex="0" role="button" aria-sort="none">Created</th>
                         <th class="actions-col">Actions</th>
                     </tr>
                 </thead>
@@ -72,4 +72,6 @@
         </div>
     </div>
 </section>
+<script src="/frontend/shared/scripts/core-utils.js"></script>
+<script src="/frontend/shared/scripts/unified-table.js"></script>
 <script src="/frontend/dashboards/internal.admin/pages/tenants/tenants.js?v=20250911-internal"></script>

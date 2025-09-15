@@ -45,7 +45,7 @@
 
 .sidebar-header {
     padding: var(--spacing-lg);
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 50%);
+    background: linear-gradient(125deg, #1c6549 0%, #b3b3b3 100%);
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
@@ -60,9 +60,9 @@
 }
 
 .sidebar-header h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #E5E7EB;
     white-space: nowrap;
 }
 
