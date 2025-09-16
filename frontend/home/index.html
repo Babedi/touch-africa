@@ -221,13 +221,12 @@
 </body>
 
 <script>
-    // Configure API client to use server from .env (PORT=5000, CLIENT_ORIGIN=http://localhost:5000)
+    // Configure API client to use current origin dynamically
     (function () {
-        var SERVER_PORT = "5000"; // from .env PORT
-        var SERVER_ORIGIN = "http://localhost:5000"; // from .env CLIENT_ORIGIN
+        var SERVER_ORIGIN = window.location.origin; // Use current origin instead of hardcoded
         var loc = window.location;
 
-        // Use the server origin from .env for API calls
+        // Use the current server origin for API calls
         if (!window.__API_CLIENT_PATH__) {
             window.__API_CLIENT_PATH__ = SERVER_ORIGIN + "/integration/api-client.js";
         }

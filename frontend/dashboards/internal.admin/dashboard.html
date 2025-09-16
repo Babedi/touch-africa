@@ -101,8 +101,8 @@
     <script src="./dashboard.js?v=3" defer></script>
     <script>
         // Configure API base URL for backend communication
-        window.__API_BASE_URL__ = "http://localhost:5000";
-        window.API_BASE_URL = "http://localhost:5000/api/v1";
+        window.__API_BASE_URL__ = window.location.origin;
+        window.API_BASE_URL = window.location.origin + "/api/v1";
 
         // Lightweight logout wiring: clears session, calls backend logout (best-effort), then redirects home
         (function () {
