@@ -119,6 +119,10 @@ firestore-debug.log
 *.pfx
 credentials.json
 
+# Exception: Allow backend/secrets folder to be tracked
+!backend/secrets/
+!backend/secrets/**
+
 # Test outputs
 test-results/
 playwright-report/
