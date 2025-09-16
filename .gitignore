@@ -113,13 +113,11 @@ firebase-debug.log
 firestore-debug.log
 
 # Secrets and credentials
-secrets/
 *.key
 *.pem
 *.p12
 *.pfx
 credentials.json
-service-account.json
 
 # Test outputs
 test-results/
@@ -147,10 +145,6 @@ modal-screenshots/
 *.jpg
 *.jpeg
 *.gif
-!frontend/shared/assets/**/*.png
-!frontend/shared/assets/**/*.jpg
-!frontend/shared/assets/**/*.jpeg
-!frontend/shared/assets/**/*.gif
 
 # Generated files
 *.generated.js
