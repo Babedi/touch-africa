@@ -66,6 +66,9 @@ jspm_packages/
 .env.test.local
 .env.production.local
 
+# Exception: Allow main .env file to be tracked
+!.env
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
